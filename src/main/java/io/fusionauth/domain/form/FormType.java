@@ -19,5 +19,17 @@ package io.fusionauth.domain.form;
  * @author Daniel DeGroff
  */
 public enum FormType {
-  registration
+  registration(""),
+  adminRegistrationEdit("registration."),
+  adminUserEdit("user.");
+
+  private final String keyPrefix;
+
+  FormType(String keyPrefix) {
+    this.keyPrefix = keyPrefix;
+  }
+
+  public String getKeyPrefix() {
+    return keyPrefix;
+  }
 }

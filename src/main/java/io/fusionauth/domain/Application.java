@@ -76,6 +76,8 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
   @InternalJSONColumn
   public ApplicationRegistrationDeletePolicy registrationDeletePolicy = new ApplicationRegistrationDeletePolicy();
 
+  public UUID registrationEditFormId;
+
   public List<ApplicationRole> roles = new ArrayList<>();
 
   @InternalJSONColumn
@@ -134,6 +136,7 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
            Objects.equals(lambdaConfiguration, that.lambdaConfiguration) &&
            Objects.equals(loginConfiguration, that.loginConfiguration) &&
            Objects.equals(name, that.name) &&
+           Objects.equals(registrationEditFormId, that.registrationEditFormId) &&
            Objects.equals(oauthConfiguration, that.oauthConfiguration) &&
            Objects.equals(passwordlessConfiguration, that.passwordlessConfiguration) &&
            Objects.equals(registrationConfiguration, that.registrationConfiguration) &&
@@ -167,7 +170,7 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
 
   @Override
   public int hashCode() {
-    return Objects.hash(active, authenticationTokenConfiguration, cleanSpeakConfiguration, data, id, jwtConfiguration, lambdaConfiguration, loginConfiguration, name, oauthConfiguration, passwordlessConfiguration, registrationConfiguration, registrationDeletePolicy, roles, samlv2Configuration, insertInstant, lastUpdateInstant, tenantId, verificationEmailTemplateId, verifyRegistration);
+    return Objects.hash(active, authenticationTokenConfiguration, cleanSpeakConfiguration, data, id, jwtConfiguration, lambdaConfiguration, loginConfiguration, name, registrationEditFormId, oauthConfiguration, passwordlessConfiguration, registrationConfiguration, registrationDeletePolicy, roles, samlv2Configuration, insertInstant, lastUpdateInstant, tenantId, verificationEmailTemplateId, verifyRegistration);
   }
 
   public void normalize() {
