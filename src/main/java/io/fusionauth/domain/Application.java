@@ -27,6 +27,7 @@ import java.util.UUID;
 
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
+import io.fusionauth.domain.form.Form;
 import io.fusionauth.domain.internal._InternalJSONColumn;
 import io.fusionauth.domain.internal.annotation.InternalJSONColumn;
 import io.fusionauth.domain.oauth2.OAuth2Configuration;
@@ -76,7 +77,7 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
   @InternalJSONColumn
   public ApplicationRegistrationDeletePolicy registrationDeletePolicy = new ApplicationRegistrationDeletePolicy();
 
-  public UUID registrationEditFormId;
+  public UUID registrationEditFormId = Form.DEFAULT_ADMIN_REGISTRATION_EDIT_ID;
 
   public List<ApplicationRole> roles = new ArrayList<>();
 

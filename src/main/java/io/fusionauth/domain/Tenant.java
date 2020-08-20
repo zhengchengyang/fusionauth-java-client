@@ -31,6 +31,7 @@ import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 import io.fusionauth.domain.connector.BaseConnectorConfiguration;
 import io.fusionauth.domain.connector.ConnectorPolicy;
+import io.fusionauth.domain.form.Form;
 import io.fusionauth.domain.internal._InternalJSONColumn;
 import io.fusionauth.domain.internal.annotation.InternalJSONColumn;
 import io.fusionauth.domain.util.Normalizer;
@@ -109,7 +110,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
   @InternalJSONColumn
   public TenantUserDeletePolicy userDeletePolicy = new TenantUserDeletePolicy();
 
-  public UUID userEditFormId;
+  public UUID userEditFormId = Form.DEFAULT_ADMIN_USER_EDIT_ID;
 
   @JacksonConstructor
   public Tenant() {
