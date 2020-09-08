@@ -13,26 +13,19 @@
  * either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package io.fusionauth.domain.provider;
+package io.fusionauth.domain.internal.annotation;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import io.fusionauth.domain.util.Normalizer;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * Interface for all identity providers that can be domain based.
+ * Marks a field for internal use, and should not be serialized externally or be reflected in the generated domain for other clients.
+ *
+ * @author Daniel DeGroff
  */
-public interface DomainBasedIdentityProvider {
-  /**
-   * @return Any domains for the identity provider.
-   */
-  Set<String> getDomains();
-
-  /**
-   * Normalizes this IdP's domains by lower-casing them all.
-   */
-  default void normalizeDomains() {
-    Normalizer.toLowerCase(getDomains(), HashSet::new);
-  }
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface InternalUse {
 }

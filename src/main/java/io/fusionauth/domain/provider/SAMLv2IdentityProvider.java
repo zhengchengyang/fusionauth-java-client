@@ -28,7 +28,6 @@ import io.fusionauth.domain.CORSConfiguration;
 import io.fusionauth.domain.RequiresCORSConfiguration;
 import io.fusionauth.domain.internal.annotation.InternalJSONColumn;
 import io.fusionauth.domain.util.HTTPMethod;
-import io.fusionauth.domain.util.Normalizer;
 
 /**
  * SAML v2 identity provider configuration.
@@ -50,6 +49,10 @@ public class SAMLv2IdentityProvider extends BaseIdentityProvider<SAMLv2Applicati
   @InternalJSONColumn
   public URI idpEndpoint;
 
+  /**
+   * @deprecated The 'issuer' is auto generated to be unique per configuration. Do not use this value any longer.  The 'issuer' will be equal to ${public_url}/samlv2/sp/${identityProviderId}.
+   */
+  @Deprecated
   @InternalJSONColumn
   public String issuer;
 
@@ -76,16 +79,15 @@ public class SAMLv2IdentityProvider extends BaseIdentityProvider<SAMLv2Applicati
     if (!super.equals(o)) {
       return false;
     }
-
     SAMLv2IdentityProvider that = (SAMLv2IdentityProvider) o;
-    return Objects.equals(domains, that.domains) &&
+    return useNameIdForEmail == that.useNameIdForEmail &&
+           Objects.equals(domains, that.domains) &&
            Objects.equals(buttonImageURL, that.buttonImageURL) &&
            Objects.equals(buttonText, that.buttonText) &&
            Objects.equals(emailClaim, that.emailClaim) &&
            Objects.equals(idpEndpoint, that.idpEndpoint) &&
            Objects.equals(issuer, that.issuer) &&
-           Objects.equals(keyId, that.keyId) &&
-           useNameIdForEmail == that.useNameIdForEmail;
+           Objects.equals(keyId, that.keyId);
   }
 
   @Override
