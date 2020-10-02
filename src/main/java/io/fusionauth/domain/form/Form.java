@@ -72,6 +72,14 @@ public class Form implements Buildable<Form>, _InternalJSONColumn {
     return Objects.hash(data, id, insertInstant, lastUpdateInstant, name, steps, type);
   }
 
+  public boolean isDefaultAdminRegistrationEdit() {
+    return id != null && id.equals(DEFAULT_ADMIN_REGISTRATION_EDIT_ID);
+  }
+
+  public boolean isDefaultAdminUserEdit() {
+    return id != null && id.equals(DEFAULT_ADMIN_USER_EDIT_ID);
+  }
+
   public void normalize() {
     Normalizer.removeEmpty(data);
     Normalizer.removeEmpty(steps);
