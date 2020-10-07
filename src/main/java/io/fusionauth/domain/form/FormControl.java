@@ -27,6 +27,8 @@ public enum FormControl {
   textarea,
   text;
 
+  // TODO : Mikey : This goes in our public domain, and is really used for our own validation. We would generally then place this somewhere in `-api`.
+  //                We could make this a private method in the service, or optionally make a set on th FormService interface similar to ManagedFields.
   public static boolean areOptionsRequired(FormControl control) {
     return control.equals(FormControl.radio)
            || control.equals(FormControl.checkbox)
