@@ -25,5 +25,11 @@ public enum FormControl {
   radio,
   select,
   textarea,
-  text
+  text;
+
+  public static boolean areOptionsRequired(FormControl control) {
+    return control.equals(FormControl.radio)
+           || control.equals(FormControl.checkbox)
+           || control.equals(FormControl.select);
+  }
 }
