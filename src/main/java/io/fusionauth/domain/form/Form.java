@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.inversoft.json.ToString;
 import io.fusionauth.domain.Buildable;
 import io.fusionauth.domain.internal._InternalJSONColumn;
@@ -72,10 +73,12 @@ public class Form implements Buildable<Form>, _InternalJSONColumn {
     return Objects.hash(data, id, insertInstant, lastUpdateInstant, name, steps, type);
   }
 
+  @JsonIgnore
   public boolean isDefaultAdminRegistrationEdit() {
     return id != null && id.equals(DEFAULT_ADMIN_REGISTRATION_EDIT_ID);
   }
 
+  @JsonIgnore
   public boolean isDefaultAdminUserEdit() {
     return id != null && id.equals(DEFAULT_ADMIN_USER_EDIT_ID);
   }
