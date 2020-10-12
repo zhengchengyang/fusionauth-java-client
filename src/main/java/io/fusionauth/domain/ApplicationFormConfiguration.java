@@ -26,7 +26,7 @@ import io.fusionauth.domain.internal.annotation.ExcludeFromDatabaseDataColumn;
  */
 public class ApplicationFormConfiguration implements Buildable<ApplicationFormConfiguration> {
   @ExcludeFromDatabaseDataColumn
-  public UUID registrationFormId;
+  public UUID adminRegistrationFormId;
 
   @Override
   public boolean equals(Object o) {
@@ -37,12 +37,12 @@ public class ApplicationFormConfiguration implements Buildable<ApplicationFormCo
       return false;
     }
     ApplicationFormConfiguration that = (ApplicationFormConfiguration) o;
-    return Objects.equals(registrationFormId, that.registrationFormId);
+    return Objects.equals(adminRegistrationFormId, that.adminRegistrationFormId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(registrationFormId);
+    return Objects.hash(adminRegistrationFormId);
   }
 
   @Override
