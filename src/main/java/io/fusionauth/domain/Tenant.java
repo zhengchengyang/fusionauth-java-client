@@ -31,7 +31,6 @@ import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 import io.fusionauth.domain.connector.BaseConnectorConfiguration;
 import io.fusionauth.domain.connector.ConnectorPolicy;
-import io.fusionauth.domain.form.Form;
 import io.fusionauth.domain.internal._InternalJSONColumn;
 import io.fusionauth.domain.internal.annotation.InternalJSONColumn;
 import io.fusionauth.domain.util.Normalizer;
@@ -62,6 +61,9 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
 
   @InternalJSONColumn
   public FamilyConfiguration familyConfiguration = new FamilyConfiguration();
+
+  @InternalJSONColumn
+  public TenantFormConfiguration formConfiguration = new TenantFormConfiguration();
 
   /**
    * Time in seconds until an inactive session will be invalidated. Used when creating a new session in the FusionAuth
@@ -110,8 +112,6 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
   @InternalJSONColumn
   public TenantUserDeletePolicy userDeletePolicy = new TenantUserDeletePolicy();
 
-  public UUID userEditFormId = Form.DEFAULT_ADMIN_USER_EDIT_ID;
-
   @JacksonConstructor
   public Tenant() {
   }
@@ -125,6 +125,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
     this.externalIdentifierConfiguration = new ExternalIdentifierConfiguration(other.externalIdentifierConfiguration);
     this.failedAuthenticationConfiguration = new FailedAuthenticationConfiguration(other.failedAuthenticationConfiguration);
     this.familyConfiguration = new FamilyConfiguration(other.familyConfiguration);
+    this.formConfiguration = new TenantFormConfiguration(other.formConfiguration);
     this.httpSessionMaxInactiveInterval = other.httpSessionMaxInactiveInterval;
     this.id = other.id;
     this.insertInstant = other.insertInstant;
@@ -139,7 +140,6 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
     this.passwordValidationRules = new PasswordValidationRules(other.passwordValidationRules);
     this.themeId = other.themeId;
     this.userDeletePolicy = new TenantUserDeletePolicy(other.userDeletePolicy);
-    this.userEditFormId = other.userEditFormId;
   }
 
   @Override
@@ -160,6 +160,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
            Objects.equals(externalIdentifierConfiguration, tenant.externalIdentifierConfiguration) &&
            Objects.equals(failedAuthenticationConfiguration, tenant.failedAuthenticationConfiguration) &&
            Objects.equals(familyConfiguration, tenant.familyConfiguration) &&
+           Objects.equals(formConfiguration, tenant.formConfiguration) &&
            Objects.equals(id, tenant.id) &&
            Objects.equals(issuer, tenant.issuer) &&
            Objects.equals(insertInstant, tenant.insertInstant) &&
@@ -172,8 +173,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
            Objects.equals(passwordEncryptionConfiguration, tenant.passwordEncryptionConfiguration) &&
            Objects.equals(passwordValidationRules, tenant.passwordValidationRules) &&
            Objects.equals(themeId, tenant.themeId) &&
-           Objects.equals(userDeletePolicy, tenant.userDeletePolicy) &&
-           Objects.equals(userEditFormId, tenant.userEditFormId);
+           Objects.equals(userDeletePolicy, tenant.userDeletePolicy);
   }
 
   @JsonIgnore
@@ -183,7 +183,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, configured, connectorPolicies, emailConfiguration, eventConfiguration, externalIdentifierConfiguration, failedAuthenticationConfiguration, familyConfiguration, httpSessionMaxInactiveInterval, id, issuer, insertInstant, lastUpdateInstant, jwtConfiguration, logoutURL, maximumPasswordAge, minimumPasswordAge, name, passwordEncryptionConfiguration, passwordValidationRules, themeId, userDeletePolicy, userEditFormId);
+    return Objects.hash(data, configured, connectorPolicies, emailConfiguration, eventConfiguration, externalIdentifierConfiguration, failedAuthenticationConfiguration, familyConfiguration, formConfiguration, httpSessionMaxInactiveInterval, id, issuer, insertInstant, lastUpdateInstant, jwtConfiguration, logoutURL, maximumPasswordAge, minimumPasswordAge, name, passwordEncryptionConfiguration, passwordValidationRules, themeId, userDeletePolicy);
   }
 
   @JsonIgnore

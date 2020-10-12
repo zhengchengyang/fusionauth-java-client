@@ -20,6 +20,6 @@ package io.fusionauth.domain.form;
  */
 public enum FormType {
   registration,
-  adminRegistrationEdit,
-  adminUserEdit
+  adminRegistration,
+  adminUser
 }
