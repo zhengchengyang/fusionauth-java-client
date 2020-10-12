@@ -27,7 +27,6 @@ import java.util.UUID;
 
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
-import io.fusionauth.domain.form.Form;
 import io.fusionauth.domain.internal._InternalJSONColumn;
 import io.fusionauth.domain.internal.annotation.InternalJSONColumn;
 import io.fusionauth.domain.oauth2.OAuth2Configuration;
@@ -50,6 +49,9 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
   public Map<String, Object> data = new LinkedHashMap<>();
 
   public ApplicationEmailConfiguration emailConfiguration = new ApplicationEmailConfiguration();
+
+  @InternalJSONColumn
+  public ApplicationFormConfiguration formConfiguration = new ApplicationFormConfiguration();
 
   public UUID id;
 
@@ -78,8 +80,6 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
 
   @InternalJSONColumn
   public ApplicationRegistrationDeletePolicy registrationDeletePolicy = new ApplicationRegistrationDeletePolicy();
-
-  public UUID registrationEditFormId = Form.DEFAULT_ADMIN_REGISTRATION_EDIT_ID;
 
   public List<ApplicationRole> roles = new ArrayList<>();
 
@@ -134,12 +134,12 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
            Objects.equals(authenticationTokenConfiguration, that.authenticationTokenConfiguration) &&
            Objects.equals(cleanSpeakConfiguration, that.cleanSpeakConfiguration) &&
            Objects.equals(data, that.data) &&
+           Objects.equals(formConfiguration, that.formConfiguration) &&
            Objects.equals(id, that.id) &&
            Objects.equals(jwtConfiguration, that.jwtConfiguration) &&
            Objects.equals(lambdaConfiguration, that.lambdaConfiguration) &&
            Objects.equals(loginConfiguration, that.loginConfiguration) &&
            Objects.equals(name, that.name) &&
-           Objects.equals(registrationEditFormId, that.registrationEditFormId) &&
            Objects.equals(oauthConfiguration, that.oauthConfiguration) &&
            Objects.equals(passwordlessConfiguration, that.passwordlessConfiguration) &&
            Objects.equals(registrationConfiguration, that.registrationConfiguration) &&
@@ -173,7 +173,7 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
 
   @Override
   public int hashCode() {
-    return Objects.hash(active, authenticationTokenConfiguration, cleanSpeakConfiguration, data, id, jwtConfiguration, lambdaConfiguration, loginConfiguration, name, registrationEditFormId, oauthConfiguration, passwordlessConfiguration, registrationConfiguration, registrationDeletePolicy, roles, samlv2Configuration, insertInstant, lastUpdateInstant, tenantId, verificationEmailTemplateId, verifyRegistration);
+    return Objects.hash(active, authenticationTokenConfiguration, cleanSpeakConfiguration, data, id, formConfiguration, jwtConfiguration, lambdaConfiguration, loginConfiguration, name, oauthConfiguration, passwordlessConfiguration, registrationConfiguration, registrationDeletePolicy, roles, samlv2Configuration, insertInstant, lastUpdateInstant, tenantId, verificationEmailTemplateId, verifyRegistration);
   }
 
   public void normalize() {

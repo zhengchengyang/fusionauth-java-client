@@ -33,8 +33,9 @@ import io.fusionauth.domain.util.Normalizer;
  * @author Daniel DeGroff
  */
 public class Form implements Buildable<Form>, _InternalJSONColumn {
-  public static final UUID DEFAULT_ADMIN_REGISTRATION_EDIT_ID = UUID.fromString("ac396ce7-3268-47a9-8fb6-e652284a0705");
-  public static final UUID DEFAULT_ADMIN_USER_EDIT_ID = UUID.fromString("ac396ce7-3268-47a9-8fb6-e652284a0706");
+  public static final UUID DEFAULT_ADMIN_REGISTRATION_FORM_ID = UUID.fromString("ac396ce7-3268-47a9-8fb6-e652284a0705");
+
+  public static final UUID DEFAULT_ADMIN_USER_FORM_ID = UUID.fromString("ac396ce7-3268-47a9-8fb6-e652284a0706");
 
   public Map<String, Object> data = new LinkedHashMap<>();
 
@@ -75,12 +76,12 @@ public class Form implements Buildable<Form>, _InternalJSONColumn {
 
   @JsonIgnore
   public boolean isDefaultAdminRegistrationEdit() {
-    return id != null && id.equals(DEFAULT_ADMIN_REGISTRATION_EDIT_ID);
+    return id != null && id.equals(DEFAULT_ADMIN_REGISTRATION_FORM_ID);
   }
 
   @JsonIgnore
   public boolean isDefaultAdminUserEdit() {
-    return id != null && id.equals(DEFAULT_ADMIN_USER_EDIT_ID);
+    return id != null && id.equals(DEFAULT_ADMIN_USER_FORM_ID);
   }
 
   public void normalize() {

@@ -18,24 +18,15 @@ package io.fusionauth.domain;
 import java.util.Objects;
 import java.util.UUID;
 
-import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 import io.fusionauth.domain.internal.annotation.ExcludeFromDatabaseDataColumn;
 
 /**
  * @author Daniel DeGroff
  */
-public class TenantFormConfiguration implements Buildable<TenantFormConfiguration> {
+public class ApplicationFormConfiguration implements Buildable<ApplicationFormConfiguration> {
   @ExcludeFromDatabaseDataColumn
-  public UUID userFormId;
-
-  @JacksonConstructor
-  public TenantFormConfiguration() {
-  }
-
-  public TenantFormConfiguration(TenantFormConfiguration other) {
-    this.userFormId = other.userFormId;
-  }
+  public UUID registrationFormId;
 
   @Override
   public boolean equals(Object o) {
@@ -45,13 +36,13 @@ public class TenantFormConfiguration implements Buildable<TenantFormConfiguratio
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    TenantFormConfiguration that = (TenantFormConfiguration) o;
-    return Objects.equals(userFormId, that.userFormId);
+    ApplicationFormConfiguration that = (ApplicationFormConfiguration) o;
+    return Objects.equals(registrationFormId, that.registrationFormId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userFormId);
+    return Objects.hash(registrationFormId);
   }
 
   @Override
