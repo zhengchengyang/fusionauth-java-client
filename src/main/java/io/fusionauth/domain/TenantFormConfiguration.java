@@ -27,14 +27,14 @@ import io.fusionauth.domain.internal.annotation.ExcludeFromDatabaseDataColumn;
  */
 public class TenantFormConfiguration implements Buildable<TenantFormConfiguration> {
   @ExcludeFromDatabaseDataColumn
-  public UUID userFormId;
+  public UUID adminUserFormId;
 
   @JacksonConstructor
   public TenantFormConfiguration() {
   }
 
   public TenantFormConfiguration(TenantFormConfiguration other) {
-    this.userFormId = other.userFormId;
+    this.adminUserFormId = other.adminUserFormId;
   }
 
   @Override
@@ -46,12 +46,12 @@ public class TenantFormConfiguration implements Buildable<TenantFormConfiguratio
       return false;
     }
     TenantFormConfiguration that = (TenantFormConfiguration) o;
-    return Objects.equals(userFormId, that.userFormId);
+    return Objects.equals(adminUserFormId, that.adminUserFormId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userFormId);
+    return Objects.hash(adminUserFormId);
   }
 
   @Override
