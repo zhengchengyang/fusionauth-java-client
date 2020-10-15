@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.inversoft.json.ToString;
@@ -87,13 +86,10 @@ public class Form implements Buildable<Form>, _InternalJSONColumn {
 
   public void normalize() {
     Normalizer.removeEmpty(data);
+    // Remove any null steps, steps w/out fields, and any null fields in steps
     Normalizer.removeEmpty(steps);
     steps.removeIf(step -> step.fields.isEmpty());
-    steps = steps.stream()
-        .peek(v -> v.fields = v.fields.stream()
-                                      .filter(Objects::nonNull)
-                                      .collect(Collectors.toList()))
-        .collect(Collectors.toList());
+    steps.stream().map(step -> step.fields).forEach(Normalizer::removeEmpty);
   }
 
   @Override
