@@ -102,6 +102,8 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
 
   public UUID tenantId;
 
+  public UUID themeId;
+
   public UUID verificationEmailTemplateId;
 
   @InternalJSONColumn
@@ -138,6 +140,7 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
     this.samlv2Configuration = new SAMLv2Configuration(other.samlv2Configuration);
     this.state = other.state;
     this.tenantId = other.tenantId;
+    this.themeId = other.themeId;
     this.verificationEmailTemplateId = other.verificationEmailTemplateId;
     this.verifyRegistration = other.verifyRegistration;
   }
@@ -195,6 +198,7 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
            Objects.equals(insertInstant, that.insertInstant) &&
            Objects.equals(lastUpdateInstant, that.lastUpdateInstant) &&
            Objects.equals(tenantId, that.tenantId) &&
+           Objects.equals(themeId, that.themeId) &&
            Objects.equals(verificationEmailTemplateId, that.verificationEmailTemplateId);
   }
 
@@ -228,7 +232,10 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
 
   @Override
   public int hashCode() {
-    return Objects.hash(authenticationTokenConfiguration, cleanSpeakConfiguration, data, id, formConfiguration, jwtConfiguration, lambdaConfiguration, loginConfiguration, name, multiFactorConfiguration, oauthConfiguration, passwordlessConfiguration, registrationConfiguration, registrationDeletePolicy, roles, samlv2Configuration, state, insertInstant, lastUpdateInstant, tenantId, verificationEmailTemplateId, verifyRegistration);
+    return Objects.hash(authenticationTokenConfiguration, cleanSpeakConfiguration, data, id, formConfiguration, jwtConfiguration, lambdaConfiguration,
+                        loginConfiguration, name, multiFactorConfiguration, oauthConfiguration, passwordlessConfiguration, registrationConfiguration,
+                        registrationDeletePolicy, roles, samlv2Configuration, state, insertInstant, lastUpdateInstant, tenantId, themeId,
+                        verificationEmailTemplateId, verifyRegistration);
   }
 
   public void normalize() {
