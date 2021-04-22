@@ -121,6 +121,9 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
   @InternalJSONColumn
   public TenantUserDeletePolicy userDeletePolicy = new TenantUserDeletePolicy();
 
+  @InternalJSONColumn
+  public TenantUsernameConfiguration usernameConfiguration = new TenantUsernameConfiguration();
+
   @JacksonConstructor
   public Tenant() {
   }
@@ -152,6 +155,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
     this.state = other.state;
     this.themeId = other.themeId;
     this.userDeletePolicy = new TenantUserDeletePolicy(other.userDeletePolicy);
+    this.usernameConfiguration = new TenantUsernameConfiguration(other.usernameConfiguration);
   }
 
   @Override
@@ -188,7 +192,8 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
            Objects.equals(passwordValidationRules, tenant.passwordValidationRules) &&
            Objects.equals(state, tenant.state) &&
            Objects.equals(themeId, tenant.themeId) &&
-           Objects.equals(userDeletePolicy, tenant.userDeletePolicy);
+           Objects.equals(userDeletePolicy, tenant.userDeletePolicy) &&
+           Objects.equals(usernameConfiguration, tenant.usernameConfiguration);
   }
 
   @JsonIgnore
@@ -198,7 +203,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, configured, connectorPolicies, emailConfiguration, eventConfiguration, externalIdentifierConfiguration, failedAuthenticationConfiguration, familyConfiguration, formConfiguration, httpSessionMaxInactiveInterval, id, issuer, insertInstant, lastUpdateInstant, jwtConfiguration, loginConfiguration, logoutURL, maximumPasswordAge, minimumPasswordAge, name, passwordEncryptionConfiguration, passwordValidationRules, state, themeId, userDeletePolicy);
+    return Objects.hash(data, configured, connectorPolicies, emailConfiguration, eventConfiguration, externalIdentifierConfiguration, failedAuthenticationConfiguration, familyConfiguration, formConfiguration, httpSessionMaxInactiveInterval, id, issuer, insertInstant, lastUpdateInstant, jwtConfiguration, loginConfiguration, logoutURL, maximumPasswordAge, minimumPasswordAge, name, passwordEncryptionConfiguration, passwordValidationRules, state, themeId, userDeletePolicy, usernameConfiguration);
   }
 
   @JsonIgnore
