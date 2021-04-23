@@ -56,18 +56,7 @@ public class TenantUsernameConfiguration implements Buildable<TenantUsernameConf
     return ToString.toString(this);
   }
 
-  public enum UniqueUsernameAppendPolicy {
-    // Always append a suffix when unique usernames are enabled
-    // Example: Even if nobody is using 'bob', this will be created as 'bob12345'
-    Always,
-    // Allow the root username to be used.
-    // Example: If nobody is using 'bob', you can use this username a suffix will not be appended.
-    OnDuplicate
-  }
-
   public static class UniqueUsernameConfiguration extends Enableable implements Buildable<UniqueUsernameConfiguration> {
-    public UniqueUsernameAppendPolicy appendPolicy;
-
     public int numberOfDigits;
 
     @JacksonConstructor
@@ -75,7 +64,6 @@ public class TenantUsernameConfiguration implements Buildable<TenantUsernameConf
     }
 
     public UniqueUsernameConfiguration(UniqueUsernameConfiguration other) {
-      this.appendPolicy = other.appendPolicy;
       this.numberOfDigits = other.numberOfDigits;
     }
 
@@ -91,12 +79,12 @@ public class TenantUsernameConfiguration implements Buildable<TenantUsernameConf
         return false;
       }
       UniqueUsernameConfiguration that = (UniqueUsernameConfiguration) o;
-      return numberOfDigits == that.numberOfDigits && appendPolicy == that.appendPolicy;
+      return numberOfDigits == that.numberOfDigits;
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(super.hashCode(), appendPolicy, numberOfDigits);
+      return Objects.hash(super.hashCode(), numberOfDigits);
     }
 
     @Override
