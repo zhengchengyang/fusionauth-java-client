@@ -138,6 +138,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
                      templates.accountTwoFactorIndex,
                      templates.emailComplete,
                      templates.emailSend,
+                     templates.emailVerificationRequired,
                      templates.emailVerify,
                      templates.helpers,
                      templates.index,
@@ -160,6 +161,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
                      templates.passwordSent,
                      templates.registrationComplete,
                      templates.registrationSend,
+                     templates.registrationVerificationRequired,
                      templates.registrationVerify,
                      templates.samlv2Logout)
                  .anyMatch(Objects::isNull);
@@ -211,10 +213,10 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
 
   public static class Templates implements Buildable<Templates> {
     public static final Set<String> suppliers = Collections.unmodifiableSet(new HashSet<>(asList(
-        "accountEdit", "accountIndex", "accountTwoFactorDisable", "accountTwoFactorEnable", "accountTwoFactorIndex", "emailComplete", "emailSend", "emailVerify",
+        "accountEdit", "accountIndex", "accountTwoFactorDisable", "accountTwoFactorEnable", "accountTwoFactorIndex", "emailComplete", "emailSend", "emailVerificationRequired", "emailVerify",
         "helpers", "index", "oauth2Authorize", "oauth2ChildRegistrationNotAllowed", "oauth2ChildRegistrationNotAllowedComplete", "oauth2CompleteRegistration",
         "oauth2Device", "oauth2DeviceComplete", "oauth2Error", "oauth2Logout", "oauth2Passwordless", "oauth2Register", "oauth2TwoFactor", "oauth2TwoFactorMethods",
-        "oauth2Wait", "passwordChange", "passwordComplete", "passwordForgot", "passwordSent", "registrationComplete", "registrationSend", "registrationVerify", "samlv2Logout"
+        "oauth2Wait", "passwordChange", "passwordComplete", "passwordForgot", "passwordSent", "registrationComplete", "registrationSend", "registrationVerificationRequired", "registrationVerify", "samlv2Logout"
     )));
 
     public String accountEdit;
@@ -230,6 +232,8 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
     public String emailComplete;
 
     public String emailSend;
+
+    public String emailVerificationRequired;
 
     public String emailVerify;
 
@@ -275,6 +279,8 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
 
     public String registrationSend;
 
+    public String registrationVerificationRequired;
+
     public String registrationVerify;
 
     public String samlv2Logout;
@@ -290,6 +296,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
       this.accountTwoFactorIndex = other.accountTwoFactorIndex;
       this.emailComplete = other.emailComplete;
       this.emailSend = other.emailSend;
+      this.emailVerificationRequired = other.emailVerificationRequired;
       this.emailVerify = other.emailVerify;
       this.helpers = other.helpers;
       this.index = other.index;
@@ -312,6 +319,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
       this.passwordSent = other.passwordSent;
       this.registrationComplete = other.registrationComplete;
       this.registrationSend = other.registrationSend;
+      this.registrationVerificationRequired = other.registrationVerify;
       this.registrationVerify = other.registrationVerify;
       this.samlv2Logout = other.samlv2Logout;
     }
@@ -332,6 +340,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
              Objects.equals(accountTwoFactorIndex, that.accountTwoFactorIndex) &&
              Objects.equals(emailComplete, that.emailComplete) &&
              Objects.equals(emailSend, that.emailSend) &&
+             Objects.equals(emailVerificationRequired, that.emailVerificationRequired) &&
              Objects.equals(emailVerify, that.emailVerify) &&
              Objects.equals(helpers, that.helpers) &&
              Objects.equals(index, that.index) &&
@@ -354,6 +363,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
              Objects.equals(passwordSent, that.passwordSent) &&
              Objects.equals(registrationComplete, that.registrationComplete) &&
              Objects.equals(registrationSend, that.registrationSend) &&
+             Objects.equals(registrationVerificationRequired, that.registrationVerificationRequired) &&
              Objects.equals(registrationVerify, that.registrationVerify) &&
              Objects.equals(samlv2Logout, that.samlv2Logout);
     }
@@ -368,6 +378,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
           accountTwoFactorIndex,
           emailComplete,
           emailSend,
+          emailVerificationRequired,
           emailVerify,
           helpers,
           index,
@@ -390,6 +401,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
           passwordSent,
           registrationComplete,
           registrationSend,
+          registrationVerificationRequired,
           registrationVerify,
           samlv2Logout);
     }
@@ -403,6 +415,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
       accountTwoFactorIndex = lineReturns(trimToNull(accountTwoFactorIndex));
       emailComplete = lineReturns(trimToNull(emailComplete));
       emailSend = lineReturns(trimToNull(emailSend));
+      emailVerificationRequired = lineReturns(trimToNull(emailVerificationRequired));
       emailVerify = lineReturns(trimToNull(emailVerify));
       helpers = lineReturns(trimToNull(helpers));
       index = lineReturns(trimToNull(index));
@@ -425,6 +438,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
       passwordSent = lineReturns(trimToNull(passwordSent));
       registrationComplete = lineReturns(trimToNull(registrationComplete));
       registrationSend = lineReturns(trimToNull(registrationSend));
+      registrationVerificationRequired = lineReturns(trimToNull(registrationVerificationRequired));
       registrationVerify = lineReturns(trimToNull(registrationVerify));
       samlv2Logout = lineReturns(trimToNull(samlv2Logout));
     }
