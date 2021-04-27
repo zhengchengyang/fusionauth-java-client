@@ -59,6 +59,8 @@ public class TenantUsernameConfiguration implements Buildable<TenantUsernameConf
   public static class UniqueUsernameConfiguration extends Enableable implements Buildable<UniqueUsernameConfiguration> {
     public int numberOfDigits;
 
+    public Character separator;
+
     @JacksonConstructor
     public UniqueUsernameConfiguration() {
     }
@@ -79,12 +81,12 @@ public class TenantUsernameConfiguration implements Buildable<TenantUsernameConf
         return false;
       }
       UniqueUsernameConfiguration that = (UniqueUsernameConfiguration) o;
-      return numberOfDigits == that.numberOfDigits;
+      return numberOfDigits == that.numberOfDigits && Objects.equals(separator, that.separator);
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(super.hashCode(), numberOfDigits);
+      return Objects.hash(super.hashCode(), numberOfDigits, separator);
     }
 
     @Override
