@@ -137,7 +137,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
                      templates.accountTwoFactorEnable,
                      templates.accountTwoFactorIndex,
                      templates.emailComplete,
-                     templates.emailSend,
+                     templates.emailSent,
                      templates.emailVerificationRequired,
                      templates.emailVerify,
                      templates.helpers,
@@ -160,7 +160,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
                      templates.passwordForgot,
                      templates.passwordSent,
                      templates.registrationComplete,
-                     templates.registrationSend,
+                     templates.registrationSent,
                      templates.registrationVerificationRequired,
                      templates.registrationVerify,
                      templates.samlv2Logout)
@@ -213,10 +213,10 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
 
   public static class Templates implements Buildable<Templates> {
     public static final Set<String> suppliers = Collections.unmodifiableSet(new HashSet<>(asList(
-        "accountEdit", "accountIndex", "accountTwoFactorDisable", "accountTwoFactorEnable", "accountTwoFactorIndex", "emailComplete", "emailSend", "emailVerificationRequired", "emailVerify",
+        "accountEdit", "accountIndex", "accountTwoFactorDisable", "accountTwoFactorEnable", "accountTwoFactorIndex", "emailComplete", "emailSent", "emailVerificationRequired", "emailVerify",
         "helpers", "index", "oauth2Authorize", "oauth2ChildRegistrationNotAllowed", "oauth2ChildRegistrationNotAllowedComplete", "oauth2CompleteRegistration",
         "oauth2Device", "oauth2DeviceComplete", "oauth2Error", "oauth2Logout", "oauth2Passwordless", "oauth2Register", "oauth2TwoFactor", "oauth2TwoFactorMethods",
-        "oauth2Wait", "passwordChange", "passwordComplete", "passwordForgot", "passwordSent", "registrationComplete", "registrationSend", "registrationVerificationRequired", "registrationVerify", "samlv2Logout"
+        "oauth2Wait", "passwordChange", "passwordComplete", "passwordForgot", "passwordSent", "registrationComplete", "registrationSent", "registrationVerificationRequired", "registrationVerify", "samlv2Logout"
     )));
 
     public String accountEdit;
@@ -231,7 +231,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
 
     public String emailComplete;
 
-    public String emailSend;
+    public String emailSent;
 
     public String emailVerificationRequired;
 
@@ -277,7 +277,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
 
     public String registrationComplete;
 
-    public String registrationSend;
+    public String registrationSent;
 
     public String registrationVerificationRequired;
 
@@ -295,7 +295,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
       this.accountTwoFactorEnable = other.accountTwoFactorEnable;
       this.accountTwoFactorIndex = other.accountTwoFactorIndex;
       this.emailComplete = other.emailComplete;
-      this.emailSend = other.emailSend;
+      this.emailSent = other.emailSent;
       this.emailVerificationRequired = other.emailVerificationRequired;
       this.emailVerify = other.emailVerify;
       this.helpers = other.helpers;
@@ -318,7 +318,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
       this.passwordForgot = other.passwordForgot;
       this.passwordSent = other.passwordSent;
       this.registrationComplete = other.registrationComplete;
-      this.registrationSend = other.registrationSend;
+      this.registrationSent = other.registrationSent;
       this.registrationVerificationRequired = other.registrationVerify;
       this.registrationVerify = other.registrationVerify;
       this.samlv2Logout = other.samlv2Logout;
@@ -339,7 +339,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
              Objects.equals(accountTwoFactorEnable, that.accountTwoFactorEnable) &&
              Objects.equals(accountTwoFactorIndex, that.accountTwoFactorIndex) &&
              Objects.equals(emailComplete, that.emailComplete) &&
-             Objects.equals(emailSend, that.emailSend) &&
+             Objects.equals(emailSent, that.emailSent) &&
              Objects.equals(emailVerificationRequired, that.emailVerificationRequired) &&
              Objects.equals(emailVerify, that.emailVerify) &&
              Objects.equals(helpers, that.helpers) &&
@@ -362,10 +362,30 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
              Objects.equals(passwordForgot, that.passwordForgot) &&
              Objects.equals(passwordSent, that.passwordSent) &&
              Objects.equals(registrationComplete, that.registrationComplete) &&
-             Objects.equals(registrationSend, that.registrationSend) &&
+             Objects.equals(registrationSent, that.registrationSent) &&
              Objects.equals(registrationVerificationRequired, that.registrationVerificationRequired) &&
              Objects.equals(registrationVerify, that.registrationVerify) &&
              Objects.equals(samlv2Logout, that.samlv2Logout);
+    }
+
+    @Deprecated
+    public String getEmailSend() {
+      return emailSent;
+    }
+
+    @Deprecated
+    public void setEmailSend(String emailSend) {
+      emailSent = emailSend;
+    }
+
+    @Deprecated
+    public String getRegistrationSend() {
+      return registrationSent;
+    }
+
+    @Deprecated
+    public void setRegistrationSend(String registrationSend) {
+      registrationSent = registrationSend;
     }
 
     @Override
@@ -377,7 +397,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
           accountTwoFactorEnable,
           accountTwoFactorIndex,
           emailComplete,
-          emailSend,
+          emailSent,
           emailVerificationRequired,
           emailVerify,
           helpers,
@@ -400,7 +420,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
           passwordForgot,
           passwordSent,
           registrationComplete,
-          registrationSend,
+          registrationSent,
           registrationVerificationRequired,
           registrationVerify,
           samlv2Logout);
@@ -414,7 +434,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
       accountTwoFactorEnable = lineReturns(trimToNull(accountTwoFactorEnable));
       accountTwoFactorIndex = lineReturns(trimToNull(accountTwoFactorIndex));
       emailComplete = lineReturns(trimToNull(emailComplete));
-      emailSend = lineReturns(trimToNull(emailSend));
+      emailSent = lineReturns(trimToNull(emailSent));
       emailVerificationRequired = lineReturns(trimToNull(emailVerificationRequired));
       emailVerify = lineReturns(trimToNull(emailVerify));
       helpers = lineReturns(trimToNull(helpers));
@@ -437,7 +457,7 @@ public class Theme implements Buildable<Theme>, _InternalJSONColumn {
       passwordForgot = lineReturns(trimToNull(passwordForgot));
       passwordSent = lineReturns(trimToNull(passwordSent));
       registrationComplete = lineReturns(trimToNull(registrationComplete));
-      registrationSend = lineReturns(trimToNull(registrationSend));
+      registrationSent = lineReturns(trimToNull(registrationSent));
       registrationVerificationRequired = lineReturns(trimToNull(registrationVerificationRequired));
       registrationVerify = lineReturns(trimToNull(registrationVerify));
       samlv2Logout = lineReturns(trimToNull(samlv2Logout));
