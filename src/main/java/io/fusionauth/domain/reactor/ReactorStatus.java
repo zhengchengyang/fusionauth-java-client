@@ -29,6 +29,8 @@ public class ReactorStatus {
 
   public ReactorFeatureStatus advancedRegistrationForms = ReactorFeatureStatus.UNKNOWN;
 
+  public ReactorFeatureStatus applicationThemes = ReactorFeatureStatus.UNKNOWN;
+
   public ReactorFeatureStatus breachedPasswordDetection = ReactorFeatureStatus.UNKNOWN;
 
   public ReactorFeatureStatus connectors = ReactorFeatureStatus.UNKNOWN;
