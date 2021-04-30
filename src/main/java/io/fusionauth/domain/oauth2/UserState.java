@@ -20,14 +20,20 @@ package io.fusionauth.domain.oauth2;
  */
 public enum UserState {
   Authenticated,
-  AuthenticatedNotRegistered;
+  AuthenticatedNotRegistered,
+  AuthenticatedNotVerified;
 
   public static UserState fromStatus(int status) {
-    if (status == 200 || status == 212) {
+    if (status == 200) {
       return Authenticated;
     }
+
     if (status == 202) {
       return AuthenticatedNotRegistered;
+    }
+
+    if (status == 212) {
+      return AuthenticatedNotVerified;
     }
 
     throw new IllegalArgumentException("Invalid status code for UserState [" + status + "]");
