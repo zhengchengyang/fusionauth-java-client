@@ -38,6 +38,8 @@ public class ExternalIdentifierConfiguration implements Buildable<ExternalIdenti
 
   public int emailVerificationIdTimeToLiveInSeconds;
 
+  public SecureGeneratorConfiguration emailVerificationOneTimeCodeGenerator;
+
   public int externalAuthenticationIdTimeToLiveInSeconds;
 
   public int oneTimePasswordTimeToLiveInSeconds;
@@ -76,6 +78,7 @@ public class ExternalIdentifierConfiguration implements Buildable<ExternalIdenti
     this.deviceUserCodeIdGenerator = new SecureGeneratorConfiguration(other.deviceUserCodeIdGenerator);
     this.emailVerificationIdGenerator = new SecureGeneratorConfiguration(other.emailVerificationIdGenerator);
     this.emailVerificationIdTimeToLiveInSeconds = other.emailVerificationIdTimeToLiveInSeconds;
+    this.emailVerificationOneTimeCodeGenerator = new SecureGeneratorConfiguration(other.emailVerificationOneTimeCodeGenerator);
     this.externalAuthenticationIdTimeToLiveInSeconds = other.externalAuthenticationIdTimeToLiveInSeconds;
     this.oneTimePasswordTimeToLiveInSeconds = other.oneTimePasswordTimeToLiveInSeconds;
     this.passwordlessLoginTimeToLiveInSeconds = other.passwordlessLoginTimeToLiveInSeconds;
@@ -116,6 +119,7 @@ public class ExternalIdentifierConfiguration implements Buildable<ExternalIdenti
            Objects.equals(changePasswordIdGenerator, that.changePasswordIdGenerator) &&
            Objects.equals(deviceUserCodeIdGenerator, that.deviceUserCodeIdGenerator) &&
            Objects.equals(emailVerificationIdGenerator, that.emailVerificationIdGenerator) &&
+           Objects.equals(emailVerificationOneTimeCodeGenerator, that.emailVerificationOneTimeCodeGenerator) &&
            Objects.equals(passwordlessLoginGenerator, that.passwordlessLoginGenerator) &&
            Objects.equals(registrationVerificationIdGenerator, that.registrationVerificationIdGenerator) &&
            Objects.equals(setupPasswordIdGenerator, that.setupPasswordIdGenerator) &&
@@ -131,6 +135,7 @@ public class ExternalIdentifierConfiguration implements Buildable<ExternalIdenti
                         deviceUserCodeIdGenerator,
                         emailVerificationIdGenerator,
                         emailVerificationIdTimeToLiveInSeconds,
+                        emailVerificationOneTimeCodeGenerator,
                         externalAuthenticationIdTimeToLiveInSeconds,
                         oneTimePasswordTimeToLiveInSeconds,
                         passwordlessLoginGenerator,

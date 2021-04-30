@@ -48,6 +48,8 @@ public class LoginResponse implements Buildable<LoginResponse> {
 
   public User user;
 
+  public String verificationId;
+
   @JacksonConstructor
   public LoginResponse() {
   }
