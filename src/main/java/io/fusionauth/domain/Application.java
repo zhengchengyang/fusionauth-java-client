@@ -400,6 +400,8 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
 
     public boolean requireAuthentication = true;
 
+    public UnverifiedBehavior unverifiedEmailBehavior;
+
     @JacksonConstructor
     public LoginConfiguration() {
     }
@@ -408,6 +410,7 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
       this.allowTokenRefresh = other.allowTokenRefresh;
       this.generateRefreshTokens = other.generateRefreshTokens;
       this.requireAuthentication = other.requireAuthentication;
+      this.unverifiedEmailBehavior = other.unverifiedEmailBehavior;
     }
 
     @Override
@@ -415,18 +418,16 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
       if (this == o) {
         return true;
       }
-      if (!(o instanceof LoginConfiguration)) {
+      if (o == null || getClass() != o.getClass()) {
         return false;
       }
       LoginConfiguration that = (LoginConfiguration) o;
-      return requireAuthentication == that.requireAuthentication &&
-             allowTokenRefresh == that.allowTokenRefresh &&
-             generateRefreshTokens == that.generateRefreshTokens;
+      return allowTokenRefresh == that.allowTokenRefresh && generateRefreshTokens == that.generateRefreshTokens && requireAuthentication == that.requireAuthentication && unverifiedEmailBehavior == that.unverifiedEmailBehavior;
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(requireAuthentication, allowTokenRefresh, generateRefreshTokens);
+      return Objects.hash(allowTokenRefresh, generateRefreshTokens, requireAuthentication, unverifiedEmailBehavior);
     }
 
     @Override

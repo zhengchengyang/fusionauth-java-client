@@ -27,6 +27,7 @@ public class ReactorStatus {
 
   public ReactorFeatureStatus advancedMultiFactorAuthentication = ReactorFeatureStatus.UNKNOWN;
 
+  // TODO : Daniel : Email Gate : This contains Unique Username feature & Email Gating.
   public ReactorFeatureStatus advancedRegistrationForms = ReactorFeatureStatus.UNKNOWN;
 
   public ReactorFeatureStatus applicationThemes = ReactorFeatureStatus.UNKNOWN;

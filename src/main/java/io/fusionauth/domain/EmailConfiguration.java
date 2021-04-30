@@ -90,19 +90,19 @@ public class EmailConfiguration implements Buildable<EmailConfiguration> {
     }
     EmailConfiguration that = (EmailConfiguration) o;
     return verifyEmail == that.verifyEmail &&
-        verifyEmailWhenChanged == that.verifyEmailWhenChanged &&
-        Objects.equals(defaultFromEmail, that.defaultFromEmail) &&
-        Objects.equals(defaultFromName, that.defaultFromName) &&
-        Objects.equals(forgotPasswordEmailTemplateId, that.forgotPasswordEmailTemplateId) &&
-        Objects.equals(host, that.host) &&
-        Objects.equals(password, that.password) &&
-        Objects.equals(passwordlessEmailTemplateId, that.passwordlessEmailTemplateId) &&
-        Objects.equals(port, that.port) &&
-        Objects.equals(properties, that.properties) &&
-        security == that.security &&
-        Objects.equals(setPasswordEmailTemplateId, that.setPasswordEmailTemplateId) &&
-        Objects.equals(username, that.username) &&
-        Objects.equals(verificationEmailTemplateId, that.verificationEmailTemplateId);
+           verifyEmailWhenChanged == that.verifyEmailWhenChanged &&
+           Objects.equals(defaultFromEmail, that.defaultFromEmail) &&
+           Objects.equals(defaultFromName, that.defaultFromName) &&
+           Objects.equals(forgotPasswordEmailTemplateId, that.forgotPasswordEmailTemplateId) &&
+           Objects.equals(host, that.host) &&
+           Objects.equals(password, that.password) &&
+           Objects.equals(passwordlessEmailTemplateId, that.passwordlessEmailTemplateId) &&
+           Objects.equals(port, that.port) &&
+           Objects.equals(properties, that.properties) &&
+           security == that.security &&
+           Objects.equals(setPasswordEmailTemplateId, that.setPasswordEmailTemplateId) &&
+           Objects.equals(username, that.username) &&
+           Objects.equals(verificationEmailTemplateId, that.verificationEmailTemplateId);
   }
 
   @Override

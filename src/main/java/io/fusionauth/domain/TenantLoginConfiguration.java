@@ -26,12 +26,11 @@ import com.inversoft.json.ToString;
 public class TenantLoginConfiguration implements Buildable<TenantLoginConfiguration> {
   public boolean requireAuthentication = true;
 
-  public TenantLoginConfiguration(boolean requireAuthentication) {
-    this.requireAuthentication = requireAuthentication;
-  }
+  public UnverifiedBehavior unverifiedEmailBehavior;
 
   public TenantLoginConfiguration(TenantLoginConfiguration other) {
     this.requireAuthentication = other.requireAuthentication;
+    this.unverifiedEmailBehavior = other.unverifiedEmailBehavior;
   }
 
   @JacksonConstructor
@@ -47,12 +46,12 @@ public class TenantLoginConfiguration implements Buildable<TenantLoginConfigurat
       return false;
     }
     TenantLoginConfiguration that = (TenantLoginConfiguration) o;
-    return requireAuthentication == that.requireAuthentication;
+    return requireAuthentication == that.requireAuthentication && unverifiedEmailBehavior == that.unverifiedEmailBehavior;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(requireAuthentication);
+    return Objects.hash(requireAuthentication, unverifiedEmailBehavior);
   }
 
   @Override
