@@ -122,6 +122,7 @@ import io.fusionauth.domain.api.UserDeleteRequest;
 import io.fusionauth.domain.api.UserDeleteResponse;
 import io.fusionauth.domain.api.UserRequest;
 import io.fusionauth.domain.api.UserResponse;
+import io.fusionauth.domain.api.VersionResponse;
 import io.fusionauth.domain.api.WebhookRequest;
 import io.fusionauth.domain.api.WebhookResponse;
 import io.fusionauth.domain.api.email.SendRequest;
@@ -3555,6 +3556,18 @@ public class FusionAuthClient {
     return startAnonymous(UserResponse.class, Errors.class)
         .uri("/api/user")
         .authorization("Bearer " + encodedJWT)
+        .get()
+        .go();
+  }
+
+  /**
+   * Retrieves the FusionAuth version string.
+   *
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<VersionResponse, Errors> retrieveVersion() {
+    return start(VersionResponse.class, Errors.class)
+        .uri("/api/system/version")
         .get()
         .go();
   }
