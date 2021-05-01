@@ -27,6 +27,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 import io.fusionauth.domain.connector.BaseConnectorConfiguration;
@@ -82,6 +83,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
   public String issuer;
 
   @InternalJSONColumn
+  @JsonIgnoreProperties("enabled")
   public JWTConfiguration jwtConfiguration = new JWTConfiguration();
 
   public ZonedDateTime lastUpdateInstant;
@@ -213,6 +215,15 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
     }
 
     return jwtConfiguration;
+  }
+
+  @JsonIgnore
+  public UnverifiedGatedOptions lookupUnverifiedGatedOptions(Application application) {
+    if (application != null && application.loginConfiguration.unverified.whenGated.enabled) {
+      return application.loginConfiguration.unverified.whenGated;
+    }
+
+    return loginConfiguration.unverified.whenGated;
   }
 
   public void normalize() {

@@ -27,7 +27,7 @@ public class ReactorStatus {
 
   public ReactorFeatureStatus advancedMultiFactorAuthentication = ReactorFeatureStatus.UNKNOWN;
 
-  // TODO : Daniel : Email Gate : This contains Unique Username feature & Email Gating.
+  // TODO : Daniel : Email Gate : This is in java-client, however I think it is only returned in a status API, could we change this to 'advancedRegistration' - it is encompassing a lot of registration related features.
   public ReactorFeatureStatus advancedRegistrationForms = ReactorFeatureStatus.UNKNOWN;
 
   public ReactorFeatureStatus applicationThemes = ReactorFeatureStatus.UNKNOWN;

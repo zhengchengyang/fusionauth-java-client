@@ -23,18 +23,18 @@ import com.inversoft.json.ToString;
 /**
  * @author Daniel DeGroff
  */
-public class TenantLoginConfiguration implements Buildable<TenantLoginConfiguration> {
-  public boolean requireAuthentication = true;
+public class UnverifiedGatedOptions extends Enableable implements Buildable<UnverifiedGatedOptions> {
+  public boolean allowEmailChange;
 
-  public TenantUnverifiedConfiguration unverified = new TenantUnverifiedConfiguration();
-
-  public TenantLoginConfiguration(TenantLoginConfiguration other) {
-    this.requireAuthentication = other.requireAuthentication;
-    this.unverified = new TenantUnverifiedConfiguration(other.unverified);
-  }
+  public VerificationStrategy verificationStrategy;
 
   @JacksonConstructor
-  public TenantLoginConfiguration() {
+  public UnverifiedGatedOptions() {
+  }
+
+  public UnverifiedGatedOptions(UnverifiedGatedOptions other) {
+    this.allowEmailChange = other.allowEmailChange;
+    this.verificationStrategy = other.verificationStrategy;
   }
 
   @Override
@@ -45,14 +45,17 @@ public class TenantLoginConfiguration implements Buildable<TenantLoginConfigurat
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    TenantLoginConfiguration that = (TenantLoginConfiguration) o;
-    return requireAuthentication == that.requireAuthentication &&
-           Objects.equals(unverified, that.unverified);
+    if (!super.equals(o)) {
+      return false;
+    }
+    UnverifiedGatedOptions that = (UnverifiedGatedOptions) o;
+    return allowEmailChange == that.allowEmailChange &&
+           verificationStrategy == that.verificationStrategy;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(requireAuthentication, unverified);
+    return Objects.hash(super.hashCode(), allowEmailChange, verificationStrategy);
   }
 
   @Override

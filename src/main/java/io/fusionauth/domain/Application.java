@@ -116,8 +116,6 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
   public Application(Application other) {
     this.active = other.active;
     this.authenticationTokenConfiguration = new AuthenticationTokenConfiguration(other.authenticationTokenConfiguration);
-    // TODO : MFA Review : Wonder why did not not hit this previously, did something else change perhaps?
-    //        This is ok, just curious.
     if (other.cleanSpeakConfiguration != null) {
       this.cleanSpeakConfiguration = new CleanSpeakConfiguration(other.cleanSpeakConfiguration);
     }
@@ -400,7 +398,7 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
 
     public boolean requireAuthentication = true;
 
-    public UnverifiedBehavior unverifiedEmailBehavior;
+    public ApplicationUnverifiedConfiguration unverified = new ApplicationUnverifiedConfiguration();
 
     @JacksonConstructor
     public LoginConfiguration() {
@@ -410,7 +408,7 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
       this.allowTokenRefresh = other.allowTokenRefresh;
       this.generateRefreshTokens = other.generateRefreshTokens;
       this.requireAuthentication = other.requireAuthentication;
-      this.unverifiedEmailBehavior = other.unverifiedEmailBehavior;
+      this.unverified = new ApplicationUnverifiedConfiguration(other.unverified);
     }
 
     @Override
@@ -422,12 +420,15 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
         return false;
       }
       LoginConfiguration that = (LoginConfiguration) o;
-      return allowTokenRefresh == that.allowTokenRefresh && generateRefreshTokens == that.generateRefreshTokens && requireAuthentication == that.requireAuthentication && unverifiedEmailBehavior == that.unverifiedEmailBehavior;
+      return allowTokenRefresh == that.allowTokenRefresh &&
+             generateRefreshTokens == that.generateRefreshTokens &&
+             requireAuthentication == that.requireAuthentication &&
+             Objects.equals(unverified, that.unverified);
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(allowTokenRefresh, generateRefreshTokens, requireAuthentication, unverifiedEmailBehavior);
+      return Objects.hash(allowTokenRefresh, generateRefreshTokens, requireAuthentication, unverified);
     }
 
     @Override

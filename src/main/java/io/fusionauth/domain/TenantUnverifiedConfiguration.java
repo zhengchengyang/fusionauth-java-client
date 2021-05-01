@@ -17,24 +17,26 @@ package io.fusionauth.domain;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 
 /**
  * @author Daniel DeGroff
  */
-public class TenantLoginConfiguration implements Buildable<TenantLoginConfiguration> {
-  public boolean requireAuthentication = true;
+public class TenantUnverifiedConfiguration implements Buildable<TenantUnverifiedConfiguration> {
+  public UnverifiedBehavior email;
 
-  public TenantUnverifiedConfiguration unverified = new TenantUnverifiedConfiguration();
+  @JsonIgnoreProperties("enabled")
+  public UnverifiedGatedOptions whenGated = new UnverifiedGatedOptions();
 
-  public TenantLoginConfiguration(TenantLoginConfiguration other) {
-    this.requireAuthentication = other.requireAuthentication;
-    this.unverified = new TenantUnverifiedConfiguration(other.unverified);
+  public TenantUnverifiedConfiguration(TenantUnverifiedConfiguration other) {
+    this.email = other.email;
+    this.whenGated = new UnverifiedGatedOptions(other.whenGated);
   }
 
   @JacksonConstructor
-  public TenantLoginConfiguration() {
+  public TenantUnverifiedConfiguration() {
   }
 
   @Override
@@ -45,14 +47,14 @@ public class TenantLoginConfiguration implements Buildable<TenantLoginConfigurat
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    TenantLoginConfiguration that = (TenantLoginConfiguration) o;
-    return requireAuthentication == that.requireAuthentication &&
-           Objects.equals(unverified, that.unverified);
+    TenantUnverifiedConfiguration that = (TenantUnverifiedConfiguration) o;
+    return email == that.email &&
+           Objects.equals(whenGated, that.whenGated);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(requireAuthentication, unverified);
+    return Objects.hash(email, whenGated);
   }
 
   @Override
