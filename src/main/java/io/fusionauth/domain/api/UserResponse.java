@@ -28,6 +28,8 @@ public class UserResponse {
 
   public User user;
 
+  public String verificationId;
+
   @JacksonConstructor
   public UserResponse() {
   }
