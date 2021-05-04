@@ -15,6 +15,9 @@
  */
 package io.fusionauth.domain.api;
 
+import java.util.Map;
+import java.util.UUID;
+
 import com.inversoft.json.JacksonConstructor;
 import io.fusionauth.domain.User;
 
@@ -24,11 +27,13 @@ import io.fusionauth.domain.User;
  * @author Brian Pontarelli
  */
 public class UserResponse {
+  public String emailVerificationId;
+
+  public Map<UUID, String> registrationVerificationIds;
+
   public String token;
 
   public User user;
-
-  public String verificationId;
 
   @JacksonConstructor
   public UserResponse() {

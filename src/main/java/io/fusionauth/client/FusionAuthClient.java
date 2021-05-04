@@ -1718,8 +1718,8 @@ public class FusionAuthClient {
    *     the IP address will be that of the client or last proxy that sent the request.
    * @return The ClientResponse object.
    */
-  public ClientResponse<Void, Errors> loginPing(UUID userId, UUID applicationId, String callerIPAddress) {
-    return start(Void.TYPE, Errors.class)
+  public ClientResponse<LoginResponse, Errors> loginPing(UUID userId, UUID applicationId, String callerIPAddress) {
+    return start(LoginResponse.class, Errors.class)
         .uri("/api/login")
         .urlSegment(userId)
         .urlSegment(applicationId)

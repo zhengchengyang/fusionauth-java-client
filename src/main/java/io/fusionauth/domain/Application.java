@@ -109,6 +109,7 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
 
   public UUID verificationEmailTemplateId;
 
+  @InternalJSONColumn
   public VerificationStrategy verificationStrategy;
 
   @InternalJSONColumn

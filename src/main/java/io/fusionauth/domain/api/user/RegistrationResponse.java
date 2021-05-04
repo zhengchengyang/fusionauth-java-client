@@ -29,6 +29,8 @@ public class RegistrationResponse {
 
   public UserRegistration registration;
 
+  public String registrationVerificationId;
+
   public String token;
 
   public User user;
