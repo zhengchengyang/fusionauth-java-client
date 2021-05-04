@@ -27,8 +27,7 @@ public class ReactorStatus {
 
   public ReactorFeatureStatus advancedMultiFactorAuthentication = ReactorFeatureStatus.UNKNOWN;
 
-  // TODO : Daniel : Email Gate : This is in java-client, however I think it is only returned in a status API, could we change this to 'advancedRegistration' - it is encompassing a lot of registration related features.
-  public ReactorFeatureStatus advancedRegistrationForms = ReactorFeatureStatus.UNKNOWN;
+  public ReactorFeatureStatus advancedRegistration = ReactorFeatureStatus.UNKNOWN;
 
   public ReactorFeatureStatus applicationThemes = ReactorFeatureStatus.UNKNOWN;
 
@@ -52,7 +51,7 @@ public class ReactorStatus {
     return licensed == that.licensed &&
            advancedIdentityProviders == that.advancedIdentityProviders &&
            advancedMultiFactorAuthentication == that.advancedMultiFactorAuthentication &&
-           advancedRegistrationForms == that.advancedRegistrationForms &&
+           advancedRegistration == that.advancedRegistration &&
            breachedPasswordDetection == that.breachedPasswordDetection &&
            connectors == that.connectors &&
            entityManagement == that.entityManagement;
@@ -62,7 +61,7 @@ public class ReactorStatus {
   public int hashCode() {
     return Objects.hash(advancedIdentityProviders,
                         advancedMultiFactorAuthentication,
-                        advancedRegistrationForms,
+                        advancedRegistration,
                         breachedPasswordDetection,
                         connectors,
                         entityManagement,

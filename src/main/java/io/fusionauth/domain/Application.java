@@ -104,7 +104,12 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
 
   public UUID themeId;
 
+  @InternalJSONColumn
+  public RegistrationUnverifiedOptions unverified = new RegistrationUnverifiedOptions();
+
   public UUID verificationEmailTemplateId;
+
+  public VerificationStrategy verificationStrategy;
 
   @InternalJSONColumn
   public boolean verifyRegistration;
@@ -139,7 +144,9 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
     this.state = other.state;
     this.tenantId = other.tenantId;
     this.themeId = other.themeId;
+    this.unverified = new RegistrationUnverifiedOptions(other.unverified);
     this.verificationEmailTemplateId = other.verificationEmailTemplateId;
+    this.verificationStrategy = other.verificationStrategy;
     this.verifyRegistration = other.verifyRegistration;
   }
 
@@ -197,7 +204,9 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
            Objects.equals(lastUpdateInstant, that.lastUpdateInstant) &&
            Objects.equals(tenantId, that.tenantId) &&
            Objects.equals(themeId, that.themeId) &&
-           Objects.equals(verificationEmailTemplateId, that.verificationEmailTemplateId);
+           Objects.equals(unverified, that.unverified) &&
+           Objects.equals(verificationEmailTemplateId, that.verificationEmailTemplateId) &&
+           Objects.equals(verificationStrategy, that.verificationStrategy);
   }
 
   public boolean getActive() {
@@ -232,8 +241,8 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
   public int hashCode() {
     return Objects.hash(authenticationTokenConfiguration, cleanSpeakConfiguration, data, id, formConfiguration, jwtConfiguration, lambdaConfiguration,
                         loginConfiguration, name, multiFactorConfiguration, oauthConfiguration, passwordlessConfiguration, registrationConfiguration,
-                        registrationDeletePolicy, roles, samlv2Configuration, state, insertInstant, lastUpdateInstant, tenantId, themeId,
-                        verificationEmailTemplateId, verifyRegistration);
+                        registrationDeletePolicy, roles, samlv2Configuration, state, insertInstant, lastUpdateInstant, tenantId, themeId, unverified,
+                        verificationEmailTemplateId, verificationStrategy, verifyRegistration);
   }
 
   public void normalize() {
@@ -398,8 +407,6 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
 
     public boolean requireAuthentication = true;
 
-    public ApplicationUnverifiedConfiguration unverified = new ApplicationUnverifiedConfiguration();
-
     @JacksonConstructor
     public LoginConfiguration() {
     }
@@ -408,7 +415,6 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
       this.allowTokenRefresh = other.allowTokenRefresh;
       this.generateRefreshTokens = other.generateRefreshTokens;
       this.requireAuthentication = other.requireAuthentication;
-      this.unverified = new ApplicationUnverifiedConfiguration(other.unverified);
     }
 
     @Override
@@ -422,13 +428,12 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
       LoginConfiguration that = (LoginConfiguration) o;
       return allowTokenRefresh == that.allowTokenRefresh &&
              generateRefreshTokens == that.generateRefreshTokens &&
-             requireAuthentication == that.requireAuthentication &&
-             Objects.equals(unverified, that.unverified);
+             requireAuthentication == that.requireAuthentication;
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(allowTokenRefresh, generateRefreshTokens, requireAuthentication, unverified);
+      return Objects.hash(allowTokenRefresh, generateRefreshTokens, requireAuthentication);
     }
 
     @Override

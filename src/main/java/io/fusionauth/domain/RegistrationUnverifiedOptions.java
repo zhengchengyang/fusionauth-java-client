@@ -23,20 +23,15 @@ import com.inversoft.json.ToString;
 /**
  * @author Daniel DeGroff
  */
-public class ApplicationUnverifiedConfiguration implements Buildable<ApplicationUnverifiedConfiguration> {
-  public UnverifiedBehavior registration;
-
-  public VerificationStrategy verificationStrategy;
-
-  public RegistrationUnverifiedOptions whenGated = new RegistrationUnverifiedOptions();
+public class RegistrationUnverifiedOptions implements Buildable<RegistrationUnverifiedOptions> {
+  public UnverifiedBehavior behavior;
 
   @JacksonConstructor
-  public ApplicationUnverifiedConfiguration() {
+  public RegistrationUnverifiedOptions() {
   }
 
-  public ApplicationUnverifiedConfiguration(ApplicationUnverifiedConfiguration other) {
-    this.whenGated = new RegistrationUnverifiedOptions(other.whenGated);
-    this.registration = other.registration;
+  public RegistrationUnverifiedOptions(RegistrationUnverifiedOptions other) {
+    this.behavior = other.behavior;
   }
 
   @Override
@@ -47,14 +42,13 @@ public class ApplicationUnverifiedConfiguration implements Buildable<Application
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ApplicationUnverifiedConfiguration that = (ApplicationUnverifiedConfiguration) o;
-    return registration == that.registration &&
-           Objects.equals(whenGated, that.whenGated);
+    RegistrationUnverifiedOptions that = (RegistrationUnverifiedOptions) o;
+    return behavior == that.behavior;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(registration, whenGated);
+    return Objects.hash(behavior);
   }
 
   @Override

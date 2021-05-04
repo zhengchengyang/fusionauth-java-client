@@ -17,7 +17,6 @@ package io.fusionauth.domain;
 
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 
@@ -27,12 +26,11 @@ import com.inversoft.json.ToString;
 public class TenantUnverifiedConfiguration implements Buildable<TenantUnverifiedConfiguration> {
   public UnverifiedBehavior email;
 
-  @JsonIgnoreProperties("enabled")
-  public UnverifiedGatedOptions whenGated = new UnverifiedGatedOptions();
+  public RegistrationUnverifiedOptions whenGated = new RegistrationUnverifiedOptions();
 
   public TenantUnverifiedConfiguration(TenantUnverifiedConfiguration other) {
     this.email = other.email;
-    this.whenGated = new UnverifiedGatedOptions(other.whenGated);
+    this.whenGated = new RegistrationUnverifiedOptions(other.whenGated);
   }
 
   @JacksonConstructor

@@ -217,15 +217,6 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
     return jwtConfiguration;
   }
 
-  @JsonIgnore
-  public UnverifiedGatedOptions lookupUnverifiedGatedOptions(Application application) {
-    if (application != null && application.loginConfiguration.unverified.whenGated.enabled) {
-      return application.loginConfiguration.unverified.whenGated;
-    }
-
-    return loginConfiguration.unverified.whenGated;
-  }
-
   public void normalize() {
     // Clear verification settings if they are disabled
     if (!emailConfiguration.verifyEmail) {

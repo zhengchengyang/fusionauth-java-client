@@ -23,18 +23,18 @@ import com.inversoft.json.ToString;
 /**
  * @author Daniel DeGroff
  */
-public class UnverifiedGatedOptions extends Enableable implements Buildable<UnverifiedGatedOptions> {
-  public boolean allowEmailChange;
+public class EmailUnverifiedOptions implements Buildable<EmailUnverifiedOptions> {
+  public boolean allowEmailChangeWhenGated;
 
-  public VerificationStrategy verificationStrategy;
+  public UnverifiedBehavior behavior;
 
   @JacksonConstructor
-  public UnverifiedGatedOptions() {
+  public EmailUnverifiedOptions() {
   }
 
-  public UnverifiedGatedOptions(UnverifiedGatedOptions other) {
-    this.allowEmailChange = other.allowEmailChange;
-    this.verificationStrategy = other.verificationStrategy;
+  public EmailUnverifiedOptions(EmailUnverifiedOptions other) {
+    this.allowEmailChangeWhenGated = other.allowEmailChangeWhenGated;
+    this.behavior = other.behavior;
   }
 
   @Override
@@ -45,17 +45,13 @@ public class UnverifiedGatedOptions extends Enableable implements Buildable<Unve
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    if (!super.equals(o)) {
-      return false;
-    }
-    UnverifiedGatedOptions that = (UnverifiedGatedOptions) o;
-    return allowEmailChange == that.allowEmailChange &&
-           verificationStrategy == that.verificationStrategy;
+    EmailUnverifiedOptions that = (EmailUnverifiedOptions) o;
+    return allowEmailChangeWhenGated == that.allowEmailChangeWhenGated && behavior == that.behavior;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), allowEmailChange, verificationStrategy);
+    return Objects.hash(allowEmailChangeWhenGated, behavior);
   }
 
   @Override
