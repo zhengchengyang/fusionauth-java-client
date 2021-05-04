@@ -20,21 +20,21 @@ import com.inversoft.json.JacksonConstructor;
 /**
  * @author Daniel DeGroff
  */
-public class VerifyEmailRequest {
+public class VerifyRegistrationRequest {
   public String oneTimeCode;
 
   public String verificationId;
 
   @JacksonConstructor
-  public VerifyEmailRequest() {
+  public VerifyRegistrationRequest() {
   }
 
-  public VerifyEmailRequest(String oneTimeCode, String verificationId) {
+  public VerifyRegistrationRequest(String oneTimeCode, String verificationId) {
     this.oneTimeCode = oneTimeCode;
     this.verificationId = verificationId;
   }
 
-  public VerifyEmailRequest(String verificationId) {
+  public VerifyRegistrationRequest(String verificationId) {
     this.verificationId = verificationId;
   }
 }

@@ -165,6 +165,7 @@ import io.fusionauth.domain.api.user.SearchRequest;
 import io.fusionauth.domain.api.user.SearchResponse;
 import io.fusionauth.domain.api.user.VerifyEmailRequest;
 import io.fusionauth.domain.api.user.VerifyEmailResponse;
+import io.fusionauth.domain.api.user.VerifyRegistrationRequest;
 import io.fusionauth.domain.api.user.VerifyRegistrationResponse;
 import io.fusionauth.domain.oauth2.AccessToken;
 import io.fusionauth.domain.oauth2.IntrospectResponse;
@@ -4580,11 +4581,32 @@ public class FusionAuthClient {
    *
    * @param verificationId The registration verification Id sent to the user.
    * @return The ClientResponse object.
+   * @deprecated This method has been renamed to verifyUserRegistration and changed to take a JSON request body, use that method instead.
    */
+  @Deprecated
   public ClientResponse<Void, Errors> verifyRegistration(String verificationId) {
     return startAnonymous(Void.TYPE, Errors.class)
         .uri("/api/user/verify-registration")
         .urlSegment(verificationId)
+        .post()
+        .go();
+  }
+
+  /**
+   * Confirms a user's registration. 
+   * 
+   * The request body will contain the verificationId. You may also be required to send a one-time use code based upon your configuration. When 
+   * the application is configured to gate a user until their registration is verified, this procedures requires two values instead of one. 
+   * The verificationId is a high entropy value and the one-time use code is a low entropy value that is easily entered in a user interactive form. The 
+   * two values together are able to confirm a user's registration and mark the user's registration as verified.
+   *
+   * @param request The request that contains the verificationId and optional one-time use code paired with the verificationId.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<Void, Errors> verifyUserRegistration(VerifyRegistrationRequest request) {
+    return startAnonymous(Void.TYPE, Errors.class)
+        .uri("/api/user/verify-registration")
+        .bodyHandler(new JSONBodyHandler(request, objectMapper))
         .post()
         .go();
   }
