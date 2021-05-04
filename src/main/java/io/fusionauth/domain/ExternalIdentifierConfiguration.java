@@ -52,6 +52,8 @@ public class ExternalIdentifierConfiguration implements Buildable<ExternalIdenti
 
   public int registrationVerificationIdTimeToLiveInSeconds;
 
+  public SecureGeneratorConfiguration registrationVerificationOneTimeCodeGenerator;
+
   public int samlv2AuthNRequestIdTimeToLiveInSeconds;
 
   public SecureGeneratorConfiguration setupPasswordIdGenerator;
@@ -85,6 +87,7 @@ public class ExternalIdentifierConfiguration implements Buildable<ExternalIdenti
     this.passwordlessLoginGenerator = new SecureGeneratorConfiguration(other.passwordlessLoginGenerator);
     this.registrationVerificationIdGenerator = new SecureGeneratorConfiguration(other.registrationVerificationIdGenerator);
     this.registrationVerificationIdTimeToLiveInSeconds = other.registrationVerificationIdTimeToLiveInSeconds;
+    this.registrationVerificationOneTimeCodeGenerator = new SecureGeneratorConfiguration(other.registrationVerificationOneTimeCodeGenerator);
     this.samlv2AuthNRequestIdTimeToLiveInSeconds = other.samlv2AuthNRequestIdTimeToLiveInSeconds;
     this.setupPasswordIdGenerator = new SecureGeneratorConfiguration(other.setupPasswordIdGenerator);
     this.setupPasswordIdTimeToLiveInSeconds = other.setupPasswordIdTimeToLiveInSeconds;
@@ -122,6 +125,7 @@ public class ExternalIdentifierConfiguration implements Buildable<ExternalIdenti
            Objects.equals(emailVerificationOneTimeCodeGenerator, that.emailVerificationOneTimeCodeGenerator) &&
            Objects.equals(passwordlessLoginGenerator, that.passwordlessLoginGenerator) &&
            Objects.equals(registrationVerificationIdGenerator, that.registrationVerificationIdGenerator) &&
+           Objects.equals(registrationVerificationOneTimeCodeGenerator, that.registrationVerificationOneTimeCodeGenerator) &&
            Objects.equals(setupPasswordIdGenerator, that.setupPasswordIdGenerator) &&
            Objects.equals(twoFactorOneTimeCodeIdGenerator, that.twoFactorOneTimeCodeIdGenerator);
   }
@@ -142,6 +146,7 @@ public class ExternalIdentifierConfiguration implements Buildable<ExternalIdenti
                         passwordlessLoginTimeToLiveInSeconds,
                         registrationVerificationIdGenerator,
                         registrationVerificationIdTimeToLiveInSeconds,
+                        registrationVerificationOneTimeCodeGenerator,
                         samlv2AuthNRequestIdTimeToLiveInSeconds,
                         setupPasswordIdGenerator,
                         setupPasswordIdTimeToLiveInSeconds,
