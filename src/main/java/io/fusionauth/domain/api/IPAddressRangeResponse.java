@@ -23,20 +23,20 @@ import io.fusionauth.domain.IpAddressRange;
 /**
  * @author Brett Guy
  */
-public class AddressRangeResponse {
+public class IPAddressRangeResponse {
   public IpAddressRange ipAddressRange;
 
   public List<IpAddressRange> ipAddressRanges;
 
   @JacksonConstructor
-  public AddressRangeResponse() {
+  public IPAddressRangeResponse() {
   }
 
-  public AddressRangeResponse(IpAddressRange ipAddressRange) {
+  public IPAddressRangeResponse(IpAddressRange ipAddressRange) {
     this.ipAddressRange = ipAddressRange;
   }
 
-  public AddressRangeResponse(List<IpAddressRange> ipAddressRanges) {
+  public IPAddressRangeResponse(List<IpAddressRange> ipAddressRanges) {
     this.ipAddressRanges = ipAddressRanges;
   }
 }

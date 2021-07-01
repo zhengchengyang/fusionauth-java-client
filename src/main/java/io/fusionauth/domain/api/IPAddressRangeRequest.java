@@ -21,14 +21,14 @@ import io.fusionauth.domain.IpAddressRange;
 /**
  * @author Brett Guy
  */
-public class AddressRangeRequest {
+public class IPAddressRangeRequest {
   public IpAddressRange ipAddressRange;
 
   @JacksonConstructor
-  public AddressRangeRequest() {
+  public IPAddressRangeRequest() {
   }
 
-  public AddressRangeRequest(IpAddressRange ipAddressRange) {
+  public IPAddressRangeRequest(IpAddressRange ipAddressRange) {
     this.ipAddressRange = ipAddressRange;
   }
 }
