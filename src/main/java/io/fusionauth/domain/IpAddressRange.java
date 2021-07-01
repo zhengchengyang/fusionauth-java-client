@@ -24,7 +24,7 @@ import com.inversoft.json.ToString;
 /**
  * @author Brett Guy
  */
-public class AddressRange implements Buildable<AddressRange> {
+public class IpAddressRange implements Buildable<IpAddressRange> {
   public String endIpAddress;
 
   // TODO description field
@@ -39,10 +39,10 @@ public class AddressRange implements Buildable<AddressRange> {
 
   public String startIpAddress;
 
-  public AddressRange() {
+  public IpAddressRange() {
   }
 
-  public AddressRange(String startIpAddress, String endIP, AddressRangeMode mode) {
+  public IpAddressRange(String startIpAddress, String endIP, AddressRangeMode mode) {
     this.startIpAddress = startIpAddress;
     this.endIpAddress = endIP;
     this.mode = mode;
@@ -56,7 +56,7 @@ public class AddressRange implements Buildable<AddressRange> {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    AddressRange that = (AddressRange) o;
+    IpAddressRange that = (IpAddressRange) o;
     return Objects.equals(endIpAddress, that.endIpAddress) &&
            Objects.equals(id, that.id) &&
            Objects.equals(insertInstant, that.insertInstant) &&
