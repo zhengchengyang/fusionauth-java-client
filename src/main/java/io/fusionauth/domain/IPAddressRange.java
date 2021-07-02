@@ -26,9 +26,8 @@ import com.inversoft.json.ToString;
  *
  * @author Brett Guy
  */
-public class IpAddressRange implements Buildable<IpAddressRange> {
+public class IPAddressRange implements Buildable<IPAddressRange> {
   // TODO : ip-allow-block : Should we use InetAddress and convert it for MyBatis and Jackson?
-  // TODO : ip-allow-block : Fix names so they are all consistent. I prefer `IP`
   public String endIpAddress;
 
   // TODO description field
@@ -45,10 +44,10 @@ public class IpAddressRange implements Buildable<IpAddressRange> {
   // TODO : ip-allow-block : Fix names so they are all consistent. I prefer `IP`
   public String startIpAddress;
 
-  public IpAddressRange() {
+  public IPAddressRange() {
   }
 
-  public IpAddressRange(String startIpAddress, String endIP, AddressRangeMode mode) {
+  public IPAddressRange(String startIpAddress, String endIP, AddressRangeMode mode) {
     this.startIpAddress = startIpAddress;
     this.endIpAddress = endIP;
     this.mode = mode;
@@ -62,7 +61,7 @@ public class IpAddressRange implements Buildable<IpAddressRange> {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    IpAddressRange that = (IpAddressRange) o;
+    IPAddressRange that = (IPAddressRange) o;
     return Objects.equals(endIpAddress, that.endIpAddress) &&
            Objects.equals(id, that.id) &&
            Objects.equals(insertInstant, that.insertInstant) &&
