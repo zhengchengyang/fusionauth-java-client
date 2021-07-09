@@ -18,25 +18,25 @@ package io.fusionauth.domain.api;
 import java.util.List;
 
 import com.inversoft.json.JacksonConstructor;
-import io.fusionauth.domain.IPAddressRange;
+import io.fusionauth.domain.IPAccessControlList;
 
 /**
  * @author Brett Guy
  */
-public class IPAddressRangeResponse {
-  public IPAddressRange ipAddressRange;
+public class IPAccessControlListResponse {
+  public IPAccessControlList ipAccessControlList;
 
-  public List<IPAddressRange> ipAddressRanges;
+  public List<IPAccessControlList> ipAccessControlLists;
 
   @JacksonConstructor
-  public IPAddressRangeResponse() {
+  public IPAccessControlListResponse() {
   }
 
-  public IPAddressRangeResponse(IPAddressRange ipAddressRange) {
-    this.ipAddressRange = ipAddressRange;
+  public IPAccessControlListResponse(IPAccessControlList ipAccessControlList) {
+    this.ipAccessControlList = ipAccessControlList;
   }
 
-  public IPAddressRangeResponse(List<IPAddressRange> IPAddressRanges) {
-    this.ipAddressRanges = IPAddressRanges;
+  public IPAccessControlListResponse(List<IPAccessControlList> ipAccessControlLists) {
+    this.ipAccessControlLists = ipAccessControlLists;
   }
 }
