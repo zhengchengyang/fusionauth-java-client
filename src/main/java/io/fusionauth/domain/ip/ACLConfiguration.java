@@ -17,11 +17,19 @@ package io.fusionauth.domain.ip;
 
 import java.util.List;
 
+import io.fusionauth.domain.IPAccessControlListMode;
+
 /**
  * @author Brett Guy
  */
-public class IPAddressRangeRule {
-  private IPAddressRangeTree ipRanges = new IPAddressRangeTree();
+public class ACLConfiguration {
+  private final IPAddressRangeTree ipRanges = new IPAddressRangeTree();
+
+  public IPAccessControlListMode aclAction;
+
+  public ACLConfiguration(IPAccessControlListMode aclAction) {
+    this.aclAction = aclAction;
+  }
 
   public void add(IPAddressRangeNode range) {
     ipRanges.insert(range);

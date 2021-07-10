@@ -24,7 +24,7 @@ import java.util.List;
 
 /**
  * An implementation of an Interval Tree used to store IP address ranges.
- *
+ * <p>
  * https://en.wikipedia.org/wiki/Interval_tree
  */
 public class IPAddressRangeTree {
@@ -75,11 +75,11 @@ public class IPAddressRangeTree {
   }
 
   private IPAddressRangeNode search(IPAddressRangeNode rangeRoot, long address) {
-    if (rangeRoot == null || (rangeRoot.startIpAddress <= address && address <= rangeRoot.endIpAddress)) {
+    if (rangeRoot == null || (rangeRoot.startIPAddress <= address && address <= rangeRoot.endIPAddress)) {
       return rangeRoot;
     }
 
-    if (rangeRoot.endIpAddress > address) {
+    if (rangeRoot.endIPAddress > address) {
       return search(rangeRoot.getLeft(), address);
     }
 

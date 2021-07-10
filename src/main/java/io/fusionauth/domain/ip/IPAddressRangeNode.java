@@ -21,23 +21,23 @@ import java.util.Objects;
  * @author Brett Guy
  */
 public class IPAddressRangeNode implements Comparable<IPAddressRangeNode> {
-  public long endIpAddress;
+  public long endIPAddress;
 
-  public long startIpAddress;
+  public long startIPAddress;
 
   private IPAddressRangeNode left;
 
   private IPAddressRangeNode right;
 
-  public IPAddressRangeNode(long startIpAddress, long endIpAddress) {
-    this.startIpAddress = startIpAddress;
-    this.endIpAddress = endIpAddress;
+  public IPAddressRangeNode(long startIPAddress, long endIPAddress) {
+    this.startIPAddress = startIPAddress;
+    this.endIPAddress = endIPAddress;
   }
 
   @Override
   public int compareTo(IPAddressRangeNode o) {
-    int i = Long.compare(this.startIpAddress, o.startIpAddress);
-    return i == 0 ? Long.compare(this.endIpAddress, o.endIpAddress) : i;
+    int i = Long.compare(this.startIPAddress, o.startIPAddress);
+    return i == 0 ? Long.compare(this.endIPAddress, o.endIPAddress) : i;
   }
 
   @Override
@@ -49,8 +49,8 @@ public class IPAddressRangeNode implements Comparable<IPAddressRangeNode> {
       return false;
     }
     IPAddressRangeNode ipAddressRangeNode = (IPAddressRangeNode) o;
-    return startIpAddress == ipAddressRangeNode.startIpAddress &&
-           endIpAddress == ipAddressRangeNode.endIpAddress;
+    return startIPAddress == ipAddressRangeNode.startIPAddress &&
+           endIPAddress == ipAddressRangeNode.endIPAddress;
   }
 
   public IPAddressRangeNode getLeft() {
@@ -71,11 +71,11 @@ public class IPAddressRangeNode implements Comparable<IPAddressRangeNode> {
 
   @Override
   public int hashCode() {
-    return Objects.hash(startIpAddress, endIpAddress);
+    return Objects.hash(startIPAddress, endIPAddress);
   }
 
   @Override
   public String toString() {
-    return "[" + startIpAddress + ", " + endIpAddress + "]";
+    return "[" + startIPAddress + ", " + endIPAddress + "]";
   }
 }
