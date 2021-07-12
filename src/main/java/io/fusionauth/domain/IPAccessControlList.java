@@ -35,7 +35,7 @@ public class IPAccessControlList implements Buildable<IPAccessControlList>, _Int
 
   // TODO : Brett G : With Brian's new push towards defaults, can we default this value, and if so, we could do it here.
   @InternalJSONColumn
-  public IPAccessControlListMode defaultAction;
+  public IPAccessControlListMode defaultAction = IPAccessControlListMode.Allow;
 
   @InternalJSONColumn
   public List<IPAccessControlListException> exceptions = new ArrayList<>();
