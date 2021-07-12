@@ -23,6 +23,9 @@ import com.inversoft.json.ToString;
 /**
  * @author Brett Guy
  */
+// TODO : Brett G : I wouldn't name this with "Exception" in the name, makes me think it is an Exception.
+//                  This "range" definition could be used in an exception configuration for an ACL, or something else as well, so
+//                  I think we could omit "Exception" from the name. Really this is just an IP range I think.
 public class IPAccessControlListException implements Buildable<IPAccessControlListException> {
   public String endIPAddress;
 

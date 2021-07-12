@@ -33,6 +33,7 @@ import io.fusionauth.domain.internal.annotation.InternalJSONColumn;
 public class IPAccessControlList implements Buildable<IPAccessControlList>, _InternalJSONColumn {
   public final Map<String, Object> data = new LinkedHashMap<>();
 
+  // TODO : Brett G : With Brian's new push towards defaults, can we default this value, and if so, we could do it here.
   @InternalJSONColumn
   public IPAccessControlListMode defaultAction;
 
