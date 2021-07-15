@@ -45,10 +45,10 @@ public class DeviceInfo implements Buildable<DeviceInfo> {
     }
     DeviceInfo device = (DeviceInfo) o;
     return Objects.equals(description, device.description) &&
-        Objects.equals(lastAccessedAddress, device.lastAccessedAddress) &&
-        Objects.equals(lastAccessedInstant, device.lastAccessedInstant) &&
-        Objects.equals(name, device.name) &&
-        type == device.type;
+           Objects.equals(lastAccessedAddress, device.lastAccessedAddress) &&
+           Objects.equals(lastAccessedInstant, device.lastAccessedInstant) &&
+           Objects.equals(name, device.name) &&
+           type == device.type;
   }
 
   @Override

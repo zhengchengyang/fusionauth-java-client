@@ -17,6 +17,7 @@ package io.fusionauth.domain.api;
 
 import com.inversoft.json.JacksonConstructor;
 import io.fusionauth.domain.Buildable;
+import io.fusionauth.domain.EventInfo;
 
 /**
  * @author Brian Pontarelli
@@ -27,6 +28,8 @@ public class TwoFactorRequest implements Buildable<TwoFactorRequest> {
   public String code;
 
   public String email;
+
+  public EventInfo eventInfo;
 
   public String method;
 

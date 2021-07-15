@@ -28,7 +28,6 @@ import io.fusionauth.domain.User;
  * @author Matthew Altman
  */
 public class UserPasswordBreachEvent extends BaseEvent implements Buildable<UserPasswordBreachEvent> {
-
   public User user;
 
   @JacksonConstructor
