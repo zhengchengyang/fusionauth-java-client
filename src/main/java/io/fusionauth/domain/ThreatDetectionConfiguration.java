@@ -89,7 +89,10 @@ public class ThreatDetectionConfiguration implements Buildable<ThreatDetectionCo
         return false;
       }
       CaptchaConfiguration that = (CaptchaConfiguration) o;
-      return captchaMethod == that.captchaMethod && secretKey.equals(that.secretKey) && siteKey.equals(that.siteKey) && threshold == that.threshold;
+      return Double.compare(that.threshold, threshold) == 0 &&
+             captchaMethod == that.captchaMethod &&
+             Objects.equals(secretKey, that.secretKey) &&
+             Objects.equals(siteKey, that.siteKey);
     }
 
     @Override
