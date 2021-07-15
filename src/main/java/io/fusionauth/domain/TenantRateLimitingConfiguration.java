@@ -49,6 +49,7 @@ public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimi
 
   @JsonIgnore
   public RateLimitedRequestConfiguration getConfiguration(RateLimitedRequestType type) {
+    // TODO : rate limiting : This will likely become a case statement?
     if (type == RateLimitedRequestType.ForgotPassword) {
       return forgotPassword;
     }
