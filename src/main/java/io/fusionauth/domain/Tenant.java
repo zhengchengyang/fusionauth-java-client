@@ -118,6 +118,9 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
   public PasswordValidationRules passwordValidationRules = new PasswordValidationRules();
 
   @InternalJSONColumn
+  public TenantRateLimitingConfiguration rateLimitingConfiguration = new TenantRateLimitingConfiguration();
+
+  @InternalJSONColumn
   public ObjectState state;
 
   public UUID themeId;
@@ -160,6 +163,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
     this.oauthConfiguration = new TenantOAuth2Configuration(other.oauthConfiguration);
     this.passwordEncryptionConfiguration = new PasswordEncryptionConfiguration(other.passwordEncryptionConfiguration);
     this.passwordValidationRules = new PasswordValidationRules(other.passwordValidationRules);
+    this.rateLimitingConfiguration = new TenantRateLimitingConfiguration(other.rateLimitingConfiguration);
     this.state = other.state;
     this.themeId = other.themeId;
     this.threatDetectionConfiguration = new ThreatDetectionConfiguration(other.threatDetectionConfiguration);
@@ -199,6 +203,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
            Objects.equals(name, tenant.name) &&
            Objects.equals(passwordEncryptionConfiguration, tenant.passwordEncryptionConfiguration) &&
            Objects.equals(passwordValidationRules, tenant.passwordValidationRules) &&
+           Objects.equals(rateLimitingConfiguration, tenant.rateLimitingConfiguration) &&
            Objects.equals(state, tenant.state) &&
            Objects.equals(themeId, tenant.themeId) &&
            Objects.equals(threatDetectionConfiguration, tenant.threatDetectionConfiguration) &&
@@ -213,7 +218,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
 
   @Override
   public int hashCode() {
-    return Objects.hash(configured, connectorPolicies, data, emailConfiguration, eventConfiguration, externalIdentifierConfiguration, failedAuthenticationConfiguration, familyConfiguration, formConfiguration, httpSessionMaxInactiveInterval, id, insertInstant, issuer, jwtConfiguration, lastUpdateInstant, loginConfiguration, logoutURL, maximumPasswordAge, minimumPasswordAge, name, passwordEncryptionConfiguration, passwordValidationRules, state, themeId, threatDetectionConfiguration, userDeletePolicy, usernameConfiguration);
+    return Objects.hash(configured, connectorPolicies, data, emailConfiguration, eventConfiguration, externalIdentifierConfiguration, failedAuthenticationConfiguration, familyConfiguration, formConfiguration, httpSessionMaxInactiveInterval, id, insertInstant, issuer, jwtConfiguration, lastUpdateInstant, loginConfiguration, logoutURL, maximumPasswordAge, minimumPasswordAge, name, passwordEncryptionConfiguration, passwordValidationRules, state, rateLimitingConfiguration, themeId, threatDetectionConfiguration, userDeletePolicy, usernameConfiguration);
   }
 
   @JsonIgnore
