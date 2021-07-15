@@ -25,14 +25,26 @@ import com.inversoft.json.ToString;
  * @author Daniel DeGroff
  */
 public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimitingConfiguration> {
+  public RateLimitedRequestConfiguration failedLogin = new RateLimitedRequestConfiguration();
+
   public RateLimitedRequestConfiguration forgotPassword = new RateLimitedRequestConfiguration();
+
+  public RateLimitedRequestConfiguration sendPasswordlessEmail = new RateLimitedRequestConfiguration();
+
+  public RateLimitedRequestConfiguration sendTwoFactorEmail = new RateLimitedRequestConfiguration();
+
+  public RateLimitedRequestConfiguration sendTwoFactorSMS = new RateLimitedRequestConfiguration();
 
   @JacksonConstructor
   public TenantRateLimitingConfiguration() {
   }
 
   public TenantRateLimitingConfiguration(TenantRateLimitingConfiguration other) {
+    this.failedLogin = new RateLimitedRequestConfiguration(other.failedLogin);
     this.forgotPassword = new RateLimitedRequestConfiguration(other.forgotPassword);
+    this.sendPasswordlessEmail = new RateLimitedRequestConfiguration(other.sendPasswordlessEmail);
+    this.sendTwoFactorEmail = new RateLimitedRequestConfiguration(other.sendTwoFactorEmail);
+    this.sendTwoFactorSMS = new RateLimitedRequestConfiguration(other.sendTwoFactorSMS);
   }
 
   @Override
@@ -44,22 +56,47 @@ public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimi
       return false;
     }
     TenantRateLimitingConfiguration that = (TenantRateLimitingConfiguration) o;
-    return Objects.equals(forgotPassword, that.forgotPassword);
+    return Objects.equals(forgotPassword, that.forgotPassword) &&
+           Objects.equals(failedLogin, that.failedLogin) &&
+           Objects.equals(sendPasswordlessEmail, that.sendPasswordlessEmail) &&
+           Objects.equals(sendTwoFactorEmail, that.sendTwoFactorEmail) &&
+           Objects.equals(sendTwoFactorSMS, that.sendTwoFactorSMS);
   }
 
   @JsonIgnore
   public RateLimitedRequestConfiguration getConfiguration(RateLimitedRequestType type) {
-    // TODO : rate limiting : This will likely become a case statement?
-    if (type == RateLimitedRequestType.ForgotPassword) {
-      return forgotPassword;
+    switch (type) {
+      case FailedLogin:
+        return failedLogin;
+      case ForgotPassword:
+        return forgotPassword;
+      case SendPasswordlessEmail:
+        return sendPasswordlessEmail;
+      case SendTwoFactorEmail:
+        return sendTwoFactorEmail;
+      case SendTwoFactorSMS:
+        return sendTwoFactorSMS;
+      default:
+        throw new IllegalArgumentException("Unexpected request type");
     }
-
-    throw new IllegalArgumentException("Unexpected request type.");
   }
+
+  // TODO : Brett : I want to use enhanced switch syntax but IntelliJ is being a $#*%!
+//  @JsonIgnore
+//  public RateLimitedRequestConfiguration getConfiguration(RateLimitedRequestType type) {
+//    return switch (type) {
+//      case FailedLogin -> failedLogin;
+//      case ForgotPassword -> forgotPassword;
+//      case SendPasswordlessEmail -> sendPasswordlessEmail;
+//      case SendTwoFactorEmail -> sendTwoFactorEmail;
+//      case SendTwoFactorSMS -> sendTwoFactorSMS;
+//      default -> throw new IllegalArgumentException("Unexpected request type");
+//    };
+//  }
 
   @Override
   public int hashCode() {
-    return Objects.hash(forgotPassword);
+    return Objects.hash(forgotPassword, failedLogin, sendPasswordlessEmail, sendTwoFactorEmail, sendTwoFactorSMS);
   }
 
   @Override
