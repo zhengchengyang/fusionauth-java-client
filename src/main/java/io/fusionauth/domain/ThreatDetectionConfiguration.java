@@ -70,8 +70,8 @@ public class ThreatDetectionConfiguration implements Buildable<ThreatDetectionCo
     }
 
     public CaptchaConfiguration(CaptchaConfiguration other) {
-      this.enabled = other.enabled;
       captchaMethod = other.captchaMethod;
+      enabled = other.enabled;
       secretKey = other.secretKey;
       siteKey = other.siteKey;
       threshold = other.threshold;
