@@ -9,6 +9,8 @@ package io.fusionauth.domain;
 public enum RateLimitedRequestType {
   FailedLogin,
   ForgotPassword,
+  ResendEmailVerification,
+  ResendRegistrationVerification,
   SendPasswordlessEmail,
   SendTwoFactorEmail,
   SendTwoFactorSMS
