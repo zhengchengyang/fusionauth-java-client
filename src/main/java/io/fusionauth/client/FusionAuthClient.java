@@ -362,22 +362,6 @@ public class FusionAuthClient {
   }
 
   /**
-   * Creates an ACL. You can optionally specify an Id for the ACL. If not provided one will be generated.
-   *
-   * @param accessControlListId (Optional) The Id for the ACL. If not provided a secure random UUID will be generated.
-   * @param request The request object that contains all of the information used to create the IP ACL.
-   * @return The ClientResponse object.
-   */
-  public ClientResponse<IPAccessControlListResponse, Errors> createACL(UUID accessControlListId, IPAccessControlListRequest request) {
-    return start(IPAccessControlListResponse.class, Errors.class)
-        .uri("/api/ip-acl")
-        .urlSegment(accessControlListId)
-        .bodyHandler(new JSONBodyHandler(request, objectMapper))
-        .post()
-        .go();
-  }
-
-  /**
    * Creates an API key. You can optionally specify a unique Id for the key, if not provided one will be generated.
    * an API key can only be created with equal or lesser authority. An API key cannot create another API key unless it is granted 
    * to that API key.
@@ -623,6 +607,22 @@ public class FusionAuthClient {
   public ClientResponse<MemberResponse, Errors> createGroupMembers(MemberRequest request) {
     return start(MemberResponse.class, Errors.class)
         .uri("/api/group/member")
+        .bodyHandler(new JSONBodyHandler(request, objectMapper))
+        .post()
+        .go();
+  }
+
+  /**
+   * Creates an IP Access Control List. You can optionally specify an Id on this create request, if one is not provided one will be generated.
+   *
+   * @param accessControlListId (Optional) The Id for the IP Access Control List. If not provided a secure random UUID will be generated.
+   * @param request The request object that contains all of the information used to create the IP Access Control List.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<IPAccessControlListResponse, Errors> createIPAccessControlList(UUID accessControlListId, IPAccessControlListRequest request) {
+    return start(IPAccessControlListResponse.class, Errors.class)
+        .uri("/api/ip-acl")
+        .urlSegment(accessControlListId)
         .bodyHandler(new JSONBodyHandler(request, objectMapper))
         .post()
         .go();
@@ -909,20 +909,6 @@ public class FusionAuthClient {
   }
 
   /**
-   * Deletes the ACL for the given Id.
-   *
-   * @param ipAccessControlListId The Id of the ACL to delete.
-   * @return The ClientResponse object.
-   */
-  public ClientResponse<Void, Errors> deleteACL(UUID ipAccessControlListId) {
-    return start(Void.TYPE, Errors.class)
-        .uri("/api/ip-acl")
-        .urlSegment(ipAccessControlListId)
-        .delete()
-        .go();
-  }
-
-  /**
    * Deletes the API key for the given Id.
    *
    * @param keyId The Id of the authentication API key to delete.
@@ -1131,6 +1117,20 @@ public class FusionAuthClient {
     return start(Void.TYPE, Errors.class)
         .uri("/api/group/member")
         .bodyHandler(new JSONBodyHandler(request, objectMapper))
+        .delete()
+        .go();
+  }
+
+  /**
+   * Deletes the IP Access Control List for the given Id.
+   *
+   * @param ipAccessControlListId The Id of the IP Access Control List to delete.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<Void, Errors> deleteIPAccessControlList(UUID ipAccessControlListId) {
+    return start(Void.TYPE, Errors.class)
+        .uri("/api/ip-acl")
+        .urlSegment(ipAccessControlListId)
         .delete()
         .go();
   }
@@ -2399,32 +2399,6 @@ public class FusionAuthClient {
   }
 
   /**
-   * Retrieves the ACL with the given Id.
-   *
-   * @param formId The Id of the ACL.
-   * @return The ClientResponse object.
-   */
-  public ClientResponse<IPAccessControlListResponse, Void> retrieveACL(UUID formId) {
-    return start(IPAccessControlListResponse.class, Void.TYPE)
-        .uri("/api/ip-acl")
-        .urlSegment(formId)
-        .get()
-        .go();
-  }
-
-  /**
-   * Retrieves all ACLs.
-   *
-   * @return The ClientResponse object.
-   */
-  public ClientResponse<IPAccessControlListResponse, Void> retrieveACLs() {
-    return start(IPAccessControlListResponse.class, Void.TYPE)
-        .uri("/api/ip-acl")
-        .get()
-        .go();
-  }
-
-  /**
    * Retrieves an authentication API key for the given id
    *
    * @param keyId The Id of the API key to retrieve.
@@ -2826,6 +2800,20 @@ public class FusionAuthClient {
   public ClientResponse<GroupResponse, Void> retrieveGroups() {
     return start(GroupResponse.class, Void.TYPE)
         .uri("/api/group")
+        .get()
+        .go();
+  }
+
+  /**
+   * Retrieves the IP Access Control List with the given Id.
+   *
+   * @param ipAccessControlListId The Id of the IP Access Control List.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<IPAccessControlListResponse, Void> retrieveIPAccessControlList(UUID ipAccessControlListId) {
+    return start(IPAccessControlListResponse.class, Void.TYPE)
+        .uri("/api/ip-acl")
+        .urlSegment(ipAccessControlListId)
         .get()
         .go();
   }
@@ -3885,20 +3873,6 @@ public class FusionAuthClient {
   }
 
   /**
-   * Searches the ACLs with the specified criteria and pagination.
-   *
-   * @param request The search criteria and pagination information.
-   * @return The ClientResponse object.
-   */
-  public ClientResponse<IPAccessControlListSearchResponse, Void> searchACLs(IPAccessControlListSearchRequest request) {
-    return start(IPAccessControlListSearchResponse.class, Void.TYPE)
-        .uri("/api/ip-acl/search")
-        .bodyHandler(new JSONBodyHandler(request, objectMapper))
-        .post()
-        .go();
-  }
-
-  /**
    * Searches the audit logs with the specified criteria and pagination.
    *
    * @param request The search criteria and pagination information.
@@ -3977,6 +3951,20 @@ public class FusionAuthClient {
   public ClientResponse<EventLogSearchResponse, Void> searchEventLogs(EventLogSearchRequest request) {
     return start(EventLogSearchResponse.class, Void.TYPE)
         .uri("/api/system/event-log/search")
+        .bodyHandler(new JSONBodyHandler(request, objectMapper))
+        .post()
+        .go();
+  }
+
+  /**
+   * Searches the IP Access Control Lists with the specified criteria and pagination.
+   *
+   * @param request The search criteria and pagination information.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<IPAccessControlListSearchResponse, Void> searchIPAccessControlLists(IPAccessControlListSearchRequest request) {
+    return start(IPAccessControlListSearchResponse.class, Void.TYPE)
+        .uri("/api/ip-acl/search")
         .bodyHandler(new JSONBodyHandler(request, objectMapper))
         .post()
         .go();
@@ -4229,22 +4217,6 @@ public class FusionAuthClient {
   }
 
   /**
-   * Updates the ACL with the given Id.
-   *
-   * @param accessControlListId The Id of the ACL to update.
-   * @param request The request that contains all of the new ACL information.
-   * @return The ClientResponse object.
-   */
-  public ClientResponse<IPAccessControlListResponse, Errors> updateACL(UUID accessControlListId, IPAccessControlListRequest request) {
-    return start(IPAccessControlListResponse.class, Errors.class)
-        .uri("/api/ip-acl")
-        .urlSegment(accessControlListId)
-        .bodyHandler(new JSONBodyHandler(request, objectMapper))
-        .put()
-        .go();
-  }
-
-  /**
    * Updates an API key by given id
    *
    * @param apiKeyId The Id of the API key to update.
@@ -4437,6 +4409,22 @@ public class FusionAuthClient {
     return start(GroupResponse.class, Errors.class)
         .uri("/api/group")
         .urlSegment(groupId)
+        .bodyHandler(new JSONBodyHandler(request, objectMapper))
+        .put()
+        .go();
+  }
+
+  /**
+   * Updates the IP Access Control List with the given Id.
+   *
+   * @param accessControlListId The Id of the IP Access Control List to update.
+   * @param request The request that contains all of the new IP Access Control List information.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<IPAccessControlListResponse, Errors> updateIPAccessControlList(UUID accessControlListId, IPAccessControlListRequest request) {
+    return start(IPAccessControlListResponse.class, Errors.class)
+        .uri("/api/ip-acl")
+        .urlSegment(accessControlListId)
         .bodyHandler(new JSONBodyHandler(request, objectMapper))
         .put()
         .go();

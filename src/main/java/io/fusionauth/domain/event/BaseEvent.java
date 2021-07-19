@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.inversoft.json.ToString;
+import io.fusionauth.domain.EventInfo;
 
 /**
  * Base-class for all FusionAuth events.
@@ -54,6 +55,8 @@ import com.inversoft.json.ToString;
 })
 public abstract class BaseEvent {
   public ZonedDateTime createInstant;
+
+  public EventInfo eventInfo;
 
   public UUID id;
 

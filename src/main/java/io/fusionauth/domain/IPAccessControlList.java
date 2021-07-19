@@ -37,7 +37,7 @@ public class IPAccessControlList implements Buildable<IPAccessControlList>, _Int
   public IPAccessControlListMode defaultAction = IPAccessControlListMode.Allow;
 
   @InternalJSONColumn
-  public List<IPRange> exceptions = new ArrayList<>();
+  public List<IPAddressRange> exceptions = new ArrayList<>();
 
   public UUID id;
 
@@ -57,17 +57,17 @@ public class IPAccessControlList implements Buildable<IPAccessControlList>, _Int
     }
     IPAccessControlList that = (IPAccessControlList) o;
     return Objects.equals(data, that.data) &&
-           Objects.equals(id, that.id) &&
-           Objects.equals(defaultAction, that.defaultAction) &&
-           Objects.equals(insertInstant, that.insertInstant) &&
+           defaultAction == that.defaultAction &&
            Objects.equals(exceptions, that.exceptions) &&
+           Objects.equals(id, that.id) &&
+           Objects.equals(insertInstant, that.insertInstant) &&
            Objects.equals(lastUpdateInstant, that.lastUpdateInstant) &&
            Objects.equals(name, that.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, id, defaultAction, insertInstant, exceptions, lastUpdateInstant, name);
+    return Objects.hash(data, defaultAction, exceptions, id, insertInstant, lastUpdateInstant, name);
   }
 
   @Override

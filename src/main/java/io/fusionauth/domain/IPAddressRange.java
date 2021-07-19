@@ -23,16 +23,16 @@ import com.inversoft.json.ToString;
 /**
  * @author Brett Guy
  */
-public class IPRange implements Buildable<IPRange> {
+public class IPAddressRange implements Buildable<IPAddressRange> {
   public String endIPAddress;
 
   public String startIPAddress;
 
   @JacksonConstructor
-  public IPRange() {
+  public IPAddressRange() {
   }
 
-  public IPRange(String startIPAddress, String endIPAddress) {
+  public IPAddressRange(String startIPAddress, String endIPAddress) {
     this.startIPAddress = startIPAddress;
     this.endIPAddress = endIPAddress;
   }
@@ -45,7 +45,7 @@ public class IPRange implements Buildable<IPRange> {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    IPRange that = (IPRange) o;
+    IPAddressRange that = (IPAddressRange) o;
     return Objects.equals(endIPAddress, that.endIPAddress) &&
            Objects.equals(startIPAddress, that.startIPAddress);
   }
