@@ -31,6 +31,7 @@ public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimi
 
   public RateLimitedRequestConfiguration forgotPassword = new RateLimitedRequestConfiguration();
 
+  // TODO : Rate Limiting : Rename fields to be consistent with new "Type" values we discussed.
   public RateLimitedRequestConfiguration resendEmailVerification = new RateLimitedRequestConfiguration();
 
   public RateLimitedRequestConfiguration resendRegistrationVerification = new RateLimitedRequestConfiguration();
