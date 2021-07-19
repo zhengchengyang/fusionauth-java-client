@@ -37,7 +37,8 @@ public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimi
 
   public RateLimitedRequestConfiguration sendPasswordlessEmail = new RateLimitedRequestConfiguration();
 
-  public RateLimitedRequestConfiguration sendTwoFactorEmail = new RateLimitedRequestConfiguration();
+  // TODO : Rate Limiting : Guessing at defaults : 10 / 60 seconds
+  public RateLimitedRequestConfiguration sendTwoFactorEmail = new RateLimitedRequestConfiguration(10, 60);
 
   public RateLimitedRequestConfiguration sendTwoFactorSMS = new RateLimitedRequestConfiguration();
 
