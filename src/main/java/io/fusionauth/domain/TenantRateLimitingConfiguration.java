@@ -31,7 +31,7 @@ public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimi
 
   public RateLimitedRequestConfiguration sendEmailVerification = new RateLimitedRequestConfiguration(10, 60);
 
-  public RateLimitedRequestConfiguration sendPasswordlessEmail = new RateLimitedRequestConfiguration(10, 60);
+  public RateLimitedRequestConfiguration sendPasswordless = new RateLimitedRequestConfiguration(10, 60);
 
   public RateLimitedRequestConfiguration sendRegistrationVerification = new RateLimitedRequestConfiguration(10, 60);
 
@@ -45,9 +45,8 @@ public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimi
     this.failedLogin = new RateLimitedRequestConfiguration(other.failedLogin);
     this.forgotPassword = new RateLimitedRequestConfiguration(other.forgotPassword);
     this.sendEmailVerification = new RateLimitedRequestConfiguration(other.sendEmailVerification);
+    this.sendPasswordless = new RateLimitedRequestConfiguration(other.sendPasswordless);
     this.sendRegistrationVerification = new RateLimitedRequestConfiguration(other.sendRegistrationVerification);
-    this.sendPasswordlessEmail = new RateLimitedRequestConfiguration(other.sendPasswordlessEmail);
-    this.sendTwoFactor = new RateLimitedRequestConfiguration(other.sendTwoFactor);
     this.sendTwoFactor = new RateLimitedRequestConfiguration(other.sendTwoFactor);
   }
 
@@ -63,9 +62,8 @@ public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimi
     return Objects.equals(failedLogin, that.failedLogin) &&
            Objects.equals(forgotPassword, that.forgotPassword) &&
            Objects.equals(sendEmailVerification, that.sendEmailVerification) &&
+           Objects.equals(sendPasswordless, that.sendPasswordless) &&
            Objects.equals(sendRegistrationVerification, that.sendRegistrationVerification) &&
-           Objects.equals(sendPasswordlessEmail, that.sendPasswordlessEmail) &&
-           Objects.equals(sendTwoFactor, that.sendTwoFactor) &&
            Objects.equals(sendTwoFactor, that.sendTwoFactor);
   }
 
@@ -78,10 +76,10 @@ public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimi
         return forgotPassword;
       case SendEmailVerification:
         return sendEmailVerification;
+      case SendPasswordless:
+        return sendPasswordless;
       case SendRegistrationVerification:
         return sendRegistrationVerification;
-      case SendPasswordlessEmail:
-        return sendPasswordlessEmail;
       case SendTwoFactor:
         return sendTwoFactor;
       default:
@@ -91,7 +89,7 @@ public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimi
 
   @Override
   public int hashCode() {
-    return Objects.hash(failedLogin, forgotPassword, sendEmailVerification, sendRegistrationVerification, sendPasswordlessEmail, sendTwoFactor, sendTwoFactor);
+    return Objects.hash(failedLogin, forgotPassword, sendEmailVerification, sendPasswordless, sendRegistrationVerification, sendTwoFactor);
   }
 
   @Override
