@@ -25,6 +25,8 @@ import com.inversoft.json.ToString;
  * @author Daniel DeGroff
  */
 public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimitingConfiguration> {
+  // TODO : Rate Limiting : Should we default these values to something reasonable? In general, we should not be adding any additional required fields to a tenant
+  //                        unless absolutely necessary. So if we have primitive values, 0 is considered not set and we can default it. See ExternalId Configuration for an example.
   public RateLimitedRequestConfiguration failedLogin = new RateLimitedRequestConfiguration();
 
   public RateLimitedRequestConfiguration forgotPassword = new RateLimitedRequestConfiguration();
@@ -89,7 +91,7 @@ public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimi
       case SendTwoFactorSMS:
         return sendTwoFactorSMS;
       default:
-        throw new IllegalArgumentException("Unexpected request type");
+        throw new IllegalArgumentException("Unexpected request type [" + type + "].");
     }
   }
 
