@@ -32,6 +32,11 @@ public class RateLimitedRequestConfiguration extends Enableable implements Build
   public RateLimitedRequestConfiguration() {
   }
 
+  public RateLimitedRequestConfiguration(int limit, int timePeriodInSeconds) {
+    this.limit = limit;
+    this.timePeriodInSeconds = timePeriodInSeconds;
+  }
+
   public RateLimitedRequestConfiguration(RateLimitedRequestConfiguration other) {
     this.enabled = other.enabled;
     this.limit = other.limit;
