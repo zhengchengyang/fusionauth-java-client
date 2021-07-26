@@ -37,18 +37,6 @@ public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimi
 
   public RateLimitedRequestConfiguration sendTwoFactor = new RateLimitedRequestConfiguration(10, 60);
 
-  // TODO : Rate Limiting : Rename fields to be consistent with new "Type" values we discussed.
-  public RateLimitedRequestConfiguration resendEmailVerification = new RateLimitedRequestConfiguration();
-
-  public RateLimitedRequestConfiguration resendRegistrationVerification = new RateLimitedRequestConfiguration();
-
-  public RateLimitedRequestConfiguration sendPasswordlessEmail = new RateLimitedRequestConfiguration();
-
-  // TODO : Rate Limiting : Guessing at defaults : 10 / 60 seconds
-  public RateLimitedRequestConfiguration sendTwoFactorEmail = new RateLimitedRequestConfiguration(10, 60);
-
-  public RateLimitedRequestConfiguration sendTwoFactorSMS = new RateLimitedRequestConfiguration();
-
   @JacksonConstructor
   public TenantRateLimitingConfiguration() {
   }
