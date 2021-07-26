@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -29,44 +30,88 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * @author Brian Pontarelli
  */
 public enum EventType {
-  UserDelete("user.delete"),
+  JWTPublicKeyUpdate("jwt.public-key.update"),
 
-  UserCreate("user.create"),
-
-  UserUpdate("user.update"),
-
-  UserDeactivate("user.deactivate"),
-
-  UserBulkCreate("user.bulk.create"),
-
-  UserReactivate("user.reactivate"),
-
-  UserAction("user.action"),
-
-  // 2.0 Rename -> refresh-token.revoke
+  // TODO : 2.0 : Rename -> refresh-token.revoke
   JWTRefreshTokenRevoke("jwt.refresh-token.revoke"),
 
   JWTRefresh("jwt.refresh"),
 
-  JWTPublicKeyUpdate("jwt.public-key.update"),
+  AuditLogCreate("audit-log.create"),
 
-  UserLoginSuccess("user.login.success"),
+  EventLogCreate("event-log.create"),
 
-  UserLoginFailed("user.login.failed"),
+  KickstartSuccess("kickstart.success"),
 
-  UserRegistrationCreate("user.registration.create"),
+  UserAction("user.action"),
 
-  UserRegistrationUpdate("user.registration.update"),
+  UserBulkCreate("user.bulk.create"),
 
-  UserRegistrationDelete("user.registration.delete"),
+  UserCreate("user.create"),
 
-  UserRegistrationVerified("user.registration.verified"),
+  UserCreateComplete("user.create.complete"),
+
+  UserDeactivate("user.deactivate"),
+
+  UserDelete("user.delete"),
+
+  UserDeleteComplete("user.delete.complete"),
+
+  // TODO : Lots of Emails : Daniel : Need to hook this event up. Should this only go in the front end registration service?
+  //        New Event + Email (I think)
+  UserEmailDuplicate("user.email.duplicate"),
+
+  UserEmailUpdate("user.email.update"),
 
   UserEmailVerified("user.email.verified"),
 
+  UserLoginFailed("user.login.failed"),
+
+  // TODO : Lots of Emails : Daniel : Need to hook this event up.
+  //        New Event + Email
+  UserLoginNewDevice("user.login.new-device"),
+
+  UserLoginSuccess("user.login.success"),
+
+  // TODO : Lots of Emails : Daniel : Need to hook this event up.
+  //        Event + Email
+  UserLoginSuspect("user.login.suspect"),
+
   UserPasswordBreach("user.password.breach"),
 
-  // TODO : Future : Add an event for each time we cut an Event Log? This way we could push out events to a 3rd party system?
+  UserPasswordResetSend("user.password.reset.send"),
+
+  UserPasswordResetStart("user.password.reset.start"),
+
+  UserPasswordResetSuccess("user.password.reset.success"),
+
+  UserPasswordUpdate("user.password.update"),
+
+  UserReactivate("user.reactivate"),
+
+  UserRegistrationCreate("user.registration.create"),
+
+  UserRegistrationCreateComplete("user.registration.create.complete"),
+
+  UserRegistrationDelete("user.registration.delete"),
+
+  UserRegistrationDeleteComplete("user.registration.delete.complete"),
+
+  UserRegistrationUpdate("user.registration.update"),
+
+  UserRegistrationUpdateComplete("user.registration.update.complete"),
+
+  UserRegistrationVerified("user.registration.verified"),
+
+  // TODO : Lots of Emails : Question: Should this also be sent during a User API Update which adds a method?
+  UserTwoFactorMethodAdd("user.two-factor.method.add"),
+
+  // TODO : Lots of Emails : Question: Should this also be sent during a User API Update which removes a method?
+  UserTwoFactorMethodRemove("user.two-factor.method.remove"),
+
+  UserUpdate("user.update"),
+
+  UserUpdateComplete("user.update.complete"),
 
   Test("test");
 
@@ -85,21 +130,40 @@ public enum EventType {
     return Arrays.asList(EventType.JWTPublicKeyUpdate,
                          EventType.JWTRefreshTokenRevoke,
                          EventType.JWTRefresh,
-                         EventType.UserLoginSuccess,
-                         EventType.UserLoginFailed,
+                         EventType.AuditLogCreate,
+                         EventType.EventLogCreate,
+                         EventType.KickstartSuccess,
                          EventType.UserAction,
                          EventType.UserBulkCreate,
                          EventType.UserCreate,
-                         EventType.UserRegistrationCreate,
-                         EventType.UserRegistrationUpdate,
-                         EventType.UserRegistrationDelete,
-                         EventType.UserRegistrationVerified,
+                         EventType.UserCreateComplete,
                          EventType.UserDeactivate,
                          EventType.UserDelete,
-                         EventType.UserReactivate,
-                         EventType.UserUpdate,
+                         EventType.UserDeleteComplete,
+                         EventType.UserEmailDuplicate,
+                         EventType.UserEmailUpdate,
                          EventType.UserEmailVerified,
-                         EventType.UserPasswordBreach);
+                         EventType.UserLoginFailed,
+                         EventType.UserLoginNewDevice,
+                         EventType.UserLoginSuccess,
+                         EventType.UserLoginSuspect,
+                         EventType.UserPasswordBreach,
+                         EventType.UserPasswordResetSend,
+                         EventType.UserPasswordResetStart,
+                         EventType.UserPasswordResetSuccess,
+                         EventType.UserPasswordUpdate,
+                         EventType.UserReactivate,
+                         EventType.UserRegistrationCreate,
+                         EventType.UserRegistrationCreateComplete,
+                         EventType.UserRegistrationDelete,
+                         EventType.UserRegistrationDeleteComplete,
+                         EventType.UserRegistrationUpdate,
+                         EventType.UserRegistrationUpdateComplete,
+                         EventType.UserRegistrationVerified,
+                         EventType.UserTwoFactorMethodAdd,
+                         EventType.UserTwoFactorMethodRemove,
+                         EventType.UserUpdate,
+                         EventType.UserUpdateComplete);
   }
 
   /**
@@ -108,23 +172,9 @@ public enum EventType {
    * @return Return all available types in displayable order that can be globally configured for a transaction setting.
    */
   public static List<EventType> allTypesForTransactionConfiguration() {
-    return Arrays.asList(EventType.JWTPublicKeyUpdate,
-                         EventType.JWTRefreshTokenRevoke,
-                         EventType.JWTRefresh,
-                         EventType.UserLoginSuccess,
-                         EventType.UserLoginFailed,
-                         EventType.UserBulkCreate,
-                         EventType.UserCreate,
-                         EventType.UserRegistrationCreate,
-                         EventType.UserRegistrationUpdate,
-                         EventType.UserRegistrationDelete,
-                         EventType.UserRegistrationVerified,
-                         EventType.UserDeactivate,
-                         EventType.UserDelete,
-                         EventType.UserReactivate,
-                         EventType.UserUpdate,
-                         EventType.UserEmailVerified,
-                         EventType.UserPasswordBreach);
+    return allTypes().stream()
+                     .filter(e -> e != UserAction)
+                     .collect(Collectors.toList());
   }
 
   @JsonCreator

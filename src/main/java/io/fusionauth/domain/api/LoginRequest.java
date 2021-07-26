@@ -19,6 +19,7 @@ import java.util.UUID;
 
 import com.inversoft.json.JacksonConstructor;
 import io.fusionauth.domain.Buildable;
+import io.fusionauth.domain.EventInfo;
 
 /**
  * Login API request object.
@@ -36,6 +37,13 @@ public class LoginRequest extends BaseLoginRequest implements Buildable<LoginReq
 
   @JacksonConstructor
   public LoginRequest() {
+  }
+
+  public LoginRequest(UUID applicationId, String loginId, String password, EventInfo eventInfo) {
+    this.applicationId = applicationId;
+    this.eventInfo = eventInfo;
+    this.loginId = loginId;
+    this.password = password;
   }
 
   public LoginRequest(UUID applicationId, String loginId, String password, String ipAddress) {

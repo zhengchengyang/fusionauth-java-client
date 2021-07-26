@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2019, FusionAuth, All Rights Reserved
+ * Copyright (c) 2021, FusionAuth, All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,26 +15,28 @@
  */
 package io.fusionauth.domain.event;
 
-import java.time.ZonedDateTime;
 import java.util.Objects;
-import java.util.UUID;
 
+import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
-import io.fusionauth.domain.EventInfo;
+import io.fusionauth.domain.Buildable;
+import io.fusionauth.domain.User;
 
 /**
- * Base-class for all FusionAuth events.
+ * Models the User Password Reset Start Event.
  *
- * @author Brian Pontarelli
+ * @author Daniel DeGroff
  */
-public abstract class BaseEvent {
-  public ZonedDateTime createInstant;
+public class UserPasswordResetStartEvent extends BaseEvent implements Buildable<UserPasswordResetStartEvent>, NonTransactionalEvent {
+  public User user;
 
-  public UUID id;
+  @JacksonConstructor
+  public UserPasswordResetStartEvent() {
+  }
 
-  public EventInfo info;
-
-  public UUID tenantId;
+  public UserPasswordResetStartEvent(User user) {
+    this.user = user;
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -44,21 +46,18 @@ public abstract class BaseEvent {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    BaseEvent baseEvent = (BaseEvent) o;
-    return Objects.equals(createInstant, baseEvent.createInstant) &&
-           Objects.equals(id, baseEvent.id) &&
-           Objects.equals(info, baseEvent.info) &&
-           Objects.equals(tenantId, baseEvent.tenantId);
+    UserPasswordResetStartEvent that = (UserPasswordResetStartEvent) o;
+    return super.equals(o) && Objects.equals(user, that.user);
   }
 
-  /**
-   * @return The type of this event.
-   */
-  public abstract EventType getType();
+  @Override
+  public EventType getType() {
+    return EventType.UserPasswordResetStart;
+  }
 
   @Override
   public int hashCode() {
-    return Objects.hash(createInstant, id, info, tenantId);
+    return Objects.hash(super.hashCode(), user);
   }
 
   @Override

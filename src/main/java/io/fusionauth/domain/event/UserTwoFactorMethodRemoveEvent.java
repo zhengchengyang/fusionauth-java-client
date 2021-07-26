@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, FusionAuth, All Rights Reserved
+ * Copyright (c) 2021, FusionAuth, All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,26 +17,29 @@ package io.fusionauth.domain.event;
 
 import java.util.Objects;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
-import io.fusionauth.json.EventRequestDeserializer;
+import io.fusionauth.domain.Buildable;
+import io.fusionauth.domain.TwoFactorMethod;
+import io.fusionauth.domain.User;
 
 /**
- * Container for the event information. This is the JSON that is sent from FusionAuth to webhooks.
+ * Model a user event when a two-factor method has been added.
  *
- * @author Brian Pontarelli
+ * @author Daniel DeGroff
  */
-@JsonDeserialize(using = EventRequestDeserializer.class)
-public class EventRequest {
-  public BaseEvent event;
+public class UserTwoFactorMethodRemoveEvent extends BaseEvent implements Buildable<UserTwoFactorMethodRemoveEvent> {
+  public TwoFactorMethod method;
+
+  public User user;
 
   @JacksonConstructor
-  public EventRequest() {
+  public UserTwoFactorMethodRemoveEvent() {
   }
 
-  public EventRequest(BaseEvent event) {
-    this.event = event;
+  public UserTwoFactorMethodRemoveEvent(TwoFactorMethod method, User user) {
+    this.method = method;
+    this.user = user;
   }
 
   @Override
@@ -47,15 +50,24 @@ public class EventRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    EventRequest that = (EventRequest) o;
-    return Objects.equals(event, that.event);
+    if (!super.equals(o)) {
+      return false;
+    }
+    UserTwoFactorMethodRemoveEvent that = (UserTwoFactorMethodRemoveEvent) o;
+    return Objects.equals(method, that.method) && Objects.equals(user, that.user);
+  }
+
+  @Override
+  public EventType getType() {
+    return EventType.UserTwoFactorMethodRemove;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(event);
+    return Objects.hash(super.hashCode(), method, user);
   }
 
+  @Override
   public String toString() {
     return ToString.toString(this);
   }

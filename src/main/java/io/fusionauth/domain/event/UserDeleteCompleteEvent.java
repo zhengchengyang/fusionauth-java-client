@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, FusionAuth, All Rights Reserved
+ * Copyright (c) 2021, FusionAuth, All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,26 +17,28 @@ package io.fusionauth.domain.event;
 
 import java.util.Objects;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
-import io.fusionauth.json.EventRequestDeserializer;
+import io.fusionauth.domain.Buildable;
+import io.fusionauth.domain.User;
 
 /**
- * Container for the event information. This is the JSON that is sent from FusionAuth to webhooks.
+ * Models the User Event (and can be converted to JSON) that is used for all user modifications (create, update,
+ * delete).
+ * <p>
+ * This is different than user.delete because it is sent after the tx is committed, this cannot be transactional.
  *
- * @author Brian Pontarelli
+ * @author Daniel DeGroff
  */
-@JsonDeserialize(using = EventRequestDeserializer.class)
-public class EventRequest {
-  public BaseEvent event;
+public class UserDeleteCompleteEvent extends BaseEvent implements Buildable<UserDeleteCompleteEvent>, NonTransactionalEvent {
+  public User user;
 
   @JacksonConstructor
-  public EventRequest() {
+  public UserDeleteCompleteEvent() {
   }
 
-  public EventRequest(BaseEvent event) {
-    this.event = event;
+  public UserDeleteCompleteEvent(User user) {
+    this.user = user;
   }
 
   @Override
@@ -47,15 +49,22 @@ public class EventRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    EventRequest that = (EventRequest) o;
-    return Objects.equals(event, that.event);
+    UserDeleteCompleteEvent that = (UserDeleteCompleteEvent) o;
+    return super.equals(o) &&
+           Objects.equals(user, that.user);
+  }
+
+  @Override
+  public EventType getType() {
+    return EventType.UserDeleteComplete;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(event);
+    return Objects.hash(super.hashCode(), user);
   }
 
+  @Override
   public String toString() {
     return ToString.toString(this);
   }

@@ -118,6 +118,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
   public PasswordValidationRules passwordValidationRules = new PasswordValidationRules();
 
   @InternalJSONColumn
+  // TODO : Rate Limiting : Naming : Rename to TenantRateLimitConfiguration? (and field name)
   public TenantRateLimitingConfiguration rateLimitingConfiguration = new TenantRateLimitingConfiguration();
 
   @InternalJSONColumn

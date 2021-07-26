@@ -18,12 +18,14 @@ package io.fusionauth.domain;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
+import com.inversoft.json.ToString;
+
 /**
  * Information about a user event (login, register, etc) that helps identify the source of the event (location, device type, OS, etc).
  *
  * @author Brian Pontarelli
  */
-public class EventInfo {
+public class EventInfo implements Buildable<EventInfo> {
   public String deviceDescription;
 
   public String deviceName;
@@ -45,17 +47,27 @@ public class EventInfo {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof EventInfo)) {
+    if (o == null || getClass() != o.getClass()) {
       return false;
     }
     EventInfo eventInfo = (EventInfo) o;
-    return Objects.equals(deviceDescription, eventInfo.deviceDescription) && Objects.equals(deviceName, eventInfo.deviceName) &&
-           deviceType == eventInfo.deviceType && Objects.equals(instant, eventInfo.instant) && Objects.equals(ipAddress, eventInfo.ipAddress) &&
-           Objects.equals(location, eventInfo.location) && Objects.equals(os, eventInfo.os) && Objects.equals(userAgent, eventInfo.userAgent);
+    return Objects.equals(deviceDescription, eventInfo.deviceDescription) &&
+           Objects.equals(deviceName, eventInfo.deviceName) &&
+           Objects.equals(deviceType, eventInfo.deviceType) &&
+           Objects.equals(instant, eventInfo.instant) &&
+           Objects.equals(ipAddress, eventInfo.ipAddress) &&
+           Objects.equals(location, eventInfo.location) &&
+           Objects.equals(os, eventInfo.os) &&
+           Objects.equals(userAgent, eventInfo.userAgent);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(deviceDescription, deviceName, deviceType, instant, ipAddress, location, os, userAgent);
+  }
+
+  @Override
+  public String toString() {
+    return ToString.toString(this);
   }
 }

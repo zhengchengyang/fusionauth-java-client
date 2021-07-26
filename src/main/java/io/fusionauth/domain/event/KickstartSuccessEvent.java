@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2019, FusionAuth, All Rights Reserved
+ * Copyright (c) 2021, FusionAuth, All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,26 +15,28 @@
  */
 package io.fusionauth.domain.event;
 
-import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
-import io.fusionauth.domain.EventInfo;
+import io.fusionauth.domain.Buildable;
 
 /**
- * Base-class for all FusionAuth events.
+ * Event event to indicate kickstart has been successfully completed.
  *
- * @author Brian Pontarelli
+ * @author Daniel DeGroff
  */
-public abstract class BaseEvent {
-  public ZonedDateTime createInstant;
+public class KickstartSuccessEvent extends BaseEvent implements Buildable<KickstartSuccessEvent>, InstanceEvent, NonTransactionalEvent {
+  public UUID instanceId;
 
-  public UUID id;
+  @JacksonConstructor
+  public KickstartSuccessEvent() {
+  }
 
-  public EventInfo info;
-
-  public UUID tenantId;
+  public KickstartSuccessEvent(UUID instanceId) {
+    this.instanceId = instanceId;
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -44,21 +46,21 @@ public abstract class BaseEvent {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    BaseEvent baseEvent = (BaseEvent) o;
-    return Objects.equals(createInstant, baseEvent.createInstant) &&
-           Objects.equals(id, baseEvent.id) &&
-           Objects.equals(info, baseEvent.info) &&
-           Objects.equals(tenantId, baseEvent.tenantId);
+    if (!super.equals(o)) {
+      return false;
+    }
+    KickstartSuccessEvent that = (KickstartSuccessEvent) o;
+    return Objects.equals(instanceId, that.instanceId);
   }
 
-  /**
-   * @return The type of this event.
-   */
-  public abstract EventType getType();
+  @Override
+  public EventType getType() {
+    return EventType.KickstartSuccess;
+  }
 
   @Override
   public int hashCode() {
-    return Objects.hash(createInstant, id, info, tenantId);
+    return Objects.hash(super.hashCode(), instanceId);
   }
 
   @Override
