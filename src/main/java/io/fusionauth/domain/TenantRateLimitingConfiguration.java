@@ -25,13 +25,17 @@ import com.inversoft.json.ToString;
  * @author Daniel DeGroff
  */
 public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimitingConfiguration> {
-  // TODO : Rate Limiting : Brett G. or Brett P. what is left here?
+  public RateLimitedRequestConfiguration failedLogin = new RateLimitedRequestConfiguration(5, 60);
 
-  // TODO : Rate Limiting : Should we default these values to something reasonable? In general, we should not be adding any additional required fields to a tenant
-  //                        unless absolutely necessary. So if we have primitive values, 0 is considered not set and we can default it. See ExternalId Configuration for an example.
-  public RateLimitedRequestConfiguration failedLogin = new RateLimitedRequestConfiguration();
+  public RateLimitedRequestConfiguration forgotPassword = new RateLimitedRequestConfiguration(5, 60);
 
-  public RateLimitedRequestConfiguration forgotPassword = new RateLimitedRequestConfiguration();
+  public RateLimitedRequestConfiguration sendEmailVerification = new RateLimitedRequestConfiguration(10, 60);
+
+  public RateLimitedRequestConfiguration sendPasswordless = new RateLimitedRequestConfiguration(10, 60);
+
+  public RateLimitedRequestConfiguration sendRegistrationVerification = new RateLimitedRequestConfiguration(10, 60);
+
+  public RateLimitedRequestConfiguration sendTwoFactor = new RateLimitedRequestConfiguration(10, 60);
 
   // TODO : Rate Limiting : Rename fields to be consistent with new "Type" values we discussed.
   public RateLimitedRequestConfiguration resendEmailVerification = new RateLimitedRequestConfiguration();
@@ -52,11 +56,10 @@ public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimi
   public TenantRateLimitingConfiguration(TenantRateLimitingConfiguration other) {
     this.failedLogin = new RateLimitedRequestConfiguration(other.failedLogin);
     this.forgotPassword = new RateLimitedRequestConfiguration(other.forgotPassword);
-    this.resendEmailVerification = new RateLimitedRequestConfiguration(other.resendEmailVerification);
-    this.resendRegistrationVerification = new RateLimitedRequestConfiguration(other.resendRegistrationVerification);
-    this.sendPasswordlessEmail = new RateLimitedRequestConfiguration(other.sendPasswordlessEmail);
-    this.sendTwoFactorEmail = new RateLimitedRequestConfiguration(other.sendTwoFactorEmail);
-    this.sendTwoFactorSMS = new RateLimitedRequestConfiguration(other.sendTwoFactorSMS);
+    this.sendEmailVerification = new RateLimitedRequestConfiguration(other.sendEmailVerification);
+    this.sendPasswordless = new RateLimitedRequestConfiguration(other.sendPasswordless);
+    this.sendRegistrationVerification = new RateLimitedRequestConfiguration(other.sendRegistrationVerification);
+    this.sendTwoFactor = new RateLimitedRequestConfiguration(other.sendTwoFactor);
   }
 
   @Override
@@ -70,11 +73,10 @@ public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimi
     TenantRateLimitingConfiguration that = (TenantRateLimitingConfiguration) o;
     return Objects.equals(failedLogin, that.failedLogin) &&
            Objects.equals(forgotPassword, that.forgotPassword) &&
-           Objects.equals(resendEmailVerification, that.resendEmailVerification) &&
-           Objects.equals(resendRegistrationVerification, that.resendRegistrationVerification) &&
-           Objects.equals(sendPasswordlessEmail, that.sendPasswordlessEmail) &&
-           Objects.equals(sendTwoFactorEmail, that.sendTwoFactorEmail) &&
-           Objects.equals(sendTwoFactorSMS, that.sendTwoFactorSMS);
+           Objects.equals(sendEmailVerification, that.sendEmailVerification) &&
+           Objects.equals(sendPasswordless, that.sendPasswordless) &&
+           Objects.equals(sendRegistrationVerification, that.sendRegistrationVerification) &&
+           Objects.equals(sendTwoFactor, that.sendTwoFactor);
   }
 
   @JsonIgnore
@@ -84,16 +86,14 @@ public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimi
         return failedLogin;
       case ForgotPassword:
         return forgotPassword;
-      case ResendEmailVerification:
-        return resendEmailVerification;
-      case ResendRegistrationVerification:
-        return resendRegistrationVerification;
-      case SendPasswordlessEmail:
-        return sendPasswordlessEmail;
-      case SendTwoFactorEmail:
-        return sendTwoFactorEmail;
-      case SendTwoFactorSMS:
-        return sendTwoFactorSMS;
+      case SendEmailVerification:
+        return sendEmailVerification;
+      case SendPasswordless:
+        return sendPasswordless;
+      case SendRegistrationVerification:
+        return sendRegistrationVerification;
+      case SendTwoFactor:
+        return sendTwoFactor;
       default:
         throw new IllegalArgumentException("Unexpected request type [" + type + "].");
     }
@@ -101,7 +101,7 @@ public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimi
 
   @Override
   public int hashCode() {
-    return Objects.hash(failedLogin, forgotPassword, resendEmailVerification, resendRegistrationVerification, sendPasswordlessEmail, sendTwoFactorEmail, sendTwoFactorSMS);
+    return Objects.hash(failedLogin, forgotPassword, sendEmailVerification, sendPasswordless, sendRegistrationVerification, sendTwoFactor);
   }
 
   @Override
