@@ -59,7 +59,12 @@ public enum EventType {
 
   // TODO : Lots of Emails : Daniel : Need to hook this event up. Should this only go in the front end registration service?
   //        New Event + Email (I think)
-  UserEmailDuplicate("user.email.duplicate"),
+  // TODO : Daniel : Rename : "user.create.duplicate" - UserCreateDuplicate
+  UserCreateDuplicate("user.create.duplicate"),
+
+  // TODO : Daniel : Add this email and event : tests, etc.
+  //       - Test Event & Email
+  UserUpdateDuplicate("user.update.duplicate"),
 
   UserEmailUpdate("user.email.update"),
 
@@ -104,9 +109,11 @@ public enum EventType {
   UserRegistrationVerified("user.registration.verified"),
 
   // TODO : Lots of Emails : Question: Should this also be sent during a User API Update which adds a method?
+  // TODO : Daniel : Send it from the API as well using the User Update.
   UserTwoFactorMethodAdd("user.two-factor.method.add"),
 
   // TODO : Lots of Emails : Question: Should this also be sent during a User API Update which removes a method?
+  // TODO : Daniel : Send it from the API as well using the User Update.
   UserTwoFactorMethodRemove("user.two-factor.method.remove"),
 
   UserUpdate("user.update"),
@@ -140,7 +147,7 @@ public enum EventType {
                          EventType.UserDeactivate,
                          EventType.UserDelete,
                          EventType.UserDeleteComplete,
-                         EventType.UserEmailDuplicate,
+                         EventType.UserCreateDuplicate,
                          EventType.UserEmailUpdate,
                          EventType.UserEmailVerified,
                          EventType.UserLoginFailed,
@@ -163,6 +170,7 @@ public enum EventType {
                          EventType.UserTwoFactorMethodAdd,
                          EventType.UserTwoFactorMethodRemove,
                          EventType.UserUpdate,
+                         EventType.UserUpdateDuplicate,
                          EventType.UserUpdateComplete);
   }
 
@@ -172,6 +180,7 @@ public enum EventType {
    * @return Return all available types in displayable order that can be globally configured for a transaction setting.
    */
   public static List<EventType> allTypesForTransactionConfiguration() {
+    // TODO : Daniel : Update this for new TX config. Do we need this? Can I just remove this from the Tenant config? We want other non-TX events at the tenant level I think such as CreateUserComplete
     return allTypes().stream()
                      .filter(e -> e != UserAction)
                      .collect(Collectors.toList());

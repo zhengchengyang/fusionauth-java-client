@@ -27,7 +27,7 @@ import io.fusionauth.domain.EventLog;
  *
  * @author Daniel DeGroff
  */
-public class EventLogCreateEvent extends BaseEvent implements Buildable<EventLogCreateEvent>, InstanceEvent, NonTransactionalEvent {
+public class EventLogCreateEvent extends BaseEvent implements Buildable<EventLogCreateEvent>, InstanceEvent {
   public EventLog eventLog;
 
   @JacksonConstructor

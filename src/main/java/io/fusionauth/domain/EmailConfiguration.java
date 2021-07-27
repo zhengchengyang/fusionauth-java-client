@@ -49,11 +49,6 @@ public class EmailConfiguration implements Buildable<EmailConfiguration> {
 
   public String defaultFromName;
 
-  // TODO : Lots of Emails : Review new email template field names with team.
-
-  @ExcludeFromDatabaseDataColumn
-  public UUID duplicateEmailEmailTemplateId;
-
   @ExcludeFromDatabaseDataColumn
   public UUID emailUpdateEmailTemplateId;
 
@@ -99,6 +94,11 @@ public class EmailConfiguration implements Buildable<EmailConfiguration> {
 
   public EmailUnverifiedOptions unverified = new EmailUnverifiedOptions();
 
+  @ExcludeFromDatabaseDataColumn
+  public UUID userCreateDuplicateEmailTemplateId;
+
+  public UUID userUpdateDuplicateEmailTemplateId;
+
   public String username;
 
   @ExcludeFromDatabaseDataColumn
@@ -117,7 +117,6 @@ public class EmailConfiguration implements Buildable<EmailConfiguration> {
   public EmailConfiguration(EmailConfiguration other) {
     this.defaultFromEmail = other.defaultFromEmail;
     this.defaultFromName = other.defaultFromName;
-    this.duplicateEmailEmailTemplateId = other.duplicateEmailEmailTemplateId;
     this.emailUpdateEmailTemplateId = other.emailUpdateEmailTemplateId;
     this.emailVerifiedEmailTemplateId = other.emailVerifiedEmailTemplateId;
     this.forgotPasswordEmailTemplateId = other.forgotPasswordEmailTemplateId;
@@ -136,6 +135,8 @@ public class EmailConfiguration implements Buildable<EmailConfiguration> {
     this.twoFactorMethodRemoveEmailTemplateId = other.twoFactorMethodRemoveEmailTemplateId;
     this.unverified = new EmailUnverifiedOptions(other.unverified);
     this.username = other.username;
+    this.userCreateDuplicateEmailTemplateId = other.userCreateDuplicateEmailTemplateId;
+    this.userUpdateDuplicateEmailTemplateId = other.userUpdateDuplicateEmailTemplateId;
     this.verificationEmailTemplateId = other.verificationEmailTemplateId;
     this.verificationStrategy = other.verificationStrategy;
     this.verifyEmail = other.verifyEmail;
@@ -155,7 +156,6 @@ public class EmailConfiguration implements Buildable<EmailConfiguration> {
            verifyEmailWhenChanged == that.verifyEmailWhenChanged &&
            Objects.equals(defaultFromEmail, that.defaultFromEmail) &&
            Objects.equals(defaultFromName, that.defaultFromName) &&
-           Objects.equals(duplicateEmailEmailTemplateId, that.duplicateEmailEmailTemplateId) &&
            Objects.equals(emailUpdateEmailTemplateId, that.emailUpdateEmailTemplateId) &&
            Objects.equals(emailVerifiedEmailTemplateId, that.emailVerifiedEmailTemplateId) &&
            Objects.equals(forgotPasswordEmailTemplateId, that.forgotPasswordEmailTemplateId) &&
@@ -174,13 +174,15 @@ public class EmailConfiguration implements Buildable<EmailConfiguration> {
            Objects.equals(twoFactorMethodRemoveEmailTemplateId, that.twoFactorMethodRemoveEmailTemplateId) &&
            Objects.equals(unverified, that.unverified) &&
            Objects.equals(username, that.username) &&
+           Objects.equals(userCreateDuplicateEmailTemplateId, that.userCreateDuplicateEmailTemplateId) &&
+           Objects.equals(userUpdateDuplicateEmailTemplateId, that.userUpdateDuplicateEmailTemplateId) &&
            Objects.equals(verificationEmailTemplateId, that.verificationEmailTemplateId) &&
            verificationStrategy == that.verificationStrategy;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(defaultFromEmail, defaultFromName, duplicateEmailEmailTemplateId, emailUpdateEmailTemplateId, emailVerifiedEmailTemplateId, forgotPasswordEmailTemplateId, host, loginNewDeviceEmailTemplateId, loginSuspectEmailTemplateId, password, passwordResetSuccessEmailTemplateId, passwordUpdateEmailTemplateId, passwordlessEmailTemplateId, port, properties, security, setPasswordEmailTemplateId, twoFactorMethodAddEmailTemplateId, twoFactorMethodRemoveEmailTemplateId, unverified, username, verificationEmailTemplateId, verificationStrategy, verifyEmail, verifyEmailWhenChanged);
+    return Objects.hash(defaultFromEmail, defaultFromName, emailUpdateEmailTemplateId, emailVerifiedEmailTemplateId, forgotPasswordEmailTemplateId, host, loginNewDeviceEmailTemplateId, loginSuspectEmailTemplateId, password, passwordResetSuccessEmailTemplateId, passwordUpdateEmailTemplateId, passwordlessEmailTemplateId, port, properties, security, setPasswordEmailTemplateId, twoFactorMethodAddEmailTemplateId, twoFactorMethodRemoveEmailTemplateId, unverified, userCreateDuplicateEmailTemplateId, userUpdateDuplicateEmailTemplateId, username, verificationEmailTemplateId, verificationStrategy, verifyEmail, verifyEmailWhenChanged);
   }
 
   public void normalize() {

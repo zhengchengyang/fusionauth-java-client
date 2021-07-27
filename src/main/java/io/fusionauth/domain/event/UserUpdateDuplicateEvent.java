@@ -15,10 +15,27 @@
  */
 package io.fusionauth.domain.event;
 
+import java.util.UUID;
+
+import com.inversoft.json.JacksonConstructor;
+import io.fusionauth.domain.User;
+
 /**
- * A marker interface indicating this event is not scoped to a tenant and will be sent to all webhooks.
+ * Models an event where a user is being updated and tries to use an "in-use" login Id (email or username).
  *
  * @author Daniel DeGroff
  */
-public interface InstanceEvent extends NonTransactionalEvent {
+public class UserUpdateDuplicateEvent extends UserCreateDuplicateEvent {
+  @JacksonConstructor
+  public UserUpdateDuplicateEvent() {
+  }
+
+  public UserUpdateDuplicateEvent(UUID applicationId, String duplicateEmail, String duplicateUsername, User user) {
+    super(applicationId, duplicateEmail, duplicateUsername, user);
+  }
+
+  @Override
+  public EventType getType() {
+    return EventType.UserUpdateDuplicate;
+  }
 }

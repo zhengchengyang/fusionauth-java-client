@@ -302,6 +302,12 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
 
     public UUID setPasswordEmailTemplateId;
 
+    // TODO : Lots of Emails : Daniel :
+    //       I could add twoFactor add / remove
+    //       I could add user create duplicate (during self service)
+    //       I could add a user update duplicate (during self service, or complete reg)
+    //       Review the current list again to see if we can expand this
+
     @JacksonConstructor
     public ApplicationEmailConfiguration() {
     }

@@ -24,21 +24,27 @@ import io.fusionauth.domain.Buildable;
 import io.fusionauth.domain.User;
 
 /**
- * Models an event where a user is attempted to be registered with the same email address of a user that already exist in FusionAuth.
+ * Models an event where a user is being created with an "in-use" login Id (email or username).
  *
  * @author Daniel DeGroff
  */
-public class UserEmailDuplicateEvent extends BaseEvent implements Buildable<UserEmailDuplicateEvent>, NonTransactionalEvent {
+public class UserCreateDuplicateEvent extends BaseEvent implements Buildable<UserCreateDuplicateEvent>, NonTransactionalEvent {
   public UUID applicationId;
+
+  public String duplicateEmail;
+
+  public String duplicateUsername;
 
   public User user;
 
   @JacksonConstructor
-  public UserEmailDuplicateEvent() {
+  public UserCreateDuplicateEvent() {
   }
 
-  public UserEmailDuplicateEvent(UUID applicationId, User user) {
+  public UserCreateDuplicateEvent(UUID applicationId, String duplicateEmail, String duplicateUsername, User user) {
     this.applicationId = applicationId;
+    this.duplicateEmail = duplicateEmail;
+    this.duplicateUsername = duplicateUsername;
     this.user = user;
   }
 
@@ -53,14 +59,14 @@ public class UserEmailDuplicateEvent extends BaseEvent implements Buildable<User
     if (!super.equals(o)) {
       return false;
     }
-    UserEmailDuplicateEvent that = (UserEmailDuplicateEvent) o;
+    UserCreateDuplicateEvent that = (UserCreateDuplicateEvent) o;
     return Objects.equals(applicationId, that.applicationId) &&
            Objects.equals(user, that.user);
   }
 
   @Override
   public EventType getType() {
-    return EventType.UserEmailDuplicate;
+    return EventType.UserCreateDuplicate;
   }
 
   @Override
