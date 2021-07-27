@@ -28,6 +28,12 @@ public class AuditLogSearchCriteria extends BaseSearchCriteria implements Builda
 
   public String message;
 
+  public String newValue;
+
+  public String oldValue;
+
+  public String reason;
+
   public ZonedDateTime start;
 
   public String user;
@@ -64,6 +70,9 @@ public class AuditLogSearchCriteria extends BaseSearchCriteria implements Builda
     }
     user = toSearchString(user);
     message = toSearchString(message);
+    newValue = toSearchString(newValue);
+    oldValue = toSearchString(oldValue);
+    reason = toSearchString(reason);
   }
 
   @Override
