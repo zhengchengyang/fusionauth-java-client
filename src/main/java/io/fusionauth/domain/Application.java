@@ -20,9 +20,11 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -488,6 +490,8 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
   public static class RegistrationConfiguration extends Enableable implements Buildable<RegistrationConfiguration> {
     public Requirable birthDate = new Requirable();
 
+    public Set<String> blockedDomains = new LinkedHashSet<>();
+
     public boolean confirmPassword;
 
     public Requirable firstName = new Requirable();
@@ -512,6 +516,7 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
 
     public RegistrationConfiguration(RegistrationConfiguration other) {
       this.birthDate = new Requirable(other.birthDate);
+      this.blockedDomains.addAll(other.blockedDomains);
       this.confirmPassword = other.confirmPassword;
       this.enabled = other.enabled;
       this.firstName = new Requirable(other.firstName);
@@ -529,28 +534,19 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
       if (this == o) {
         return true;
       }
-      if (!(o instanceof RegistrationConfiguration)) {
+      if (o == null || getClass() != o.getClass()) {
         return false;
       }
       if (!super.equals(o)) {
         return false;
       }
       RegistrationConfiguration that = (RegistrationConfiguration) o;
-      return confirmPassword == that.confirmPassword &&
-             Objects.equals(birthDate, that.birthDate) &&
-             Objects.equals(firstName, that.firstName) &&
-             Objects.equals(formId, that.formId) &&
-             Objects.equals(fullName, that.fullName) &&
-             Objects.equals(lastName, that.lastName) &&
-             loginIdType == that.loginIdType &&
-             Objects.equals(middleName, that.middleName) &&
-             Objects.equals(mobilePhone, that.mobilePhone) &&
-             type == that.type;
+      return confirmPassword == that.confirmPassword && Objects.equals(birthDate, that.birthDate) && Objects.equals(blockedDomains, that.blockedDomains) && Objects.equals(firstName, that.firstName) && Objects.equals(formId, that.formId) && Objects.equals(fullName, that.fullName) && Objects.equals(lastName, that.lastName) && loginIdType == that.loginIdType && Objects.equals(middleName, that.middleName) && Objects.equals(mobilePhone, that.mobilePhone) && type == that.type;
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(super.hashCode(), birthDate, confirmPassword, firstName, formId, fullName, lastName, loginIdType, middleName, mobilePhone, type);
+      return Objects.hash(super.hashCode(), birthDate, blockedDomains, confirmPassword, firstName, formId, fullName, lastName, loginIdType, middleName, mobilePhone, type);
     }
 
     public String toString() {
