@@ -107,12 +107,8 @@ public enum EventType {
 
   UserRegistrationVerified("user.registration.verified"),
 
-  // TODO : Lots of Emails : Question: Should this also be sent during a User API Update which adds a method?
-  // TODO : Daniel : Send it from the API as well using the User Update.
   UserTwoFactorMethodAdd("user.two-factor.method.add"),
 
-  // TODO : Lots of Emails : Question: Should this also be sent during a User API Update which removes a method?
-  // TODO : Daniel : Send it from the API as well using the User Update.
   UserTwoFactorMethodRemove("user.two-factor.method.remove"),
 
   UserUpdate("user.update"),
