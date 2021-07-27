@@ -57,13 +57,12 @@ public enum EventType {
 
   UserDeleteComplete("user.delete.complete"),
 
-  // TODO : Lots of Emails : Daniel : Need to hook this event up. Should this only go in the front end registration service?
-  //        New Event + Email (I think)
-  // TODO : Daniel : Rename : "user.create.duplicate" - UserCreateDuplicate
+  // TODO : Lots of Emails : Needs a test for event + email
+  //        Tests: Event + Email
   UserCreateDuplicate("user.create.duplicate"),
 
-  // TODO : Daniel : Add this email and event : tests, etc.
-  //       - Test Event & Email
+  // TODO : Lots of Emails : Needs a test for event + email
+  //        Tests: Event + Email
   UserUpdateDuplicate("user.update.duplicate"),
 
   UserEmailUpdate("user.email.update"),
@@ -73,13 +72,13 @@ public enum EventType {
   UserLoginFailed("user.login.failed"),
 
   // TODO : Lots of Emails : Daniel : Need to hook this event up.
-  //        New Event + Email
+  //        Tests: Event + Email
   UserLoginNewDevice("user.login.new-device"),
 
   UserLoginSuccess("user.login.success"),
 
   // TODO : Lots of Emails : Daniel : Need to hook this event up.
-  //        Event + Email
+  //        Tests: Event + Email
   UserLoginSuspect("user.login.suspect"),
 
   UserPasswordBreach("user.password.breach"),
