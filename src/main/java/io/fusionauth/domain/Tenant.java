@@ -241,6 +241,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
     Normalizer.removeEmpty(data);
     name = trim(name);
     emailConfiguration.normalize();
+    eventConfiguration.normalize();
 
     // Lower case any domain entries
     connectorPolicies.forEach(policy -> Normalizer.toLowerCase(policy.domains, HashSet::new));

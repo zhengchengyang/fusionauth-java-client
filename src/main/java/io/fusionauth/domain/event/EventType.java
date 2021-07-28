@@ -59,8 +59,6 @@ public enum EventType {
 
   UserCreateDuplicate("user.create.duplicate"),
 
-  // TODO : Lots of Emails : Needs a test for event + email
-  //        Tests: Event + Email
   UserUpdateDuplicate("user.update.duplicate"),
 
   UserEmailUpdate("user.email.update"),
@@ -188,6 +186,15 @@ public enum EventType {
   @JsonValue
   public String eventName() {
     return eventName;
+  }
+
+  public boolean isTransactionalEvent() {
+    try {
+      return !(Class.forName(name() + "Event").getConstructor().newInstance() instanceof NonTransactionalEvent);
+    } catch (Exception ignore) {
+    }
+
+    return false;
   }
 
   static {
