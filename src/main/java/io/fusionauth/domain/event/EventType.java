@@ -127,6 +127,7 @@ public enum EventType {
    * @return Return all available types in displayable order.
    */
   public static List<EventType> allTypes() {
+    // TODO : Lots of Emails : Brett G : Clean up comments when done with this
     return Arrays.asList(EventType.JWTPublicKeyUpdate, //
                          EventType.JWTRefreshTokenRevoke, //
                          EventType.JWTRefresh, //
