@@ -35,16 +35,19 @@ public class UserCreateDuplicateEvent extends BaseEvent implements Buildable<Use
 
   public String duplicateUsername;
 
+  public User existing;
+
   public User user;
 
   @JacksonConstructor
   public UserCreateDuplicateEvent() {
   }
 
-  public UserCreateDuplicateEvent(UUID applicationId, String duplicateEmail, String duplicateUsername, User user) {
+  public UserCreateDuplicateEvent(UUID applicationId, String duplicateEmail, String duplicateUsername, User existing, User user) {
     this.applicationId = applicationId;
     this.duplicateEmail = duplicateEmail;
     this.duplicateUsername = duplicateUsername;
+    this.existing = existing;
     this.user = user;
   }
 
@@ -60,8 +63,7 @@ public class UserCreateDuplicateEvent extends BaseEvent implements Buildable<Use
       return false;
     }
     UserCreateDuplicateEvent that = (UserCreateDuplicateEvent) o;
-    return Objects.equals(applicationId, that.applicationId) &&
-           Objects.equals(user, that.user);
+    return Objects.equals(applicationId, that.applicationId) && Objects.equals(duplicateEmail, that.duplicateEmail) && Objects.equals(duplicateUsername, that.duplicateUsername) && Objects.equals(existing, that.existing) && Objects.equals(user, that.user);
   }
 
   @Override
@@ -71,7 +73,7 @@ public class UserCreateDuplicateEvent extends BaseEvent implements Buildable<Use
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), applicationId, user);
+    return Objects.hash(super.hashCode(), applicationId, duplicateEmail, duplicateUsername, existing, user);
   }
 
   @Override

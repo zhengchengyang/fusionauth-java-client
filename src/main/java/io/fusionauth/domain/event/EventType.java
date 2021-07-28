@@ -57,8 +57,6 @@ public enum EventType {
 
   UserDeleteComplete("user.delete.complete"),
 
-  // TODO : Lots of Emails : Needs a test for event + email
-  //        Tests: Event + Email
   UserCreateDuplicate("user.create.duplicate"),
 
   // TODO : Lots of Emails : Needs a test for event + email

@@ -30,8 +30,8 @@ public class UserUpdateDuplicateEvent extends UserCreateDuplicateEvent {
   public UserUpdateDuplicateEvent() {
   }
 
-  public UserUpdateDuplicateEvent(UUID applicationId, String duplicateEmail, String duplicateUsername, User user) {
-    super(applicationId, duplicateEmail, duplicateUsername, user);
+  public UserUpdateDuplicateEvent(UUID applicationId, String duplicateEmail, String duplicateUsername, User existing, User user) {
+    super(applicationId, duplicateEmail, duplicateUsername, existing, user);
   }
 
   @Override
