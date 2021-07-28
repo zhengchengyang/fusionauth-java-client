@@ -127,43 +127,43 @@ public enum EventType {
    * @return Return all available types in displayable order.
    */
   public static List<EventType> allTypes() {
-    return Arrays.asList(EventType.JWTPublicKeyUpdate,
-                         EventType.JWTRefreshTokenRevoke,
-                         EventType.JWTRefresh,
-                         EventType.AuditLogCreate,
-                         EventType.EventLogCreate,
-                         EventType.KickstartSuccess,
-                         EventType.UserAction,
-                         EventType.UserBulkCreate,
-                         EventType.UserCreate,
-                         EventType.UserCreateComplete,
-                         EventType.UserDeactivate,
-                         EventType.UserDelete,
-                         EventType.UserDeleteComplete,
-                         EventType.UserCreateDuplicate,
-                         EventType.UserEmailUpdate,
-                         EventType.UserEmailVerified,
-                         EventType.UserLoginFailed,
-                         EventType.UserLoginNewDevice,
-                         EventType.UserLoginSuccess,
-                         EventType.UserLoginSuspect,
-                         EventType.UserPasswordBreach,
-                         EventType.UserPasswordResetSend,
-                         EventType.UserPasswordResetStart,
-                         EventType.UserPasswordResetSuccess,
-                         EventType.UserPasswordUpdate,
-                         EventType.UserReactivate,
-                         EventType.UserRegistrationCreate,
+    return Arrays.asList(EventType.JWTPublicKeyUpdate, //
+                         EventType.JWTRefreshTokenRevoke, //
+                         EventType.JWTRefresh, //
+                         EventType.AuditLogCreate, //
+                         EventType.EventLogCreate,//
+                         EventType.KickstartSuccess,//
+                         EventType.UserAction,//
+                         EventType.UserBulkCreate,//
+                         EventType.UserCreate, //
+                         EventType.UserCreateComplete, //
+                         EventType.UserDeactivate, //
+                         EventType.UserDelete, //
+                         EventType.UserDeleteComplete, //
+                         EventType.UserCreateDuplicate, //
+                         EventType.UserEmailUpdate, //
+                         EventType.UserEmailVerified, //
+                         EventType.UserLoginFailed, //
+                         EventType.UserLoginNewDevice, //
+                         EventType.UserLoginSuccess, //
+                         EventType.UserLoginSuspect, //
+                         EventType.UserPasswordBreach, //
+                         EventType.UserPasswordResetSend, //
+                         EventType.UserPasswordResetStart, //
+                         EventType.UserPasswordResetSuccess,//
+                         EventType.UserPasswordUpdate, //
+                         EventType.UserReactivate, //
+                         EventType.UserRegistrationCreate, //
                          EventType.UserRegistrationCreateComplete,
-                         EventType.UserRegistrationDelete,
-                         EventType.UserRegistrationDeleteComplete,
-                         EventType.UserRegistrationUpdate,
+                         EventType.UserRegistrationDelete, //
+                         EventType.UserRegistrationDeleteComplete, //
+                         EventType.UserRegistrationUpdate, //
                          EventType.UserRegistrationUpdateComplete,
-                         EventType.UserRegistrationVerified,
-                         EventType.UserTwoFactorMethodAdd,
-                         EventType.UserTwoFactorMethodRemove,
-                         EventType.UserUpdate,
-                         EventType.UserUpdateDuplicate,
+                         EventType.UserRegistrationVerified, //
+                         EventType.UserTwoFactorMethodAdd,//
+                         EventType.UserTwoFactorMethodRemove,//
+                         EventType.UserUpdate,//
+                         EventType.UserUpdateDuplicate, //
                          EventType.UserUpdateComplete);
   }
 
