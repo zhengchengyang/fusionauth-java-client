@@ -61,6 +61,10 @@ public class SystemConfiguration implements Buildable<SystemConfiguration>, _Int
   @InternalJSONColumn
   public UIConfiguration uiConfiguration = new UIConfiguration();
 
+  // [brettp]TODO: trust config object as a separate class
+//  @InternalJSONColumn
+//  public SystemSSOConfiguration ssoConfiguration = new SystemSSOConfiguration();
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
