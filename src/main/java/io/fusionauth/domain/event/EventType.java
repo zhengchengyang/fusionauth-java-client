@@ -134,12 +134,13 @@ public enum EventType {
                          EventType.UserBulkCreate,
                          EventType.UserCreate,
                          EventType.UserCreateComplete,
-                         EventType.UserLoginIdDuplicateOnCreate,
                          EventType.UserDeactivate,
                          EventType.UserDelete,
                          EventType.UserDeleteComplete,
                          EventType.UserEmailUpdate,
                          EventType.UserEmailVerified,
+                         EventType.UserLoginIdDuplicateOnCreate,
+                         EventType.UserLoginIdDuplicateOnUpdate,
                          EventType.UserLoginFailed,
                          EventType.UserLoginNewDevice,
                          EventType.UserLoginSuccess,
@@ -160,8 +161,7 @@ public enum EventType {
                          EventType.UserTwoFactorMethodAdd,
                          EventType.UserTwoFactorMethodRemove,
                          EventType.UserUpdate,
-                         EventType.UserUpdateComplete,
-                         EventType.UserLoginIdDuplicateOnUpdate
+                         EventType.UserUpdateComplete
     );
   }
 
