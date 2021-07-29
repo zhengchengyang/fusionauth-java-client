@@ -23,12 +23,10 @@ import io.fusionauth.domain.jwt.RefreshToken.MetaData;
 /**
  * @author Daniel DeGroff
  */
-public class BaseLoginRequest {
+public class BaseLoginRequest extends BaseEventRequest {
   public UUID applicationId;
 
   public String deviceTrustId;
-
-  public EventInfo eventInfo;
 
   @Deprecated
   public String ipAddress;

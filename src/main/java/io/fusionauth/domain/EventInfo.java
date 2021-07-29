@@ -16,9 +16,13 @@
 package io.fusionauth.domain;
 
 import java.time.ZonedDateTime;
+import java.util.Map;
 import java.util.Objects;
 
 import com.inversoft.json.ToString;
+import io.fusionauth.domain.jwt.DeviceInfo;
+import io.fusionauth.domain.jwt.DeviceInfo.DeviceType;
+import io.fusionauth.domain.jwt.RefreshToken.MetaData;
 
 /**
  * Information about a user event (login, register, etc) that helps identify the source of the event (location, device type, OS, etc).
@@ -26,6 +30,8 @@ import com.inversoft.json.ToString;
  * @author Brian Pontarelli
  */
 public class EventInfo implements Buildable<EventInfo> {
+  public Map<String, Object> data;
+
   public String deviceDescription;
 
   public String deviceName;
@@ -42,6 +48,15 @@ public class EventInfo implements Buildable<EventInfo> {
 
   public String userAgent;
 
+  public EventInfo() {
+  }
+
+  public EventInfo(MetaData metaData) {
+    this.deviceDescription = (metaData != null && metaData.device != null) ? metaData.device.description : null;
+    this.deviceName = (metaData != null && metaData.device != null) ? metaData.device.name : null;
+    this.deviceType = (metaData != null && metaData.device != null && metaData.device.type != null) ? metaData.device.type.toString() : null;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -52,6 +67,7 @@ public class EventInfo implements Buildable<EventInfo> {
     }
     EventInfo eventInfo = (EventInfo) o;
     return Objects.equals(deviceDescription, eventInfo.deviceDescription) &&
+           Objects.equals(data, eventInfo.data) &&
            Objects.equals(deviceName, eventInfo.deviceName) &&
            Objects.equals(deviceType, eventInfo.deviceType) &&
            Objects.equals(instant, eventInfo.instant) &&
@@ -63,7 +79,14 @@ public class EventInfo implements Buildable<EventInfo> {
 
   @Override
   public int hashCode() {
-    return Objects.hash(deviceDescription, deviceName, deviceType, instant, ipAddress, location, os, userAgent);
+    return Objects.hash(data, deviceDescription, deviceName, deviceType, instant, ipAddress, location, os, userAgent);
+  }
+
+  public MetaData toMetaData() {
+    return new MetaData().with(md -> md.device = new DeviceInfo())
+                         .with(md -> md.device.description = deviceDescription)
+                         .with(md -> md.device.name = deviceName)
+                         .with(md -> md.device.type = DeviceType.safeValueOf(deviceType));
   }
 
   @Override

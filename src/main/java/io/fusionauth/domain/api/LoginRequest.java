@@ -48,9 +48,13 @@ public class LoginRequest extends BaseLoginRequest implements Buildable<LoginReq
 
   public LoginRequest(UUID applicationId, String loginId, String password, String ipAddress) {
     this.applicationId = applicationId;
-    this.ipAddress = ipAddress;
     this.loginId = loginId;
     this.password = password;
+
+    if (ipAddress != null) {
+      eventInfo = eventInfo != null ? eventInfo : new EventInfo();
+      eventInfo.ipAddress = ipAddress;
+    }
   }
 
   public LoginRequest(UUID applicationId, String loginId, String password) {

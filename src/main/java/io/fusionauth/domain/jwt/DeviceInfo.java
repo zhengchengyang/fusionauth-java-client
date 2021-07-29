@@ -70,6 +70,18 @@ public class DeviceInfo implements Buildable<DeviceInfo> {
     SERVER,
     TABLET,
     TV,
-    UNKNOWN
+    UNKNOWN;
+
+    public static DeviceType safeValueOf(String type) {
+      if (type == null) {
+        return null;
+      }
+
+      try {
+        return DeviceType.valueOf(type);
+      } catch (IllegalArgumentException e) {
+        return null;
+      }
+    }
   }
 }

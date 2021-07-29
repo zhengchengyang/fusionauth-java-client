@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2019, FusionAuth, All Rights Reserved
+ * Copyright (c) 2021, FusionAuth, All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,24 +15,14 @@
  */
 package io.fusionauth.domain.api;
 
-import java.util.UUID;
-
-import com.inversoft.json.JacksonConstructor;
-import io.fusionauth.domain.Tenant;
+import io.fusionauth.domain.EventInfo;
 
 /**
- * @author Daniel DeGroff
+ * Base class for requests that can contain event information. This event information is used when sending Webhooks or emails
+ * during the transaction. The caller is responsible for ensuring that the event information is correct.
+ *
+ * @author Brian Pontarelli
  */
-public class TenantRequest extends BaseEventRequest {
-  public UUID sourceTenantId;
-
-  public Tenant tenant;
-
-  public TenantRequest(Tenant tenant) {
-    this.tenant = tenant;
-  }
-
-  @JacksonConstructor
-  public TenantRequest() {
-  }
+public abstract class BaseEventRequest {
+  public EventInfo eventInfo;
 }

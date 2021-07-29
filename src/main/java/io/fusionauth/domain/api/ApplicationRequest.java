@@ -27,7 +27,7 @@ import io.fusionauth.domain.ApplicationRole;
  *
  * @author Brian Pontarelli
  */
-public class ApplicationRequest {
+public class ApplicationRequest extends BaseEventRequest {
   public Application application;
 
   public ApplicationRole role;

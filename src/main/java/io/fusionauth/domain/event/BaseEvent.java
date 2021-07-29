@@ -36,6 +36,13 @@ public abstract class BaseEvent {
 
   public UUID tenantId;
 
+  public BaseEvent() {
+  }
+
+  public BaseEvent(EventInfo info) {
+    this.info = info;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
