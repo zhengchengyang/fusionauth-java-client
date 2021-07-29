@@ -44,6 +44,14 @@ public class TwoFactorLoginRequest extends BaseLoginRequest implements Buildable
     this.twoFactorId = twoFactorId;
   }
 
+  public TwoFactorLoginRequest(UUID applicationId, String code, String twoFactorId, EventInfo eventInfo) {
+    this.applicationId = applicationId;
+    this.code = code;
+    this.eventInfo = eventInfo;
+    this.twoFactorId = twoFactorId;
+  }
+
+  @Deprecated
   public TwoFactorLoginRequest(UUID applicationId, String code, String twoFactorId, String ipAddress) {
     this.applicationId = applicationId;
     this.code = code;

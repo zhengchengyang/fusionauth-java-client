@@ -15,7 +15,6 @@
  */
 package io.fusionauth.domain;
 
-import java.time.ZonedDateTime;
 import java.util.Map;
 import java.util.Objects;
 
@@ -37,8 +36,6 @@ public class EventInfo implements Buildable<EventInfo> {
   public String deviceName;
 
   public String deviceType;
-
-  public ZonedDateTime instant;
 
   public String ipAddress;
 
@@ -70,7 +67,6 @@ public class EventInfo implements Buildable<EventInfo> {
            Objects.equals(data, eventInfo.data) &&
            Objects.equals(deviceName, eventInfo.deviceName) &&
            Objects.equals(deviceType, eventInfo.deviceType) &&
-           Objects.equals(instant, eventInfo.instant) &&
            Objects.equals(ipAddress, eventInfo.ipAddress) &&
            Objects.equals(location, eventInfo.location) &&
            Objects.equals(os, eventInfo.os) &&
@@ -79,7 +75,7 @@ public class EventInfo implements Buildable<EventInfo> {
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, deviceDescription, deviceName, deviceType, instant, ipAddress, location, os, userAgent);
+    return Objects.hash(data, deviceDescription, deviceName, deviceType, ipAddress, location, os, userAgent);
   }
 
   public MetaData toMetaData() {

@@ -36,6 +36,12 @@ public class PasswordlessLoginRequest extends BaseLoginRequest implements Builda
     this.code = code;
   }
 
+  public PasswordlessLoginRequest(String code, EventInfo eventInfo) {
+    this.code = code;
+    this.eventInfo = eventInfo;
+  }
+
+  @Deprecated
   public PasswordlessLoginRequest(String code, String ipAddress) {
     this.code = code;
 

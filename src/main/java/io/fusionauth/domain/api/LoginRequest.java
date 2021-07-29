@@ -46,6 +46,7 @@ public class LoginRequest extends BaseLoginRequest implements Buildable<LoginReq
     this.password = password;
   }
 
+  @Deprecated
   public LoginRequest(UUID applicationId, String loginId, String password, String ipAddress) {
     this.applicationId = applicationId;
     this.loginId = loginId;
