@@ -25,6 +25,8 @@ import io.fusionauth.domain.UserRegistration;
  * @author Brian Pontarelli
  */
 public class RegistrationRequest {
+  public boolean disableDomainBlock;
+
   public boolean generateAuthenticationToken;
 
   public UserRegistration registration;
