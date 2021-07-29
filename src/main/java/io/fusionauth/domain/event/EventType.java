@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -57,9 +56,9 @@ public enum EventType {
 
   UserDeleteComplete("user.delete.complete"),
 
-  UserCreateDuplicate("user.create.duplicate"),
+  UserLoginIdDuplicateOnCreate("user.loginId.duplicate.create"),
 
-  UserUpdateDuplicate("user.update.duplicate"),
+  UserLoginIdDuplicateOnUpdate("user.loginId.duplicate.update"),
 
   UserEmailUpdate("user.email.update"),
 
@@ -135,7 +134,7 @@ public enum EventType {
                          EventType.UserBulkCreate,
                          EventType.UserCreate,
                          EventType.UserCreateComplete,
-                         EventType.UserCreateDuplicate,
+                         EventType.UserLoginIdDuplicateOnCreate,
                          EventType.UserDeactivate,
                          EventType.UserDelete,
                          EventType.UserDeleteComplete,
@@ -162,20 +161,8 @@ public enum EventType {
                          EventType.UserTwoFactorMethodRemove,
                          EventType.UserUpdate,
                          EventType.UserUpdateComplete,
-                         EventType.UserUpdateDuplicate
+                         EventType.UserLoginIdDuplicateOnUpdate
     );
-  }
-
-  /**
-   * This returns all event types with the exception of the UserAction because the transaction for that event is configured per event.
-   *
-   * @return Return all available types in displayable order that can be globally configured for a transaction setting.
-   */
-  public static List<EventType> allTypesForTransactionConfiguration() {
-    // TODO : Daniel : Update this for new TX config. Do we need this? Can I just remove this from the Tenant config? We want other non-TX events at the tenant level I think such as CreateUserComplete
-    return allTypes().stream()
-                     .filter(e -> e != UserAction)
-                     .collect(Collectors.toList());
   }
 
   @JsonCreator
@@ -190,7 +177,7 @@ public enum EventType {
 
   public boolean isTransactionalEvent() {
     try {
-      return !(Class.forName(name() + "Event").getConstructor().newInstance() instanceof NonTransactionalEvent);
+      return !(Class.forName(getClass().getPackage().getName() + "." + name() + "Event").getConstructor().newInstance() instanceof NonTransactionalEvent);
     } catch (Exception ignore) {
     }
 

@@ -13,33 +13,27 @@
  * either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package io.fusionauth.domain.event;
+package io.fusionauth.domain;
 
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
-import io.fusionauth.domain.Buildable;
-import io.fusionauth.domain.TwoFactorMethod;
-import io.fusionauth.domain.User;
 
 /**
- * Model a user event when a two-factor method has been added.
- *
  * @author Daniel DeGroff
  */
-public class UserTwoFactorMethodRemoveEvent extends BaseEvent implements Buildable<UserTwoFactorMethodRemoveEvent>, NonTransactionalEvent {
-  public TwoFactorMethod method;
-
-  public User user;
+public class TenantRegistrationConfiguration implements Buildable<TenantRegistrationConfiguration> {
+  public Set<String> blockedDomains = new LinkedHashSet<>();
 
   @JacksonConstructor
-  public UserTwoFactorMethodRemoveEvent() {
+  public TenantRegistrationConfiguration() {
   }
 
-  public UserTwoFactorMethodRemoveEvent(TwoFactorMethod method, User user) {
-    this.method = method;
-    this.user = user;
+  public TenantRegistrationConfiguration(TenantRegistrationConfiguration other) {
+    blockedDomains.addAll(other.blockedDomains);
   }
 
   @Override
@@ -50,21 +44,13 @@ public class UserTwoFactorMethodRemoveEvent extends BaseEvent implements Buildab
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    if (!super.equals(o)) {
-      return false;
-    }
-    UserTwoFactorMethodRemoveEvent that = (UserTwoFactorMethodRemoveEvent) o;
-    return Objects.equals(method, that.method) && Objects.equals(user, that.user);
-  }
-
-  @Override
-  public EventType getType() {
-    return EventType.UserTwoFactorMethodRemove;
+    TenantRegistrationConfiguration that = (TenantRegistrationConfiguration) o;
+    return Objects.equals(blockedDomains, that.blockedDomains);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), method, user);
+    return Objects.hash(blockedDomains);
   }
 
   @Override

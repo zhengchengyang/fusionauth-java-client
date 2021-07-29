@@ -28,7 +28,7 @@ import io.fusionauth.domain.User;
  *
  * @author Daniel DeGroff
  */
-public class UserCreateDuplicateEvent extends BaseEvent implements Buildable<UserCreateDuplicateEvent>, NonTransactionalEvent {
+public class UserLoginIdDuplicateOnCreateEvent extends BaseEvent implements Buildable<UserLoginIdDuplicateOnCreateEvent>, NonTransactionalEvent {
   public UUID applicationId;
 
   public String duplicateEmail;
@@ -40,10 +40,10 @@ public class UserCreateDuplicateEvent extends BaseEvent implements Buildable<Use
   public User user;
 
   @JacksonConstructor
-  public UserCreateDuplicateEvent() {
+  public UserLoginIdDuplicateOnCreateEvent() {
   }
 
-  public UserCreateDuplicateEvent(UUID applicationId, String duplicateEmail, String duplicateUsername, User existing, User user) {
+  public UserLoginIdDuplicateOnCreateEvent(UUID applicationId, String duplicateEmail, String duplicateUsername, User existing, User user) {
     this.applicationId = applicationId;
     this.duplicateEmail = duplicateEmail;
     this.duplicateUsername = duplicateUsername;
@@ -62,13 +62,13 @@ public class UserCreateDuplicateEvent extends BaseEvent implements Buildable<Use
     if (!super.equals(o)) {
       return false;
     }
-    UserCreateDuplicateEvent that = (UserCreateDuplicateEvent) o;
+    UserLoginIdDuplicateOnCreateEvent that = (UserLoginIdDuplicateOnCreateEvent) o;
     return Objects.equals(applicationId, that.applicationId) && Objects.equals(duplicateEmail, that.duplicateEmail) && Objects.equals(duplicateUsername, that.duplicateUsername) && Objects.equals(existing, that.existing) && Objects.equals(user, that.user);
   }
 
   @Override
   public EventType getType() {
-    return EventType.UserCreateDuplicate;
+    return EventType.UserLoginIdDuplicateOnCreate;
   }
 
   @Override

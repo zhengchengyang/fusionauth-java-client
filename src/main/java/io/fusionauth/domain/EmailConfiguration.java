@@ -17,6 +17,7 @@ package io.fusionauth.domain;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -37,12 +38,14 @@ public class EmailConfiguration implements Buildable<EmailConfiguration> {
   public static List<String> EmailTemplateIdFieldNames = Arrays.stream(EmailConfiguration.class.getDeclaredFields())
                                                                .map(Field::getName)
                                                                .filter(name -> name.endsWith("EmailTemplateId"))
+                                                               .sorted()
                                                                .collect(Collectors.toList());
 
   @JsonIgnore
   @SuppressWarnings("unused")
   public static List<Field> EmailTemplateIdFields = Arrays.stream(EmailConfiguration.class.getDeclaredFields())
                                                           .filter(f -> f.getName().endsWith("EmailTemplateId"))
+                                                          .sorted(Comparator.comparing(Field::getName))
                                                           .collect(Collectors.toList());
 
   public String defaultFromEmail = "change-me@example.com";
@@ -59,6 +62,11 @@ public class EmailConfiguration implements Buildable<EmailConfiguration> {
   public UUID forgotPasswordEmailTemplateId;
 
   public String host = "localhost";
+
+  @ExcludeFromDatabaseDataColumn
+  public UUID loginIdInUseOnCreateEmailTemplateId;
+
+  public UUID loginIdInUseOnUpdateEmailTemplateId;
 
   @ExcludeFromDatabaseDataColumn
   public UUID loginNewDeviceEmailTemplateId;
@@ -93,11 +101,6 @@ public class EmailConfiguration implements Buildable<EmailConfiguration> {
   public UUID twoFactorMethodRemoveEmailTemplateId;
 
   public EmailUnverifiedOptions unverified = new EmailUnverifiedOptions();
-
-  @ExcludeFromDatabaseDataColumn
-  public UUID userCreateDuplicateEmailTemplateId;
-
-  public UUID userUpdateDuplicateEmailTemplateId;
 
   public String username;
 
@@ -135,8 +138,8 @@ public class EmailConfiguration implements Buildable<EmailConfiguration> {
     this.twoFactorMethodRemoveEmailTemplateId = other.twoFactorMethodRemoveEmailTemplateId;
     this.unverified = new EmailUnverifiedOptions(other.unverified);
     this.username = other.username;
-    this.userCreateDuplicateEmailTemplateId = other.userCreateDuplicateEmailTemplateId;
-    this.userUpdateDuplicateEmailTemplateId = other.userUpdateDuplicateEmailTemplateId;
+    this.loginIdInUseOnCreateEmailTemplateId = other.loginIdInUseOnCreateEmailTemplateId;
+    this.loginIdInUseOnUpdateEmailTemplateId = other.loginIdInUseOnUpdateEmailTemplateId;
     this.verificationEmailTemplateId = other.verificationEmailTemplateId;
     this.verificationStrategy = other.verificationStrategy;
     this.verifyEmail = other.verifyEmail;
@@ -160,6 +163,8 @@ public class EmailConfiguration implements Buildable<EmailConfiguration> {
            Objects.equals(emailVerifiedEmailTemplateId, that.emailVerifiedEmailTemplateId) &&
            Objects.equals(forgotPasswordEmailTemplateId, that.forgotPasswordEmailTemplateId) &&
            Objects.equals(host, that.host) &&
+           Objects.equals(loginIdInUseOnCreateEmailTemplateId, that.loginIdInUseOnCreateEmailTemplateId) &&
+           Objects.equals(loginIdInUseOnUpdateEmailTemplateId, that.loginIdInUseOnUpdateEmailTemplateId) &&
            Objects.equals(loginNewDeviceEmailTemplateId, that.loginNewDeviceEmailTemplateId) &&
            Objects.equals(loginSuspectEmailTemplateId, that.loginSuspectEmailTemplateId) &&
            Objects.equals(password, that.password) &&
@@ -174,15 +179,13 @@ public class EmailConfiguration implements Buildable<EmailConfiguration> {
            Objects.equals(twoFactorMethodRemoveEmailTemplateId, that.twoFactorMethodRemoveEmailTemplateId) &&
            Objects.equals(unverified, that.unverified) &&
            Objects.equals(username, that.username) &&
-           Objects.equals(userCreateDuplicateEmailTemplateId, that.userCreateDuplicateEmailTemplateId) &&
-           Objects.equals(userUpdateDuplicateEmailTemplateId, that.userUpdateDuplicateEmailTemplateId) &&
            Objects.equals(verificationEmailTemplateId, that.verificationEmailTemplateId) &&
            verificationStrategy == that.verificationStrategy;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(defaultFromEmail, defaultFromName, emailUpdateEmailTemplateId, emailVerifiedEmailTemplateId, forgotPasswordEmailTemplateId, host, loginNewDeviceEmailTemplateId, loginSuspectEmailTemplateId, password, passwordResetSuccessEmailTemplateId, passwordUpdateEmailTemplateId, passwordlessEmailTemplateId, port, properties, security, setPasswordEmailTemplateId, twoFactorMethodAddEmailTemplateId, twoFactorMethodRemoveEmailTemplateId, unverified, userCreateDuplicateEmailTemplateId, userUpdateDuplicateEmailTemplateId, username, verificationEmailTemplateId, verificationStrategy, verifyEmail, verifyEmailWhenChanged);
+    return Objects.hash(defaultFromEmail, defaultFromName, emailUpdateEmailTemplateId, emailVerifiedEmailTemplateId, forgotPasswordEmailTemplateId, host, loginIdInUseOnCreateEmailTemplateId, loginIdInUseOnUpdateEmailTemplateId, loginNewDeviceEmailTemplateId, loginSuspectEmailTemplateId, password, passwordResetSuccessEmailTemplateId, passwordUpdateEmailTemplateId, passwordlessEmailTemplateId, port, properties, security, setPasswordEmailTemplateId, twoFactorMethodAddEmailTemplateId, twoFactorMethodRemoveEmailTemplateId, unverified, username, verificationEmailTemplateId, verificationStrategy, verifyEmail, verifyEmailWhenChanged);
   }
 
   public void normalize() {

@@ -25,17 +25,17 @@ import io.fusionauth.domain.User;
  *
  * @author Daniel DeGroff
  */
-public class UserUpdateDuplicateEvent extends UserCreateDuplicateEvent {
+public class UserLoginIdDuplicateOnUpdateEvent extends UserLoginIdDuplicateOnCreateEvent {
   @JacksonConstructor
-  public UserUpdateDuplicateEvent() {
+  public UserLoginIdDuplicateOnUpdateEvent() {
   }
 
-  public UserUpdateDuplicateEvent(UUID applicationId, String duplicateEmail, String duplicateUsername, User existing, User user) {
+  public UserLoginIdDuplicateOnUpdateEvent(UUID applicationId, String duplicateEmail, String duplicateUsername, User existing, User user) {
     super(applicationId, duplicateEmail, duplicateUsername, existing, user);
   }
 
   @Override
   public EventType getType() {
-    return EventType.UserUpdateDuplicate;
+    return EventType.UserLoginIdDuplicateOnUpdate;
   }
 }
