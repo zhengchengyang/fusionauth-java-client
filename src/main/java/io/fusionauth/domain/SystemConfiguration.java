@@ -58,7 +58,6 @@ public class SystemConfiguration implements Buildable<SystemConfiguration>, _Int
 
   public ZoneId reportTimezone;
 
-  // [brettp]TODO: trust config object as a separate class
   @InternalJSONColumn
   public SystemSSOConfiguration ssoConfiguration = new SystemSSOConfiguration();
 
