@@ -140,6 +140,8 @@ import io.fusionauth.domain.api.identityProvider.IdentityProviderStartLoginRespo
 import io.fusionauth.domain.api.identityProvider.LookupResponse;
 import io.fusionauth.domain.api.jwt.IssueResponse;
 import io.fusionauth.domain.api.jwt.JWTRefreshResponse;
+import io.fusionauth.domain.api.jwt.JWTVendRequest;
+import io.fusionauth.domain.api.jwt.JWTVendResponse;
 import io.fusionauth.domain.api.jwt.RefreshRequest;
 import io.fusionauth.domain.api.jwt.RefreshTokenResponse;
 import io.fusionauth.domain.api.jwt.ValidateResponse;
@@ -4714,6 +4716,28 @@ public class FusionAuthClient {
         .uri("/api/jwt/validate")
         .authorization("Bearer " + encodedJWT)
         .get()
+        .go();
+  }
+
+  /**
+   * It's a JWT vending machine!
+   * 
+   * Issue a new access token (JWT) with the provided claims in the request. This JWT is not scoped to a tenant or user, it is a free form 
+   * token that will contain what claims you provide.
+   * <p>
+   * The iat, exp and jti claims will be added by FusionAuth, all other claims must be provided by the caller.
+   * 
+   * If a TTL is not provided in the request, the TTL will be retrieved from the default Tenant or the Tenant specified on the request either 
+   * by way of the X-FusionAuth-TenantId request header, or a tenant scoped API key.
+   *
+   * @param request The request that contains all of the claims for this JWT.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<JWTVendResponse, Errors> vendJWT(JWTVendRequest request) {
+    return start(JWTVendResponse.class, Errors.class)
+        .uri("/api/jwt/vend")
+        .bodyHandler(new JSONBodyHandler(request, objectMapper))
+        .post()
         .go();
   }
 

@@ -305,6 +305,8 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
     //       I could add user create duplicate (during self service)
     //       I could add a user update duplicate (during self service, or complete reg)
     //       Review the current list again to see if we can expand this
+    //
+    // TODO : Lots of Emails : For the new templates here, they are not necessarily hooked up yet. This needs work.
 
     @JacksonConstructor
     public ApplicationEmailConfiguration() {
