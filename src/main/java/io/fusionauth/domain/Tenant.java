@@ -44,6 +44,9 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
   public final Map<String, Object> data = new LinkedHashMap<>();
 
   @InternalJSONColumn
+  public TenantCaptchaConfiguration captchaConfiguration = new TenantCaptchaConfiguration();
+
+  @InternalJSONColumn
   public boolean configured;
 
   public List<ConnectorPolicy> connectorPolicies = new ArrayList<>();
@@ -130,9 +133,6 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
   public UUID themeId;
 
   @InternalJSONColumn
-  public ThreatDetectionConfiguration threatDetectionConfiguration = new ThreatDetectionConfiguration();
-
-  @InternalJSONColumn
   public TenantUserDeletePolicy userDeletePolicy = new TenantUserDeletePolicy();
 
   @InternalJSONColumn
@@ -143,6 +143,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
   }
 
   public Tenant(Tenant other) {
+    this.captchaConfiguration = new TenantCaptchaConfiguration(other.captchaConfiguration);
     this.configured = other.configured;
     this.connectorPolicies.addAll(other.connectorPolicies.stream().map(ConnectorPolicy::new).collect(Collectors.toList()));
     this.data.putAll(other.data);
@@ -171,7 +172,6 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
     this.registrationConfiguration = new TenantRegistrationConfiguration(other.registrationConfiguration);
     this.state = other.state;
     this.themeId = other.themeId;
-    this.threatDetectionConfiguration = new ThreatDetectionConfiguration(other.threatDetectionConfiguration);
     this.userDeletePolicy = new TenantUserDeletePolicy(other.userDeletePolicy);
     this.usernameConfiguration = new TenantUsernameConfiguration(other.usernameConfiguration);
   }
@@ -187,6 +187,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
     Tenant tenant = (Tenant) o;
     return configured == tenant.configured &&
            httpSessionMaxInactiveInterval == tenant.httpSessionMaxInactiveInterval &&
+           Objects.equals(captchaConfiguration, tenant.captchaConfiguration) &&
            Objects.equals(connectorPolicies, tenant.connectorPolicies) &&
            Objects.equals(data, tenant.data) &&
            Objects.equals(emailConfiguration, tenant.emailConfiguration) &&
@@ -212,7 +213,6 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
            Objects.equals(registrationConfiguration, tenant.registrationConfiguration) &&
            Objects.equals(state, tenant.state) &&
            Objects.equals(themeId, tenant.themeId) &&
-           Objects.equals(threatDetectionConfiguration, tenant.threatDetectionConfiguration) &&
            Objects.equals(userDeletePolicy, tenant.userDeletePolicy) &&
            Objects.equals(usernameConfiguration, tenant.usernameConfiguration);
   }
@@ -224,7 +224,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
 
   @Override
   public int hashCode() {
-    return Objects.hash(configured, connectorPolicies, data, emailConfiguration, eventConfiguration, externalIdentifierConfiguration, failedAuthenticationConfiguration, familyConfiguration, formConfiguration, httpSessionMaxInactiveInterval, id, insertInstant, issuer, jwtConfiguration, lastUpdateInstant, loginConfiguration, logoutURL, maximumPasswordAge, minimumPasswordAge, name, passwordEncryptionConfiguration, passwordValidationRules, state, rateLimitingConfiguration, registrationConfiguration, themeId, threatDetectionConfiguration, userDeletePolicy, usernameConfiguration);
+    return Objects.hash(captchaConfiguration, configured, connectorPolicies, data, emailConfiguration, eventConfiguration, externalIdentifierConfiguration, failedAuthenticationConfiguration, familyConfiguration, formConfiguration, httpSessionMaxInactiveInterval, id, insertInstant, issuer, jwtConfiguration, lastUpdateInstant, loginConfiguration, logoutURL, maximumPasswordAge, minimumPasswordAge, name, passwordEncryptionConfiguration, passwordValidationRules, state, rateLimitingConfiguration, registrationConfiguration, themeId, userDeletePolicy, usernameConfiguration);
   }
 
   @JsonIgnore
