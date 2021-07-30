@@ -24,13 +24,13 @@ import com.inversoft.json.ToString;
  * @author Brett Pontarelli
  */
 public class TenantCaptchaConfiguration extends Enableable implements Buildable<TenantCaptchaConfiguration> {
-  public CaptchaMethod captchaMethod;
+  public CaptchaMethod captchaMethod = CaptchaMethod.GoogleRecaptchaV3;
 
   public String secretKey;
 
   public String siteKey;
 
-  public double threshold;
+  public double threshold = 0.5;
 
   @JacksonConstructor
   public TenantCaptchaConfiguration() {
