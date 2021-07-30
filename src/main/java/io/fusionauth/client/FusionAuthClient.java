@@ -1332,6 +1332,21 @@ public class FusionAuthClient {
   }
 
   /**
+   * Deletes the user based on the given request (sent to the API as JSON). This permanently deletes all information, metrics, reports and data associated
+   * with the user.
+   *
+   * @param request The request object that contains all of the information used to delete the user.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<Void, Errors> deleteUserWithRequest(UserDeleteRequest request) {
+    return start(Void.TYPE, Errors.class)
+        .uri("/api/user")
+        .bodyHandler(new JSONBodyHandler(request, objectMapper))
+        .delete()
+        .go();
+  }
+
+  /**
    * Deletes the users with the given ids, or users matching the provided JSON query or queryString.
    * The order of preference is ids, query and then queryString, it is recommended to only provide one of the three for the request.
    * 

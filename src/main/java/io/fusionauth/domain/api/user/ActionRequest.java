@@ -42,6 +42,11 @@ public class ActionRequest extends BaseEventRequest {
   public ActionRequest() {
   }
 
+  public ActionRequest(ActionData action, boolean broadcast) {
+    this.action = action;
+    this.broadcast = broadcast;
+  }
+
   public ActionRequest(EventInfo eventInfo, ActionData action, boolean broadcast) {
     super(eventInfo);
     this.action = action;

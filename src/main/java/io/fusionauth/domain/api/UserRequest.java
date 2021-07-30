@@ -38,6 +38,18 @@ public class UserRequest extends BaseEventRequest implements Buildable<UserReque
   public UserRequest() {
   }
 
+  public UserRequest(User user) {
+    this.sendSetPasswordEmail = false;
+    this.skipVerification = true;
+    this.user = user;
+  }
+
+  public UserRequest(boolean sendSetPasswordEmail, boolean skipVerification, User user) {
+    this.sendSetPasswordEmail = sendSetPasswordEmail;
+    this.skipVerification = skipVerification;
+    this.user = user;
+  }
+
   public UserRequest(EventInfo eventInfo, User user) {
     super(eventInfo);
     this.sendSetPasswordEmail = false;

@@ -36,12 +36,6 @@ public class PasswordlessLoginRequest extends BaseLoginRequest implements Builda
     this.code = code;
   }
 
-  public PasswordlessLoginRequest(EventInfo eventInfo, String code) {
-    super(eventInfo);
-    this.code = code;
-  }
-
-  @Deprecated
   public PasswordlessLoginRequest(String code, String ipAddress) {
     this.code = code;
 
@@ -49,5 +43,10 @@ public class PasswordlessLoginRequest extends BaseLoginRequest implements Builda
       eventInfo = eventInfo != null ? eventInfo : new EventInfo();
       eventInfo.ipAddress = ipAddress;
     }
+  }
+
+  public PasswordlessLoginRequest(EventInfo eventInfo, String code) {
+    super(eventInfo);
+    this.code = code;
   }
 }

@@ -33,6 +33,10 @@ public class TenantRequest extends BaseEventRequest {
   public TenantRequest() {
   }
 
+  public TenantRequest(Tenant tenant) {
+    this.tenant = tenant;
+  }
+
   public TenantRequest(EventInfo eventInfo, Tenant tenant) {
     super(eventInfo);
     this.tenant = tenant;

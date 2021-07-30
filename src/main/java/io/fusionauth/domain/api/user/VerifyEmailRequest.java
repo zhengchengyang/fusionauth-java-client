@@ -16,6 +16,7 @@
 package io.fusionauth.domain.api.user;
 
 import com.inversoft.json.JacksonConstructor;
+import io.fusionauth.domain.EventInfo;
 import io.fusionauth.domain.api.BaseEventRequest;
 
 /**
@@ -36,6 +37,17 @@ public class VerifyEmailRequest extends BaseEventRequest {
   }
 
   public VerifyEmailRequest(String verificationId) {
+    this.verificationId = verificationId;
+  }
+
+  public VerifyEmailRequest(EventInfo eventInfo, String oneTimeCode, String verificationId) {
+    super(eventInfo);
+    this.oneTimeCode = oneTimeCode;
+    this.verificationId = verificationId;
+  }
+
+  public VerifyEmailRequest(EventInfo eventInfo, String verificationId) {
+    super(eventInfo);
     this.verificationId = verificationId;
   }
 }

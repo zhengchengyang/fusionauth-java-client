@@ -29,6 +29,10 @@ public class AuditLogRequest extends BaseEventRequest {
   public AuditLogRequest() {
   }
 
+  public AuditLogRequest(AuditLog auditLog) {
+    this.auditLog = auditLog;
+  }
+
   public AuditLogRequest(EventInfo eventInfo, AuditLog auditLog) {
     super(eventInfo);
     this.auditLog = auditLog;

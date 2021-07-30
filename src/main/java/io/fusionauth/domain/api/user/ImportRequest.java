@@ -18,6 +18,7 @@ package io.fusionauth.domain.api.user;
 import java.util.List;
 
 import com.inversoft.json.JacksonConstructor;
+import io.fusionauth.domain.EventInfo;
 import io.fusionauth.domain.User;
 import io.fusionauth.domain.api.BaseEventRequest;
 
@@ -40,6 +41,11 @@ public class ImportRequest extends BaseEventRequest {
   }
 
   public ImportRequest(List<User> users) {
+    this.users = users;
+  }
+
+  public ImportRequest(EventInfo eventInfo, List<User> users) {
+    super(eventInfo);
     this.users = users;
   }
 }

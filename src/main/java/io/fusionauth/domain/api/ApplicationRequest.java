@@ -39,6 +39,15 @@ public class ApplicationRequest extends BaseEventRequest {
   public ApplicationRequest() {
   }
 
+  public ApplicationRequest(Application application, List<UUID> webhookIds) {
+    this.application = application;
+    this.webhookIds = webhookIds;
+  }
+
+  public ApplicationRequest(ApplicationRole role) {
+    this.role = role;
+  }
+
   public ApplicationRequest(EventInfo info, Application application, List<UUID> webhookIds) {
     super(info);
     this.application = application;

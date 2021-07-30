@@ -39,8 +39,7 @@ public class LoginRequest extends BaseLoginRequest implements Buildable<LoginReq
   public LoginRequest() {
   }
 
-  public LoginRequest(EventInfo eventInfo, UUID applicationId, String loginId, String password) {
-    super(eventInfo);
+  public LoginRequest(UUID applicationId, String loginId, String password) {
     this.applicationId = applicationId;
     this.loginId = loginId;
     this.password = password;
@@ -58,7 +57,8 @@ public class LoginRequest extends BaseLoginRequest implements Buildable<LoginReq
     }
   }
 
-  public LoginRequest(UUID applicationId, String loginId, String password) {
+  public LoginRequest(EventInfo eventInfo, UUID applicationId, String loginId, String password) {
+    super(eventInfo);
     this.applicationId = applicationId;
     this.loginId = loginId;
     this.password = password;

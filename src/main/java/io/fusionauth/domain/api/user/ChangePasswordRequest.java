@@ -37,6 +37,10 @@ public class ChangePasswordRequest extends BaseEventRequest {
   public ChangePasswordRequest() {
   }
 
+  public ChangePasswordRequest(String password) {
+    this.password = password;
+  }
+
   public ChangePasswordRequest(EventInfo eventInfo, String password) {
     super(eventInfo);
     this.password = password;
