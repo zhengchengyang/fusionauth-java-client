@@ -121,8 +121,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
   public PasswordValidationRules passwordValidationRules = new PasswordValidationRules();
 
   @InternalJSONColumn
-  // TODO : Rate Limiting : Naming : Rename to TenantRateLimitConfiguration? (and field name)
-  public TenantRateLimitingConfiguration rateLimitingConfiguration = new TenantRateLimitingConfiguration();
+  public TenantRateLimitConfiguration rateLimitConfiguration = new TenantRateLimitConfiguration();
 
   @InternalJSONColumn
   public TenantRegistrationConfiguration registrationConfiguration = new TenantRegistrationConfiguration();
@@ -168,7 +167,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
     this.oauthConfiguration = new TenantOAuth2Configuration(other.oauthConfiguration);
     this.passwordEncryptionConfiguration = new PasswordEncryptionConfiguration(other.passwordEncryptionConfiguration);
     this.passwordValidationRules = new PasswordValidationRules(other.passwordValidationRules);
-    this.rateLimitingConfiguration = new TenantRateLimitingConfiguration(other.rateLimitingConfiguration);
+    this.rateLimitConfiguration = new TenantRateLimitConfiguration(other.rateLimitConfiguration);
     this.registrationConfiguration = new TenantRegistrationConfiguration(other.registrationConfiguration);
     this.state = other.state;
     this.themeId = other.themeId;
@@ -209,7 +208,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
            Objects.equals(name, tenant.name) &&
            Objects.equals(passwordEncryptionConfiguration, tenant.passwordEncryptionConfiguration) &&
            Objects.equals(passwordValidationRules, tenant.passwordValidationRules) &&
-           Objects.equals(rateLimitingConfiguration, tenant.rateLimitingConfiguration) &&
+           Objects.equals(rateLimitConfiguration, tenant.rateLimitConfiguration) &&
            Objects.equals(registrationConfiguration, tenant.registrationConfiguration) &&
            Objects.equals(state, tenant.state) &&
            Objects.equals(themeId, tenant.themeId) &&
@@ -224,7 +223,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
 
   @Override
   public int hashCode() {
-    return Objects.hash(captchaConfiguration, configured, connectorPolicies, data, emailConfiguration, eventConfiguration, externalIdentifierConfiguration, failedAuthenticationConfiguration, familyConfiguration, formConfiguration, httpSessionMaxInactiveInterval, id, insertInstant, issuer, jwtConfiguration, lastUpdateInstant, loginConfiguration, logoutURL, maximumPasswordAge, minimumPasswordAge, name, passwordEncryptionConfiguration, passwordValidationRules, state, rateLimitingConfiguration, registrationConfiguration, themeId, userDeletePolicy, usernameConfiguration);
+    return Objects.hash(captchaConfiguration, configured, connectorPolicies, data, emailConfiguration, eventConfiguration, externalIdentifierConfiguration, failedAuthenticationConfiguration, familyConfiguration, formConfiguration, httpSessionMaxInactiveInterval, id, insertInstant, issuer, jwtConfiguration, lastUpdateInstant, loginConfiguration, logoutURL, maximumPasswordAge, minimumPasswordAge, name, passwordEncryptionConfiguration, passwordValidationRules, state, rateLimitConfiguration, registrationConfiguration, themeId, userDeletePolicy, usernameConfiguration);
   }
 
   @JsonIgnore

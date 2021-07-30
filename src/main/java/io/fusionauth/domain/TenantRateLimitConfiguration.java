@@ -24,7 +24,7 @@ import com.inversoft.json.ToString;
 /**
  * @author Daniel DeGroff
  */
-public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimitingConfiguration> {
+public class TenantRateLimitConfiguration implements Buildable<TenantRateLimitConfiguration> {
   public RateLimitedRequestConfiguration failedLogin = new RateLimitedRequestConfiguration(5, 60);
 
   public RateLimitedRequestConfiguration forgotPassword = new RateLimitedRequestConfiguration(5, 60);
@@ -38,10 +38,10 @@ public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimi
   public RateLimitedRequestConfiguration sendTwoFactor = new RateLimitedRequestConfiguration(10, 60);
 
   @JacksonConstructor
-  public TenantRateLimitingConfiguration() {
+  public TenantRateLimitConfiguration() {
   }
 
-  public TenantRateLimitingConfiguration(TenantRateLimitingConfiguration other) {
+  public TenantRateLimitConfiguration(TenantRateLimitConfiguration other) {
     this.failedLogin = new RateLimitedRequestConfiguration(other.failedLogin);
     this.forgotPassword = new RateLimitedRequestConfiguration(other.forgotPassword);
     this.sendEmailVerification = new RateLimitedRequestConfiguration(other.sendEmailVerification);
@@ -58,7 +58,7 @@ public class TenantRateLimitingConfiguration implements Buildable<TenantRateLimi
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    TenantRateLimitingConfiguration that = (TenantRateLimitingConfiguration) o;
+    TenantRateLimitConfiguration that = (TenantRateLimitConfiguration) o;
     return Objects.equals(failedLogin, that.failedLogin) &&
            Objects.equals(forgotPassword, that.forgotPassword) &&
            Objects.equals(sendEmailVerification, that.sendEmailVerification) &&
