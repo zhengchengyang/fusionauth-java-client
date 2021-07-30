@@ -20,6 +20,7 @@ import java.util.Objects;
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 import io.fusionauth.domain.Buildable;
+import io.fusionauth.domain.EventInfo;
 import io.fusionauth.domain.User;
 
 /**
@@ -37,7 +38,8 @@ public class UserDeleteCompleteEvent extends BaseEvent implements Buildable<User
   public UserDeleteCompleteEvent() {
   }
 
-  public UserDeleteCompleteEvent(User user) {
+  public UserDeleteCompleteEvent(EventInfo info, User user) {
+    super(info);
     this.user = user;
   }
 

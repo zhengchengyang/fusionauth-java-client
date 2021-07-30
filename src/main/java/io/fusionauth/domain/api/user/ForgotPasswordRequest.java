@@ -19,13 +19,14 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.inversoft.json.JacksonConstructor;
+import io.fusionauth.domain.api.BaseEventRequest;
 
 /**
  * Forgot password request object.
  *
  * @author Brian Pontarelli
  */
-public class ForgotPasswordRequest {
+public class ForgotPasswordRequest extends BaseEventRequest {
   public UUID applicationId;
 
   public String changePasswordId;

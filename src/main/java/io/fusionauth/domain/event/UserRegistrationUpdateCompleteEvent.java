@@ -21,6 +21,7 @@ import java.util.UUID;
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 import io.fusionauth.domain.Buildable;
+import io.fusionauth.domain.EventInfo;
 import io.fusionauth.domain.User;
 import io.fusionauth.domain.UserRegistration;
 
@@ -44,7 +45,9 @@ public class UserRegistrationUpdateCompleteEvent extends BaseEvent implements Bu
   public UserRegistrationUpdateCompleteEvent() {
   }
 
-  public UserRegistrationUpdateCompleteEvent(UUID applicationId, UserRegistration original, UserRegistration registration, User user) {
+  public UserRegistrationUpdateCompleteEvent(EventInfo info, UUID applicationId, UserRegistration original, UserRegistration registration,
+                                             User user) {
+    super(info);
     this.applicationId = applicationId;
     this.original = original;
     this.registration = registration;

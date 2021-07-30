@@ -25,7 +25,7 @@ import com.inversoft.json.JacksonConstructor;
  *
  * @author Daniel DeGroff
  */
-public class UserDeleteRequest {
+public class UserDeleteRequest extends BaseEventRequest {
   public boolean dryRun;
 
   public boolean hardDelete;

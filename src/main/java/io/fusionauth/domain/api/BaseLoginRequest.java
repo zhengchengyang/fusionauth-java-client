@@ -36,6 +36,13 @@ public class BaseLoginRequest extends BaseEventRequest {
 
   public boolean noJWT;
 
+  public BaseLoginRequest() {
+  }
+
+  public BaseLoginRequest(EventInfo eventInfo) {
+    super(eventInfo);
+  }
+
   public void normalize() {
     eventInfo = eventInfo != null ? eventInfo : new EventInfo();
     if (eventInfo.ipAddress == null) {

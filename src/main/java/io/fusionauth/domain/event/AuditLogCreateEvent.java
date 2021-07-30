@@ -21,6 +21,7 @@ import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 import io.fusionauth.domain.AuditLog;
 import io.fusionauth.domain.Buildable;
+import io.fusionauth.domain.EventInfo;
 
 /**
  * Event event to an audit log was created.
@@ -34,7 +35,8 @@ public class AuditLogCreateEvent extends BaseEvent implements Buildable<AuditLog
   public AuditLogCreateEvent() {
   }
 
-  public AuditLogCreateEvent(AuditLog auditLog) {
+  public AuditLogCreateEvent(EventInfo info, AuditLog auditLog) {
+    super(info);
     this.auditLog = auditLog;
   }
 

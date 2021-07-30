@@ -16,13 +16,15 @@
 package io.fusionauth.domain.api.user;
 
 import com.inversoft.json.JacksonConstructor;
+import io.fusionauth.domain.EventInfo;
+import io.fusionauth.domain.api.BaseEventRequest;
 
 /**
  * Change password request object.
  *
  * @author Brian Pontarelli
  */
-public class ChangePasswordRequest {
+public class ChangePasswordRequest extends BaseEventRequest {
   public String currentPassword;
 
   public String loginId;
@@ -35,7 +37,8 @@ public class ChangePasswordRequest {
   public ChangePasswordRequest() {
   }
 
-  public ChangePasswordRequest(String password) {
+  public ChangePasswordRequest(EventInfo eventInfo, String password) {
+    super(eventInfo);
     this.password = password;
   }
 

@@ -21,6 +21,7 @@ import java.util.UUID;
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 import io.fusionauth.domain.Buildable;
+import io.fusionauth.domain.EventInfo;
 import io.fusionauth.domain.User;
 
 /**
@@ -43,7 +44,8 @@ public class UserLoginIdDuplicateOnCreateEvent extends BaseEvent implements Buil
   public UserLoginIdDuplicateOnCreateEvent() {
   }
 
-  public UserLoginIdDuplicateOnCreateEvent(UUID applicationId, String duplicateEmail, String duplicateUsername, User existing, User user) {
+  public UserLoginIdDuplicateOnCreateEvent(EventInfo info, UUID applicationId, String duplicateEmail, String duplicateUsername, User existing, User user) {
+    super(info);
     this.applicationId = applicationId;
     this.duplicateEmail = duplicateEmail;
     this.duplicateUsername = duplicateUsername;

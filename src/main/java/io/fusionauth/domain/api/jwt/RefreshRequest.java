@@ -16,11 +16,12 @@
 package io.fusionauth.domain.api.jwt;
 
 import com.inversoft.json.JacksonConstructor;
+import io.fusionauth.domain.api.BaseEventRequest;
 
 /**
  * @author Daniel DeGroff
  */
-public class RefreshRequest {
+public class RefreshRequest extends BaseEventRequest {
   public String refreshToken;
 
   public String token;

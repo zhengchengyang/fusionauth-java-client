@@ -19,13 +19,14 @@ import java.util.List;
 
 import com.inversoft.json.JacksonConstructor;
 import io.fusionauth.domain.User;
+import io.fusionauth.domain.api.BaseEventRequest;
 
 /**
  * Import request.
  *
  * @author Brian Pontarelli
  */
-public class ImportRequest {
+public class ImportRequest extends BaseEventRequest {
   public String encryptionScheme;
 
   public Integer factor;

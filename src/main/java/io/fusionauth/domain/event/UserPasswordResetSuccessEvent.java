@@ -20,6 +20,7 @@ import java.util.Objects;
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 import io.fusionauth.domain.Buildable;
+import io.fusionauth.domain.EventInfo;
 import io.fusionauth.domain.User;
 
 /**
@@ -34,7 +35,8 @@ public class UserPasswordResetSuccessEvent extends BaseEvent implements Buildabl
   public UserPasswordResetSuccessEvent() {
   }
 
-  public UserPasswordResetSuccessEvent(User user) {
+  public UserPasswordResetSuccessEvent(EventInfo info, User user) {
+    super(info);
     this.user = user;
   }
 

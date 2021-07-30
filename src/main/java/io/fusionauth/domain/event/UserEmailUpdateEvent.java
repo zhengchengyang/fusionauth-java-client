@@ -18,6 +18,7 @@ package io.fusionauth.domain.event;
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 import io.fusionauth.domain.Buildable;
+import io.fusionauth.domain.EventInfo;
 import io.fusionauth.domain.User;
 
 /**
@@ -30,7 +31,8 @@ public class UserEmailUpdateEvent extends BaseEvent implements Buildable<UserEma
 
   public User user;
 
-  public UserEmailUpdateEvent(String previousEmail, User user) {
+  public UserEmailUpdateEvent(EventInfo info, String previousEmail, User user) {
+    super(info);
     this.previousEmail = previousEmail;
     this.user = user;
   }

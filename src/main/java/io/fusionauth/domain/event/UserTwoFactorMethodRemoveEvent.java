@@ -20,6 +20,7 @@ import java.util.Objects;
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 import io.fusionauth.domain.Buildable;
+import io.fusionauth.domain.EventInfo;
 import io.fusionauth.domain.TwoFactorMethod;
 import io.fusionauth.domain.User;
 
@@ -37,7 +38,8 @@ public class UserTwoFactorMethodRemoveEvent extends BaseEvent implements Buildab
   public UserTwoFactorMethodRemoveEvent() {
   }
 
-  public UserTwoFactorMethodRemoveEvent(TwoFactorMethod method, User user) {
+  public UserTwoFactorMethodRemoveEvent(EventInfo info, TwoFactorMethod method, User user) {
+    super(info);
     this.method = method;
     this.user = user;
   }

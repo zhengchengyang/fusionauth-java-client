@@ -16,11 +16,12 @@
 package io.fusionauth.domain.api.user;
 
 import com.inversoft.json.JacksonConstructor;
+import io.fusionauth.domain.api.BaseEventRequest;
 
 /**
  * @author Daniel DeGroff
  */
-public class VerifyRegistrationRequest {
+public class VerifyRegistrationRequest extends BaseEventRequest {
   public String oneTimeCode;
 
   public String verificationId;

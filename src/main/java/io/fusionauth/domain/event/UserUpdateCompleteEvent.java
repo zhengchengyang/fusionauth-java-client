@@ -20,6 +20,7 @@ import java.util.Objects;
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 import io.fusionauth.domain.Buildable;
+import io.fusionauth.domain.EventInfo;
 import io.fusionauth.domain.User;
 
 /**
@@ -36,7 +37,8 @@ public class UserUpdateCompleteEvent extends BaseEvent implements Buildable<User
   public UserUpdateCompleteEvent() {
   }
 
-  public UserUpdateCompleteEvent(User original, User user) {
+  public UserUpdateCompleteEvent(EventInfo info, User original, User user) {
+    super(info);
     this.original = original;
     this.user = user;
   }

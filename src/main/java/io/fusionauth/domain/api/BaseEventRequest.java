@@ -25,4 +25,11 @@ import io.fusionauth.domain.EventInfo;
  */
 public abstract class BaseEventRequest {
   public EventInfo eventInfo;
+
+  public BaseEventRequest() {
+  }
+
+  public BaseEventRequest(EventInfo eventInfo) {
+    this.eventInfo = eventInfo;
+  }
 }

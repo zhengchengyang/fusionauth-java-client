@@ -17,18 +17,20 @@ package io.fusionauth.domain.api;
 
 import com.inversoft.json.JacksonConstructor;
 import io.fusionauth.domain.AuditLog;
+import io.fusionauth.domain.EventInfo;
 
 /**
  * @author Brian Pontarelli
  */
-public class AuditLogRequest {
+public class AuditLogRequest extends BaseEventRequest {
   public AuditLog auditLog;
 
   @JacksonConstructor
   public AuditLogRequest() {
   }
 
-  public AuditLogRequest(AuditLog auditLog) {
+  public AuditLogRequest(EventInfo eventInfo, AuditLog auditLog) {
+    super(eventInfo);
     this.auditLog = auditLog;
   }
 }

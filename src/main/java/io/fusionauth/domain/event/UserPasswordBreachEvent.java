@@ -20,6 +20,7 @@ import java.util.Objects;
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 import io.fusionauth.domain.Buildable;
+import io.fusionauth.domain.EventInfo;
 import io.fusionauth.domain.User;
 
 /**
@@ -34,7 +35,8 @@ public class UserPasswordBreachEvent extends BaseEvent implements Buildable<User
   public UserPasswordBreachEvent() {
   }
 
-  public UserPasswordBreachEvent(User user) {
+  public UserPasswordBreachEvent(EventInfo info, User user) {
+    super(info);
     this.user = user;
   }
 

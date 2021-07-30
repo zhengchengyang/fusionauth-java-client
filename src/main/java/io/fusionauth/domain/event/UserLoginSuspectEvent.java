@@ -15,12 +15,31 @@
  */
 package io.fusionauth.domain.event;
 
+import java.util.UUID;
+
+import com.inversoft.json.JacksonConstructor;
+import io.fusionauth.domain.EventInfo;
+import io.fusionauth.domain.User;
+import io.fusionauth.domain.provider.BaseIdentityProvider;
+
 /**
  * Models the User Login event that is suspect.
  *
  * @author Daniel DeGroff
  */
 public class UserLoginSuspectEvent extends UserLoginSuccessEvent {
+  @JacksonConstructor
+  public UserLoginSuspectEvent() {
+  }
+
+  public UserLoginSuspectEvent(EventInfo info, UUID applicationId, String authenticationType, BaseIdentityProvider<?> identityProvider, User user) {
+    super(info, applicationId, authenticationType, identityProvider, user);
+  }
+
+  public UserLoginSuspectEvent(EventInfo info, UUID applicationId, UUID connectorId, String authenticationType, User user) {
+    super(info, applicationId, connectorId, authenticationType, user);
+  }
+
   @Override
   public EventType getType() {
     return EventType.UserLoginSuspect;

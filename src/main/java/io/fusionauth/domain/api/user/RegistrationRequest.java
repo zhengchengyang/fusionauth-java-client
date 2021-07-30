@@ -18,13 +18,14 @@ package io.fusionauth.domain.api.user;
 import com.inversoft.json.JacksonConstructor;
 import io.fusionauth.domain.User;
 import io.fusionauth.domain.UserRegistration;
+import io.fusionauth.domain.api.BaseEventRequest;
 
 /**
  * Registration API request object.
  *
  * @author Brian Pontarelli
  */
-public class RegistrationRequest {
+public class RegistrationRequest extends BaseEventRequest {
   public boolean disableDomainBlock;
 
   public boolean generateAuthenticationToken;
