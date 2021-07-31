@@ -23,7 +23,7 @@ import com.inversoft.json.ToString;
  * @author Brett Pontarelli
  */
 public class SystemSSOConfiguration {
-  public int ssoDeviceTrustTimeToLiveInSeconds = 2592000;
+  public int ssoDeviceTrustTimeToLiveInSeconds = 31536000;
 
   @Override
   public boolean equals(Object o) {
