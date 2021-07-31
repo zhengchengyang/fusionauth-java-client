@@ -125,6 +125,7 @@ import io.fusionauth.domain.api.UserConsentRequest;
 import io.fusionauth.domain.api.UserConsentResponse;
 import io.fusionauth.domain.api.UserDeleteRequest;
 import io.fusionauth.domain.api.UserDeleteResponse;
+import io.fusionauth.domain.api.UserDeleteSingleRequest;
 import io.fusionauth.domain.api.UserRequest;
 import io.fusionauth.domain.api.UserResponse;
 import io.fusionauth.domain.api.VersionResponse;
@@ -1338,7 +1339,7 @@ public class FusionAuthClient {
    * @param request The request object that contains all of the information used to delete the user.
    * @return The ClientResponse object.
    */
-  public ClientResponse<Void, Errors> deleteUserWithRequest(UserDeleteRequest request) {
+  public ClientResponse<Void, Errors> deleteUserWithRequest(UserDeleteSingleRequest request) {
     return start(Void.TYPE, Errors.class)
         .uri("/api/user")
         .bodyHandler(new JSONBodyHandler(request, objectMapper))
