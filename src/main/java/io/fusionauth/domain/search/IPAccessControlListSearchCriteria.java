@@ -15,28 +15,34 @@
  */
 package io.fusionauth.domain.search;
 
+import com.inversoft.json.JacksonConstructor;
+
 /**
  * @author Brett Guy
  */
 public class IPAccessControlListSearchCriteria extends BaseSearchCriteria {
   public String name;
 
+  @JacksonConstructor
+  public IPAccessControlListSearchCriteria() {
+    orderBy = defaultOrderBy();
+  }
+
   @Override
   public void prepare() {
     secure();
-
     if (orderBy == null) {
       orderBy = defaultOrderBy();
     }
 
-    orderBy = orderBy.replace("insertInstant", "insert_instant")
-                     .replace("lastUpdateInstant", "last_update_instant");
-
+    orderBy = orderBy.replace("insertInstant", "ip.insert_instant")
+                     .replace("lastUpdateInstant", "ip.last_update_instant")
+                     .replace("name", "ip.name");
     name = toSearchString(name);
   }
 
   @Override
   protected String defaultOrderBy() {
-    return "insert_instant DESC";
+    return "name ASC";
   }
 }
