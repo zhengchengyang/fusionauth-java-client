@@ -3802,49 +3802,6 @@ public class FusionAuthClient {
   }
 
   /**
-   * Revokes refresh tokens using the information in the JSON body. The handling for this method is the same as the revokeRefreshToken method
-   * and is based on the information you provide in the RefreshDeleteRequest object. See that method for additional information.
-   *
-   * @param request The request information used to revoke the refresh tokens.
-   * @return The ClientResponse object.
-   */
-  public ClientResponse<Void, Errors> revokeRefreshTokenWithRequest(RefreshTokenRevokeRequest request) {
-    return start(Void.TYPE, Errors.class)
-        .uri("/api/jwt/refresh")
-        .bodyHandler(new JSONBodyHandler(request, objectMapper))
-        .delete()
-        .go();
-  }
-
-  /**
-   * Revokes a single refresh token by the unique Id. The unique Id is not sensitive as it cannot be used to obtain another JWT.
-   *
-   * @param tokenId The unique Id of the token to delete.
-   * @return The ClientResponse object.
-   */
-  public ClientResponse<Void, Errors> revokeRefreshTokenById(UUID tokenId) {
-    return start(Void.TYPE, Errors.class)
-        .uri("/api/jwt/refresh")
-        .urlSegment(tokenId)
-        .delete()
-        .go();
-  }
-
-  /**
-   * Revokes a single refresh token by using the actual refresh token value. This refresh token value is sensitive, so  be careful with this API request.
-   *
-   * @param token The refresh token to delete.
-   * @return The ClientResponse object.
-   */
-  public ClientResponse<Void, Errors> revokeRefreshTokenByToken(String token) {
-    return start(Void.TYPE, Errors.class)
-        .uri("/api/jwt/refresh")
-        .urlParameter("token", token)
-        .delete()
-        .go();
-  }
-
-  /**
    * Revokes refresh tokens.
    * 
    * Usage examples:
@@ -3881,6 +3838,34 @@ public class FusionAuthClient {
         .urlParameter("token", token)
         .urlParameter("userId", userId)
         .urlParameter("applicationId", applicationId)
+        .delete()
+        .go();
+  }
+
+  /**
+   * Revokes a single refresh token by the unique Id. The unique Id is not sensitive as it cannot be used to obtain another JWT.
+   *
+   * @param tokenId The unique Id of the token to delete.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<Void, Errors> revokeRefreshTokenById(UUID tokenId) {
+    return start(Void.TYPE, Errors.class)
+        .uri("/api/jwt/refresh")
+        .urlSegment(tokenId)
+        .delete()
+        .go();
+  }
+
+  /**
+   * Revokes a single refresh token by using the actual refresh token value. This refresh token value is sensitive, so  be careful with this API request.
+   *
+   * @param token The refresh token to delete.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<Void, Errors> revokeRefreshTokenByToken(String token) {
+    return start(Void.TYPE, Errors.class)
+        .uri("/api/jwt/refresh")
+        .urlParameter("token", token)
         .delete()
         .go();
   }
@@ -3925,6 +3910,21 @@ public class FusionAuthClient {
         .uri("/api/jwt/refresh")
         .urlParameter("userId", userId)
         .urlParameter("applicationId", applicationId)
+        .delete()
+        .go();
+  }
+
+  /**
+   * Revokes refresh tokens using the information in the JSON body. The handling for this method is the same as the revokeRefreshToken method
+   * and is based on the information you provide in the RefreshDeleteRequest object. See that method for additional information.
+   *
+   * @param request The request information used to revoke the refresh tokens.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<Void, Errors> revokeRefreshTokensWithRequest(RefreshTokenRevokeRequest request) {
+    return start(Void.TYPE, Errors.class)
+        .uri("/api/jwt/refresh")
+        .bodyHandler(new JSONBodyHandler(request, objectMapper))
         .delete()
         .go();
   }
