@@ -34,10 +34,7 @@ public class IPAccessControlList implements Buildable<IPAccessControlList>, _Int
   public final Map<String, Object> data = new LinkedHashMap<>();
 
   @InternalJSONColumn
-  public IPAccessControlListMode defaultAction = IPAccessControlListMode.Allow;
-
-  @InternalJSONColumn
-  public List<IPAddressRange> exceptions = new ArrayList<>();
+  public List<IPAccessControlEntry> entries = new ArrayList<>();
 
   public UUID id;
 
@@ -57,8 +54,7 @@ public class IPAccessControlList implements Buildable<IPAccessControlList>, _Int
     }
     IPAccessControlList that = (IPAccessControlList) o;
     return Objects.equals(data, that.data) &&
-           defaultAction == that.defaultAction &&
-           Objects.equals(exceptions, that.exceptions) &&
+           Objects.equals(entries, that.entries) &&
            Objects.equals(id, that.id) &&
            Objects.equals(insertInstant, that.insertInstant) &&
            Objects.equals(lastUpdateInstant, that.lastUpdateInstant) &&
@@ -67,7 +63,16 @@ public class IPAccessControlList implements Buildable<IPAccessControlList>, _Int
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, defaultAction, exceptions, id, insertInstant, lastUpdateInstant, name);
+    return Objects.hash(data, entries, id, insertInstant, lastUpdateInstant, name);
+  }
+
+  public void normalize() {
+    // The "base" entry of "*" does not have an end value
+    for (IPAccessControlEntry entry : entries) {
+      if ("*".equals(entry.startIPAddress)) {
+        entry.endIPAddress = null;
+      }
+    }
   }
 
   @Override

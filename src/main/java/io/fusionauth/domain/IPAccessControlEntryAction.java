@@ -18,7 +18,7 @@ package io.fusionauth.domain;
 /**
  * @author Brett Guy
  */
-public enum IPAccessControlListMode {
+public enum IPAccessControlEntryAction {
   Allow,
   Block
 }

@@ -17,25 +17,17 @@ package io.fusionauth.domain;
 
 import java.util.Objects;
 
-import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 
 /**
  * @author Brett Guy
  */
-public class IPAddressRange implements Buildable<IPAddressRange> {
+public class IPAccessControlEntry implements Buildable<IPAccessControlEntry> {
+  public IPAccessControlEntryAction action = IPAccessControlEntryAction.Block;
+
   public String endIPAddress;
 
   public String startIPAddress;
-
-  @JacksonConstructor
-  public IPAddressRange() {
-  }
-
-  public IPAddressRange(String startIPAddress, String endIPAddress) {
-    this.startIPAddress = startIPAddress;
-    this.endIPAddress = endIPAddress;
-  }
 
   @Override
   public boolean equals(Object o) {
@@ -45,14 +37,15 @@ public class IPAddressRange implements Buildable<IPAddressRange> {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    IPAddressRange that = (IPAddressRange) o;
-    return Objects.equals(endIPAddress, that.endIPAddress) &&
+    IPAccessControlEntry that = (IPAccessControlEntry) o;
+    return action == that.action &&
+           Objects.equals(endIPAddress, that.endIPAddress) &&
            Objects.equals(startIPAddress, that.startIPAddress);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(endIPAddress, startIPAddress);
+    return Objects.hash(action, endIPAddress, startIPAddress);
   }
 
   @Override

@@ -108,6 +108,13 @@ public class SQLToolsTest {
     assertSearchString("*fu*sion", "%fu%sion");
     assertSearchString("*fu**sion", "%fu*sion");
     assertSearchString(null, null);
+
+    // These are working as designed, not sure if this is what we want.
+    // - We could try to be smart about % - but then we have to manage two wild cards. Or.. since we are asking our users to enter *, we treat all
+    // - I think MySQL and PostgreSQL may both use a \ for an escape , so perhaps the correct way for the end user to write this would be:
+    //      %0\% Percent (to match 10% Percent or 100% Percent)
+    assertSearchString("*% Percent", "%% percent");
+    assertSearchString("*%% Percent", "%%% percent");
   }
 
   private void assertNormalized(String orderBy, String expected, String... columns) {

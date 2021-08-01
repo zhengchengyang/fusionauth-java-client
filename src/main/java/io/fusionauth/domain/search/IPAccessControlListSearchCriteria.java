@@ -15,34 +15,45 @@
  */
 package io.fusionauth.domain.search;
 
-import com.inversoft.json.JacksonConstructor;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import io.fusionauth.domain.Buildable;
+import static io.fusionauth.domain.util.SQLTools.normalizeOrderBy;
+import static io.fusionauth.domain.util.SQLTools.toSearchString;
 
 /**
  * @author Brett Guy
  */
-public class IPAccessControlListSearchCriteria extends BaseSearchCriteria {
+public class IPAccessControlListSearchCriteria extends BaseSearchCriteria implements Buildable<IPAccessControlListSearchCriteria> {
+  public static final Map<String, String> SortableFields = new LinkedHashMap<>();
+
   public String name;
 
-  @JacksonConstructor
   public IPAccessControlListSearchCriteria() {
-    orderBy = defaultOrderBy();
+    prepare();
   }
 
   @Override
-  public void prepare() {
-    secure();
+  public IPAccessControlListSearchCriteria prepare() {
     if (orderBy == null) {
       orderBy = defaultOrderBy();
     }
 
-    orderBy = orderBy.replace("insertInstant", "ip.insert_instant")
-                     .replace("lastUpdateInstant", "ip.last_update_instant")
-                     .replace("name", "ip.name");
+    orderBy = normalizeOrderBy(orderBy, SortableFields);
     name = toSearchString(name);
+    return this;
   }
 
   @Override
   protected String defaultOrderBy() {
     return "name ASC";
+  }
+
+  static {
+    SortableFields.put("id", "id");
+    SortableFields.put("insertInstant", "insert_instant");
+    SortableFields.put("lastUpdateInstant", "last_update_instant");
+    SortableFields.put("name", "name");
   }
 }
