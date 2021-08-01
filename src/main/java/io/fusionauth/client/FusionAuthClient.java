@@ -88,6 +88,7 @@ import io.fusionauth.domain.api.LoginRecordSearchRequest;
 import io.fusionauth.domain.api.LoginRecordSearchResponse;
 import io.fusionauth.domain.api.LoginRequest;
 import io.fusionauth.domain.api.LoginResponse;
+import io.fusionauth.domain.api.LogoutRequest;
 import io.fusionauth.domain.api.MemberDeleteRequest;
 import io.fusionauth.domain.api.MemberRequest;
 import io.fusionauth.domain.api.MemberResponse;
@@ -1829,6 +1830,21 @@ public class FusionAuthClient {
         .uri("/api/logout")
         .urlParameter("global", global)
         .urlParameter("refreshToken", refreshToken)
+        .post()
+        .go();
+  }
+
+  /**
+   * The Logout API is intended to be used to remove the refresh token and access token cookies if they exist on the
+   * client and revoke the refresh token stored. This API takes the refresh token in the JSON body.
+   *
+   * @param request The request object that contains all of the information used to logout the user.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<Void, Void> logout(LogoutRequest request) {
+    return startAnonymous(Void.TYPE, Void.TYPE)
+        .uri("/api/logout")
+        .bodyHandler(new JSONBodyHandler(request, objectMapper))
         .post()
         .go();
   }
