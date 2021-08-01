@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2019, FusionAuth, All Rights Reserved
+ * Copyright (c) 2021, FusionAuth, All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,19 +19,19 @@ import com.inversoft.json.JacksonConstructor;
 import io.fusionauth.domain.EventInfo;
 
 /**
- * User API delete request object for a single user.
+ * Request for the Tenant API to delete a tenant rather than using the URL parameters.
  *
  * @author Brian Pontarelli
  */
-public class UserDeleteSingleRequest extends BaseEventRequest {
-  public boolean hardDelete;
+public class TenantDeleteRequest extends BaseEventRequest {
+  public boolean async;
 
   @JacksonConstructor
-  public UserDeleteSingleRequest() {
+  public TenantDeleteRequest() {
   }
 
-  public UserDeleteSingleRequest(EventInfo eventInfo, boolean hardDelete) {
+  public TenantDeleteRequest(EventInfo eventInfo, boolean async) {
     super(eventInfo);
-    this.hardDelete = hardDelete;
+    this.async = async;
   }
 }
