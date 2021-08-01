@@ -17,6 +17,8 @@ package io.fusionauth.domain;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,13 +68,26 @@ public class IPAccessControlList implements Buildable<IPAccessControlList>, _Int
     return Objects.hash(data, entries, id, insertInstant, lastUpdateInstant, name);
   }
 
-  public void normalize() {
+  public IPAccessControlList normalize() {
     // The "base" entry of "*" does not have an end value
-    for (IPAccessControlEntry entry : entries) {
+    boolean hasDefault = false;
+    Iterator<IPAccessControlEntry> iterator = entries.iterator();
+    while (iterator.hasNext()) {
+      IPAccessControlEntry entry = iterator.next();
       if ("*".equals(entry.startIPAddress)) {
+        if (hasDefault) {
+          iterator.remove();
+          continue;
+        }
+
         entry.endIPAddress = null;
+        hasDefault = true;
       }
     }
+
+    // We have not completed validation yet, there may be null values for startIPAddress
+    entries.sort(Comparator.comparing(entry -> entry.startIPAddress, Comparator.nullsLast(Comparator.naturalOrder())));
+    return this;
   }
 
   @Override
