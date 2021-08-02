@@ -114,6 +114,7 @@ import io.fusionauth.domain.api.TenantRequest;
 import io.fusionauth.domain.api.TenantResponse;
 import io.fusionauth.domain.api.ThemeRequest;
 import io.fusionauth.domain.api.ThemeResponse;
+import io.fusionauth.domain.api.TwoFactorDisableRequest;
 import io.fusionauth.domain.api.TwoFactorRecoveryCodeResponse;
 import io.fusionauth.domain.api.TwoFactorRequest;
 import io.fusionauth.domain.api.TwoFactorResponse;
@@ -1452,9 +1453,25 @@ public class FusionAuthClient {
   public ClientResponse<Void, Errors> disableTwoFactor(UUID userId, String methodId, String code) {
     return start(Void.TYPE, Errors.class)
         .uri("/api/user/two-factor")
-        .urlParameter("userId", userId)
+        .urlSegment(userId)
         .urlParameter("methodId", methodId)
         .urlParameter("code", code)
+        .delete()
+        .go();
+  }
+
+  /**
+   * Disable Two Factor authentication for a user using a JSON body rather than URL parameters.
+   *
+   * @param userId The Id of the User for which you're disabling Two Factor authentication.
+   * @param request The request information that contains the code and methodId along with any event information.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<Void, Errors> disableTwoFactorWithRequest(UUID userId, TwoFactorDisableRequest request) {
+    return start(Void.TYPE, Errors.class)
+        .uri("/api/user/two-factor")
+        .urlSegment(userId)
+        .bodyHandler(new JSONBodyHandler(request, objectMapper))
         .delete()
         .go();
   }

@@ -16,6 +16,7 @@
 package io.fusionauth.domain.api;
 
 import com.inversoft.json.JacksonConstructor;
+import io.fusionauth.domain.Buildable;
 import io.fusionauth.domain.EventInfo;
 
 /**
@@ -23,7 +24,7 @@ import io.fusionauth.domain.EventInfo;
  *
  * @author Brian Pontarelli
  */
-public class TenantDeleteRequest extends BaseEventRequest {
+public class TenantDeleteRequest extends BaseEventRequest implements Buildable<TenantDeleteRequest> {
   public boolean async;
 
   @JacksonConstructor

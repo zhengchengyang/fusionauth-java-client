@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.inversoft.json.JacksonConstructor;
+import io.fusionauth.domain.Buildable;
 import io.fusionauth.domain.EventInfo;
 
 /**
@@ -26,7 +27,7 @@ import io.fusionauth.domain.EventInfo;
  *
  * @author Daniel DeGroff
  */
-public class UserDeleteRequest extends BaseEventRequest {
+public class UserDeleteRequest extends BaseEventRequest implements Buildable<UserDeleteRequest> {
   public boolean dryRun;
 
   public boolean hardDelete;

@@ -15,12 +15,14 @@
  */
 package io.fusionauth.domain.api;
 
+import io.fusionauth.domain.Buildable;
+
 /**
  * Request for the Logout API that can be used as an alternative to URL parameters.
  *
  * @author Brian Pontarelli
  */
-public class LogoutRequest extends BaseEventRequest {
+public class LogoutRequest extends BaseEventRequest implements Buildable<LogoutRequest> {
   public boolean global;
 
   public String refreshToken;

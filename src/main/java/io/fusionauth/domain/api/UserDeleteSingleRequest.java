@@ -16,6 +16,7 @@
 package io.fusionauth.domain.api;
 
 import com.inversoft.json.JacksonConstructor;
+import io.fusionauth.domain.Buildable;
 import io.fusionauth.domain.EventInfo;
 
 /**
@@ -23,7 +24,7 @@ import io.fusionauth.domain.EventInfo;
  *
  * @author Brian Pontarelli
  */
-public class UserDeleteSingleRequest extends BaseEventRequest {
+public class UserDeleteSingleRequest extends BaseEventRequest implements Buildable<UserDeleteSingleRequest> {
   public boolean hardDelete;
 
   @JacksonConstructor

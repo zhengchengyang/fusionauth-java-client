@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, FusionAuth, All Rights Reserved
+ * Copyright (c) 2018-2019, FusionAuth, All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,35 +13,27 @@
  * either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package io.fusionauth.domain.api.jwt;
-
-import java.util.UUID;
+package io.fusionauth.domain.api;
 
 import com.inversoft.json.JacksonConstructor;
 import io.fusionauth.domain.Buildable;
 import io.fusionauth.domain.EventInfo;
-import io.fusionauth.domain.api.BaseEventRequest;
 
 /**
- * Request for the Refresh Token API to revoke a refresh token rather than using the URL parameters.
- *
  * @author Brian Pontarelli
  */
-public class RefreshTokenRevokeRequest extends BaseEventRequest implements Buildable<RefreshTokenRevokeRequest> {
-  public UUID applicationId;
+public class TwoFactorDisableRequest extends BaseEventRequest implements Buildable<TwoFactorDisableRequest> {
+  public String code;
 
-  public String token;
-
-  public UUID userId;
+  public String methodId;
 
   @JacksonConstructor
-  public RefreshTokenRevokeRequest() {
+  public TwoFactorDisableRequest() {
   }
 
-  public RefreshTokenRevokeRequest(EventInfo eventInfo, UUID applicationId, String token, UUID userId) {
+  public TwoFactorDisableRequest(EventInfo eventInfo, String code, String methodId) {
     super(eventInfo);
-    this.applicationId = applicationId;
-    this.token = token;
-    this.userId = userId;
+    this.code = code;
+    this.methodId = methodId;
   }
 }
