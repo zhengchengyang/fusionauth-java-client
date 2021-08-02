@@ -44,6 +44,9 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
   public final Map<String, Object> data = new LinkedHashMap<>();
 
   @InternalJSONColumn
+  public TenantAccessControlListConfiguration accessControlListConfiguration = new TenantAccessControlListConfiguration();
+
+  @InternalJSONColumn
   public TenantCaptchaConfiguration captchaConfiguration = new TenantCaptchaConfiguration();
 
   @InternalJSONColumn
@@ -81,9 +84,6 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
   public UUID id;
 
   public ZonedDateTime insertInstant;
-
-  @InternalJSONColumn
-  public TenantIPAccessControlListConfiguration ipAccessControlListConfiguration = new TenantIPAccessControlListConfiguration();
 
   @InternalJSONColumn
   public String issuer;
@@ -158,8 +158,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
     this.httpSessionMaxInactiveInterval = other.httpSessionMaxInactiveInterval;
     this.id = other.id;
     this.insertInstant = other.insertInstant;
-    // TODO : Brett G : Review this line of code
-    this.ipAccessControlListConfiguration = other.ipAccessControlListConfiguration;
+    this.accessControlListConfiguration = new TenantAccessControlListConfiguration(other.accessControlListConfiguration);
     this.issuer = other.issuer;
     this.jwtConfiguration = new JWTConfiguration(other.jwtConfiguration);
     this.lastUpdateInstant = other.lastUpdateInstant;
@@ -202,7 +201,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
            Objects.equals(formConfiguration, tenant.formConfiguration) &&
            Objects.equals(id, tenant.id) &&
            Objects.equals(insertInstant, tenant.insertInstant) &&
-           Objects.equals(ipAccessControlListConfiguration, tenant.ipAccessControlListConfiguration) &&
+           Objects.equals(accessControlListConfiguration, tenant.accessControlListConfiguration) &&
            Objects.equals(issuer, tenant.issuer) &&
            Objects.equals(jwtConfiguration, tenant.jwtConfiguration) &&
            Objects.equals(lastUpdateInstant, tenant.lastUpdateInstant) &&
@@ -229,7 +228,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
 
   @Override
   public int hashCode() {
-    return Objects.hash(captchaConfiguration, configured, connectorPolicies, data, emailConfiguration, eventConfiguration, externalIdentifierConfiguration, failedAuthenticationConfiguration, familyConfiguration, formConfiguration, httpSessionMaxInactiveInterval, id, insertInstant, ipAccessControlListConfiguration, issuer, jwtConfiguration, lastUpdateInstant, loginConfiguration, logoutURL, maximumPasswordAge, minimumPasswordAge, name, passwordEncryptionConfiguration, passwordValidationRules, state, rateLimitConfiguration, registrationConfiguration, themeId, userDeletePolicy, usernameConfiguration);
+    return Objects.hash(captchaConfiguration, configured, connectorPolicies, data, emailConfiguration, eventConfiguration, externalIdentifierConfiguration, failedAuthenticationConfiguration, familyConfiguration, formConfiguration, httpSessionMaxInactiveInterval, id, insertInstant, accessControlListConfiguration, issuer, jwtConfiguration, lastUpdateInstant, loginConfiguration, logoutURL, maximumPasswordAge, minimumPasswordAge, name, passwordEncryptionConfiguration, passwordValidationRules, state, rateLimitConfiguration, registrationConfiguration, themeId, userDeletePolicy, usernameConfiguration);
   }
 
   @JsonIgnore

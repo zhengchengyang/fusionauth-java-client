@@ -25,16 +25,16 @@ import io.fusionauth.domain.internal.annotation.ExcludeFromDatabaseDataColumn;
 /**
  * @author Brett Guy
  */
-public class TenantIPAccessControlListConfiguration extends Enableable implements Buildable<TenantIPAccessControlListConfiguration> {
+public class TenantAccessControlListConfiguration implements Buildable<TenantAccessControlListConfiguration> {
 
   @ExcludeFromDatabaseDataColumn
   public UUID ipAccessControlListId;
 
   @JacksonConstructor
-  public TenantIPAccessControlListConfiguration() {
+  public TenantAccessControlListConfiguration() {
   }
 
-  public TenantIPAccessControlListConfiguration(TenantIPAccessControlListConfiguration other) {
+  public TenantAccessControlListConfiguration(TenantAccessControlListConfiguration other) {
     this.ipAccessControlListId = other.ipAccessControlListId;
   }
 
@@ -46,7 +46,7 @@ public class TenantIPAccessControlListConfiguration extends Enableable implement
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    TenantIPAccessControlListConfiguration that = (TenantIPAccessControlListConfiguration) o;
+    TenantAccessControlListConfiguration that = (TenantAccessControlListConfiguration) o;
     return Objects.equals(ipAccessControlListId, that.ipAccessControlListId);
   }
 
