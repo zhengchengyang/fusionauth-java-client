@@ -172,6 +172,7 @@ import io.fusionauth.domain.api.user.ForgotPasswordResponse;
 import io.fusionauth.domain.api.user.ImportRequest;
 import io.fusionauth.domain.api.user.RecentLoginResponse;
 import io.fusionauth.domain.api.user.RefreshTokenImportRequest;
+import io.fusionauth.domain.api.user.RegistrationDeleteRequest;
 import io.fusionauth.domain.api.user.RegistrationRequest;
 import io.fusionauth.domain.api.user.RegistrationResponse;
 import io.fusionauth.domain.api.user.SearchRequest;
@@ -1223,6 +1224,24 @@ public class FusionAuthClient {
         .uri("/api/user/registration")
         .urlSegment(userId)
         .urlSegment(applicationId)
+        .delete()
+        .go();
+  }
+
+  /**
+   * Deletes the user registration for the given user and application along with the given JSON body that contains the event information.
+   *
+   * @param userId The Id of the user whose registration is being deleted.
+   * @param applicationId The Id of the application to remove the registration for.
+   * @param request The request body that contains the event information.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<Void, Errors> deleteRegistrationWithRequest(UUID userId, UUID applicationId, RegistrationDeleteRequest request) {
+    return start(Void.TYPE, Errors.class)
+        .uri("/api/user/registration")
+        .urlSegment(userId)
+        .urlSegment(applicationId)
+        .bodyHandler(new JSONBodyHandler(request, objectMapper))
         .delete()
         .go();
   }
