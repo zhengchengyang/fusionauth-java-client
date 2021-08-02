@@ -25,7 +25,7 @@ import io.fusionauth.domain.search.SearchResults;
  * @author Brett Guy
  */
 public class IPAccessControlListSearchResponse {
-  public List<IPAccessControlList> acls;
+  public List<IPAccessControlList> ipAccessControlLists;
 
   public long total;
 
@@ -34,7 +34,7 @@ public class IPAccessControlListSearchResponse {
   }
 
   public IPAccessControlListSearchResponse(SearchResults<IPAccessControlList> searchResults) {
-    this.acls = searchResults.results;
+    this.ipAccessControlLists = searchResults.results;
     this.total = searchResults.total;
   }
 }
