@@ -17,6 +17,7 @@ package io.fusionauth.domain.api;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.inversoft.json.JacksonConstructor;
 import io.fusionauth.domain.AuthenticationThreats;
@@ -47,7 +48,7 @@ public class LoginResponse implements Buildable<LoginResponse> {
 
   public Map<String, Object> state;
 
-  public List<AuthenticationThreats> threatsDetected;
+  public Set<AuthenticationThreats> threatsDetected;
 
   public String token;
 
