@@ -17,7 +17,6 @@ package io.fusionauth.domain;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -85,8 +84,6 @@ public class IPAccessControlList implements Buildable<IPAccessControlList>, _Int
       }
     }
 
-    // We have not completed validation yet, there may be null values for startIPAddress
-    entries.sort(Comparator.comparing(entry -> entry.startIPAddress, Comparator.nullsLast(Comparator.naturalOrder())));
     return this;
   }
 
