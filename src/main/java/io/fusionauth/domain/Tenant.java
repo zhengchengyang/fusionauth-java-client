@@ -158,6 +158,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
     this.httpSessionMaxInactiveInterval = other.httpSessionMaxInactiveInterval;
     this.id = other.id;
     this.insertInstant = other.insertInstant;
+    // TODO : Brett G : Review this line of code
     this.ipAccessControlListConfiguration = other.ipAccessControlListConfiguration;
     this.issuer = other.issuer;
     this.jwtConfiguration = new JWTConfiguration(other.jwtConfiguration);
