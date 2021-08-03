@@ -292,7 +292,7 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
 
     public UUID loginNewDeviceEmailTemplateId;
 
-    public UUID loginSuspectEmailTemplateId;
+    public UUID loginSuspiciousEmailTemplateId;
 
     public UUID passwordResetSuccessEmailTemplateId;
 
@@ -317,7 +317,7 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
       this.emailVerifiedEmailTemplateId = other.emailVerifiedEmailTemplateId;
       this.forgotPasswordEmailTemplateId = other.forgotPasswordEmailTemplateId;
       this.loginNewDeviceEmailTemplateId = other.loginNewDeviceEmailTemplateId;
-      this.loginSuspectEmailTemplateId = other.loginSuspectEmailTemplateId;
+      this.loginSuspiciousEmailTemplateId = other.loginSuspiciousEmailTemplateId;
       this.passwordResetSuccessEmailTemplateId = other.passwordResetSuccessEmailTemplateId;
       this.passwordlessEmailTemplateId = other.passwordlessEmailTemplateId;
       this.setPasswordEmailTemplateId = other.setPasswordEmailTemplateId;
@@ -332,12 +332,12 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
         return false;
       }
       ApplicationEmailConfiguration that = (ApplicationEmailConfiguration) o;
-      return Objects.equals(emailVerificationEmailTemplateId, that.emailVerificationEmailTemplateId) && Objects.equals(emailVerifiedEmailTemplateId, that.emailVerifiedEmailTemplateId) && Objects.equals(forgotPasswordEmailTemplateId, that.forgotPasswordEmailTemplateId) && Objects.equals(loginNewDeviceEmailTemplateId, that.loginNewDeviceEmailTemplateId) && Objects.equals(loginSuspectEmailTemplateId, that.loginSuspectEmailTemplateId) && Objects.equals(passwordResetSuccessEmailTemplateId, that.passwordResetSuccessEmailTemplateId) && Objects.equals(passwordlessEmailTemplateId, that.passwordlessEmailTemplateId) && Objects.equals(setPasswordEmailTemplateId, that.setPasswordEmailTemplateId);
+      return Objects.equals(emailVerificationEmailTemplateId, that.emailVerificationEmailTemplateId) && Objects.equals(emailVerifiedEmailTemplateId, that.emailVerifiedEmailTemplateId) && Objects.equals(forgotPasswordEmailTemplateId, that.forgotPasswordEmailTemplateId) && Objects.equals(loginNewDeviceEmailTemplateId, that.loginNewDeviceEmailTemplateId) && Objects.equals(loginSuspiciousEmailTemplateId, that.loginSuspiciousEmailTemplateId) && Objects.equals(passwordResetSuccessEmailTemplateId, that.passwordResetSuccessEmailTemplateId) && Objects.equals(passwordlessEmailTemplateId, that.passwordlessEmailTemplateId) && Objects.equals(setPasswordEmailTemplateId, that.setPasswordEmailTemplateId);
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(emailVerificationEmailTemplateId, emailVerifiedEmailTemplateId, forgotPasswordEmailTemplateId, loginNewDeviceEmailTemplateId, loginSuspectEmailTemplateId, passwordResetSuccessEmailTemplateId, passwordlessEmailTemplateId, setPasswordEmailTemplateId);
+      return Objects.hash(emailVerificationEmailTemplateId, emailVerifiedEmailTemplateId, forgotPasswordEmailTemplateId, loginNewDeviceEmailTemplateId, loginSuspiciousEmailTemplateId, passwordResetSuccessEmailTemplateId, passwordlessEmailTemplateId, setPasswordEmailTemplateId);
     }
 
     @Override
