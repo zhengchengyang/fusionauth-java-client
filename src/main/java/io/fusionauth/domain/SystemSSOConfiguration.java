@@ -23,7 +23,7 @@ import com.inversoft.json.ToString;
  * @author Brett Pontarelli
  */
 public class SystemSSOConfiguration {
-  public int ssoDeviceTrustTimeToLiveInSeconds = 31536000;
+  public int deviceTrustTimeToLiveInSeconds = 365 * 24 * 60 * 60;
 
   @Override
   public boolean equals(Object o) {
@@ -34,12 +34,12 @@ public class SystemSSOConfiguration {
       return false;
     }
     SystemSSOConfiguration that = (SystemSSOConfiguration) o;
-    return ssoDeviceTrustTimeToLiveInSeconds == that.ssoDeviceTrustTimeToLiveInSeconds;
+    return deviceTrustTimeToLiveInSeconds == that.deviceTrustTimeToLiveInSeconds;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), ssoDeviceTrustTimeToLiveInSeconds);
+    return Objects.hash(super.hashCode(), deviceTrustTimeToLiveInSeconds);
   }
 
   @Override
