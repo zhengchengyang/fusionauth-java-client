@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 import io.fusionauth.domain.internal._InternalJSONColumn;
 import io.fusionauth.domain.internal.annotation.InternalJSONColumn;
@@ -111,7 +112,7 @@ public class SystemConfiguration implements Buildable<SystemConfiguration>, _Int
   }
 
   public static class AuditLogConfiguration {
-    public DeleteConfiguration delete = new DeleteConfiguration();
+    public DeleteConfiguration delete = new DeleteConfiguration(365);
 
     @Override
     public boolean equals(Object o) {
@@ -137,7 +138,15 @@ public class SystemConfiguration implements Buildable<SystemConfiguration>, _Int
   }
 
   public static class DeleteConfiguration extends Enableable {
-    public Integer numberOfDaysToRetain;
+    public int numberOfDaysToRetain = 365;
+
+    @JacksonConstructor
+    public DeleteConfiguration() {
+    }
+
+    public DeleteConfiguration(int numberOfDaysToRetain) {
+      this.numberOfDaysToRetain = numberOfDaysToRetain;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -192,7 +201,7 @@ public class SystemConfiguration implements Buildable<SystemConfiguration>, _Int
   }
 
   public static class LoginRecordConfiguration {
-    public DeleteConfiguration delete = new DeleteConfiguration();
+    public DeleteConfiguration delete = new DeleteConfiguration(365);
 
     @Override
     public boolean equals(Object o) {
