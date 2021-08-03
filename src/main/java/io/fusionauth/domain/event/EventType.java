@@ -80,7 +80,7 @@ public enum EventType {
   //        Tests: Event + Email
   // TODO : Is there a better name for this?
   // LICENSE
-  UserLoginSuspect("user.login.suspect"),
+  UserLoginSuspicious("user.login.suspicious"),
 
   // LICENSE
   UserPasswordBreach("user.password.breach"),
@@ -155,7 +155,7 @@ public enum EventType {
                          EventType.UserLoginFailed,
                          EventType.UserLoginNewDevice,
                          EventType.UserLoginSuccess,
-                         EventType.UserLoginSuspect,
+                         EventType.UserLoginSuspicious,
                          EventType.UserPasswordBreach,
                          EventType.UserPasswordResetSend,
                          EventType.UserPasswordResetStart,

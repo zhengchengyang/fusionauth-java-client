@@ -23,25 +23,26 @@ import io.fusionauth.domain.User;
 import io.fusionauth.domain.provider.BaseIdentityProvider;
 
 /**
- * Models the User Login event that is suspect.
+ * Models the User Login event that is suspicious.
  *
  * @author Daniel DeGroff
  */
-public class UserLoginSuspectEvent extends UserLoginSuccessEvent {
+public class UserLoginSuspiciousEvent extends UserLoginSuccessEvent {
   @JacksonConstructor
-  public UserLoginSuspectEvent() {
+  public UserLoginSuspiciousEvent() {
   }
 
-  public UserLoginSuspectEvent(EventInfo info, UUID applicationId, String authenticationType, BaseIdentityProvider<?> identityProvider, User user) {
+  public UserLoginSuspiciousEvent(EventInfo info, UUID applicationId, String authenticationType, BaseIdentityProvider<?> identityProvider,
+                                  User user) {
     super(info, applicationId, authenticationType, identityProvider, user);
   }
 
-  public UserLoginSuspectEvent(EventInfo info, UUID applicationId, UUID connectorId, String authenticationType, User user) {
+  public UserLoginSuspiciousEvent(EventInfo info, UUID applicationId, UUID connectorId, String authenticationType, User user) {
     super(info, applicationId, connectorId, authenticationType, user);
   }
 
   @Override
   public EventType getType() {
-    return EventType.UserLoginSuspect;
+    return EventType.UserLoginSuspicious;
   }
 }

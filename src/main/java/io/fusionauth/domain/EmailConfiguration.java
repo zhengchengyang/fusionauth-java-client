@@ -72,7 +72,7 @@ public class EmailConfiguration implements Buildable<EmailConfiguration> {
   public UUID loginNewDeviceEmailTemplateId;
 
   @ExcludeFromDatabaseDataColumn
-  public UUID loginSuspectEmailTemplateId;
+  public UUID loginSuspiciousEmailTemplateId;
 
   public String password;
 
@@ -125,7 +125,7 @@ public class EmailConfiguration implements Buildable<EmailConfiguration> {
     this.forgotPasswordEmailTemplateId = other.forgotPasswordEmailTemplateId;
     this.host = other.host;
     this.loginNewDeviceEmailTemplateId = other.loginNewDeviceEmailTemplateId;
-    this.loginSuspectEmailTemplateId = other.loginSuspectEmailTemplateId;
+    this.loginSuspiciousEmailTemplateId = other.loginSuspiciousEmailTemplateId;
     this.password = other.password;
     this.passwordlessEmailTemplateId = other.passwordlessEmailTemplateId;
     this.passwordResetSuccessEmailTemplateId = other.passwordResetSuccessEmailTemplateId;
@@ -166,7 +166,7 @@ public class EmailConfiguration implements Buildable<EmailConfiguration> {
            Objects.equals(loginIdInUseOnCreateEmailTemplateId, that.loginIdInUseOnCreateEmailTemplateId) &&
            Objects.equals(loginIdInUseOnUpdateEmailTemplateId, that.loginIdInUseOnUpdateEmailTemplateId) &&
            Objects.equals(loginNewDeviceEmailTemplateId, that.loginNewDeviceEmailTemplateId) &&
-           Objects.equals(loginSuspectEmailTemplateId, that.loginSuspectEmailTemplateId) &&
+           Objects.equals(loginSuspiciousEmailTemplateId, that.loginSuspiciousEmailTemplateId) &&
            Objects.equals(password, that.password) &&
            Objects.equals(passwordResetSuccessEmailTemplateId, that.passwordResetSuccessEmailTemplateId) &&
            Objects.equals(passwordUpdateEmailTemplateId, that.passwordUpdateEmailTemplateId) &&
@@ -185,7 +185,7 @@ public class EmailConfiguration implements Buildable<EmailConfiguration> {
 
   @Override
   public int hashCode() {
-    return Objects.hash(defaultFromEmail, defaultFromName, emailUpdateEmailTemplateId, emailVerifiedEmailTemplateId, forgotPasswordEmailTemplateId, host, loginIdInUseOnCreateEmailTemplateId, loginIdInUseOnUpdateEmailTemplateId, loginNewDeviceEmailTemplateId, loginSuspectEmailTemplateId, password, passwordResetSuccessEmailTemplateId, passwordUpdateEmailTemplateId, passwordlessEmailTemplateId, port, properties, security, setPasswordEmailTemplateId, twoFactorMethodAddEmailTemplateId, twoFactorMethodRemoveEmailTemplateId, unverified, username, verificationEmailTemplateId, verificationStrategy, verifyEmail, verifyEmailWhenChanged);
+    return Objects.hash(defaultFromEmail, defaultFromName, emailUpdateEmailTemplateId, emailVerifiedEmailTemplateId, forgotPasswordEmailTemplateId, host, loginIdInUseOnCreateEmailTemplateId, loginIdInUseOnUpdateEmailTemplateId, loginNewDeviceEmailTemplateId, loginSuspiciousEmailTemplateId, password, passwordResetSuccessEmailTemplateId, passwordUpdateEmailTemplateId, passwordlessEmailTemplateId, port, properties, security, setPasswordEmailTemplateId, twoFactorMethodAddEmailTemplateId, twoFactorMethodRemoveEmailTemplateId, unverified, username, verificationEmailTemplateId, verificationStrategy, verifyEmail, verifyEmailWhenChanged);
   }
 
   public void normalize() {
