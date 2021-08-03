@@ -78,6 +78,7 @@ public enum EventType {
 
   // TODO : Lots of Emails : Daniel : Need to hook this event up.
   //        Tests: Event + Email
+  // TODO : Is there a better name for this?
   // LICENSE
   UserLoginSuspicious("user.login.suspicious"),
 
