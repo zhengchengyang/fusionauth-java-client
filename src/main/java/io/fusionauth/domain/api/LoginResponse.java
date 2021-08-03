@@ -32,6 +32,8 @@ import io.fusionauth.domain.User;
 public class LoginResponse implements Buildable<LoginResponse> {
   public List<LoginPreventedResponse> actions;
 
+  public String authenticationType;
+
   public String changePasswordId;
 
   public ChangePasswordReason changePasswordReason;
