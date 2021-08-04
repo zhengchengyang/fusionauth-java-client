@@ -55,6 +55,7 @@ public class Location implements Buildable<Location> {
            Objects.equals(zipcode, location.zipcode);
   }
 
+  @SuppressWarnings("unused")
   public String getDisplayString() {
     List<String> parts = Stream.of(city, region, country)
                                .filter(Objects::nonNull)
