@@ -27,6 +27,7 @@ import io.fusionauth.domain.api.BaseEventRequest;
  *
  * @author Brian Pontarelli
  */
+@SuppressWarnings("unused")
 public class ForgotPasswordRequest extends BaseEventRequest {
   public UUID applicationId;
 
