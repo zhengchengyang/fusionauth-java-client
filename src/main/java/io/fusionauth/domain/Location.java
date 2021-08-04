@@ -55,15 +55,15 @@ public class Location implements Buildable<Location> {
            Objects.equals(zipcode, location.zipcode);
   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(city, country, latitude, longitude, region, zipcode);
-  }
-
-  public String toDisplayableString() {
+  public String getDisplayString() {
     List<String> parts = Stream.of(city, region, country)
                                .filter(Objects::nonNull)
                                .collect(Collectors.toList());
     return String.join(", ", parts);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(city, country, latitude, longitude, region, zipcode);
   }
 }
