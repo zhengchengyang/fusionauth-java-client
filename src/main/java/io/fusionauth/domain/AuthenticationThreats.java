@@ -19,8 +19,6 @@ package io.fusionauth.domain;
  * @author Brett Pontarelli
  */
 public enum AuthenticationThreats {
-  ImpossibleTravel,
-  UnusualTravel,
-  BadCaptcha,
-  NewDeviceLogin
+  BlockedIPAddress,
+  ImpossibleTravel
 }
