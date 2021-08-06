@@ -23,19 +23,18 @@ import com.inversoft.json.ToString;
 import io.fusionauth.domain.internal.annotation.ExcludeFromDatabaseDataColumn;
 
 /**
- * @author Brett Guy
+ * @author Daniel DeGroff
  */
-public class TenantAccessControlListConfiguration implements Buildable<TenantAccessControlListConfiguration> {
-
+public class ApplicationAccessControlConfiguration implements Buildable<ApplicationAccessControlConfiguration> {
   @ExcludeFromDatabaseDataColumn
-  public UUID ipAccessControlListId;
+  public UUID uiIPAccessControlListId;
 
   @JacksonConstructor
-  public TenantAccessControlListConfiguration() {
+  public ApplicationAccessControlConfiguration() {
   }
 
-  public TenantAccessControlListConfiguration(TenantAccessControlListConfiguration other) {
-    this.ipAccessControlListId = other.ipAccessControlListId;
+  public ApplicationAccessControlConfiguration(ApplicationAccessControlConfiguration other) {
+    this.uiIPAccessControlListId = other.uiIPAccessControlListId;
   }
 
   @Override
@@ -46,13 +45,13 @@ public class TenantAccessControlListConfiguration implements Buildable<TenantAcc
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    TenantAccessControlListConfiguration that = (TenantAccessControlListConfiguration) o;
-    return Objects.equals(ipAccessControlListId, that.ipAccessControlListId);
+    ApplicationAccessControlConfiguration that = (ApplicationAccessControlConfiguration) o;
+    return Objects.equals(uiIPAccessControlListId, that.uiIPAccessControlListId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(ipAccessControlListId);
+    return Objects.hash(uiIPAccessControlListId);
   }
 
   @Override

@@ -43,6 +43,9 @@ import static io.fusionauth.domain.util.Normalizer.trim;
 public class Application implements Buildable<Application>, _InternalJSONColumn, Tenantable {
   public static final UUID FUSIONAUTH_APP_ID = UUID.fromString("3c219e58-ed0e-4b18-ad48-f4f92793ae32");
 
+  @InternalJSONColumn
+  public ApplicationAccessControlConfiguration accessControlConfiguration = new ApplicationAccessControlConfiguration();
+
   /**
    * @deprecated prefer the use of {@link #state}.
    */
@@ -123,6 +126,7 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
 
   public Application(Application other) {
     this.active = other.active;
+    this.accessControlConfiguration = new ApplicationAccessControlConfiguration(other.accessControlConfiguration);
     this.authenticationTokenConfiguration = new AuthenticationTokenConfiguration(other.authenticationTokenConfiguration);
     if (other.cleanSpeakConfiguration != null) {
       this.cleanSpeakConfiguration = new CleanSpeakConfiguration(other.cleanSpeakConfiguration);
@@ -186,6 +190,7 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
     }
     Application that = (Application) o;
     return verifyRegistration == that.verifyRegistration &&
+           Objects.equals(accessControlConfiguration, that.accessControlConfiguration) &&
            Objects.equals(authenticationTokenConfiguration, that.authenticationTokenConfiguration) &&
            Objects.equals(cleanSpeakConfiguration, that.cleanSpeakConfiguration) &&
            Objects.equals(data, that.data) &&
@@ -242,7 +247,7 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
 
   @Override
   public int hashCode() {
-    return Objects.hash(authenticationTokenConfiguration, cleanSpeakConfiguration, data, id, formConfiguration, jwtConfiguration, lambdaConfiguration,
+    return Objects.hash(accessControlConfiguration, authenticationTokenConfiguration, cleanSpeakConfiguration, data, id, formConfiguration, jwtConfiguration, lambdaConfiguration,
                         loginConfiguration, name, multiFactorConfiguration, oauthConfiguration, passwordlessConfiguration, registrationConfiguration,
                         registrationDeletePolicy, roles, samlv2Configuration, state, insertInstant, lastUpdateInstant, tenantId, themeId, unverified,
                         verificationEmailTemplateId, verificationStrategy, verifyRegistration);
@@ -299,6 +304,20 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
     public UUID passwordlessEmailTemplateId;
 
     public UUID setPasswordEmailTemplateId;
+
+    // TODO : Brett G :
+    //        Review each of these templates that are new for this release.
+    //         - Start at the email proxy
+    //         - Add an application to the method signature (nullable)
+    //         - Walk back up to the send and try to get an application object into the call path as early as you can
+    //           probably at the API action level.
+    //         - Write a test to see if we can get an application specific template rendered for this "email test"
+    //         - If you get all the way to the API and there is no application or applicationId, mark it here and we can review
+    //           if we want to add an applicationId to the API request object.
+    //
+    // TODO : Brett G :
+    //         If you review each of the new templates already defined here, then we need to look at all new templates in the tenant
+    //         to see if we should add more here.
 
     // TODO : Lots of Emails : Daniel :
     //       I could add twoFactor add / remove
