@@ -305,28 +305,6 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
 
     public UUID setPasswordEmailTemplateId;
 
-    // TODO : Brett G :
-    //        Review each of these templates that are new for this release.
-    //         - Start at the email proxy
-    //         - Add an application to the method signature (nullable)
-    //         - Walk back up to the send and try to get an application object into the call path as early as you can
-    //           probably at the API action level.
-    //         - Write a test to see if we can get an application specific template rendered for this "email test"
-    //         - If you get all the way to the API and there is no application or applicationId, mark it here and we can review
-    //           if we want to add an applicationId to the API request object.
-    //
-    // TODO : Brett G :
-    //         If you review each of the new templates already defined here, then we need to look at all new templates in the tenant
-    //         to see if we should add more here.
-
-    // TODO : Lots of Emails : Daniel :
-    //       I could add twoFactor add / remove
-    //       I could add user create duplicate (during self service)
-    //       I could add a user update duplicate (during self service, or complete reg)
-    //       Review the current list again to see if we can expand this
-    //
-    // TODO : Lots of Emails : For the new templates here, they are not necessarily hooked up yet. This needs work.
-
     @JacksonConstructor
     public ApplicationEmailConfiguration() {
     }
