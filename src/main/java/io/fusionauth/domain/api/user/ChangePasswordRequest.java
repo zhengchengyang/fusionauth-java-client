@@ -18,7 +18,7 @@ package io.fusionauth.domain.api.user;
 import java.util.UUID;
 
 import com.inversoft.json.JacksonConstructor;
-import io.fusionauth.domain.EventInfo;
+import io.fusionauth.domain.Buildable;
 import io.fusionauth.domain.api.BaseEventRequest;
 
 /**
@@ -26,7 +26,7 @@ import io.fusionauth.domain.api.BaseEventRequest;
  *
  * @author Brian Pontarelli
  */
-public class ChangePasswordRequest extends BaseEventRequest {
+public class ChangePasswordRequest extends BaseEventRequest implements Buildable<ChangePasswordRequest> {
   public UUID applicationId;
 
   public String currentPassword;
@@ -42,12 +42,6 @@ public class ChangePasswordRequest extends BaseEventRequest {
   }
 
   public ChangePasswordRequest(String password) {
-    this.password = password;
-  }
-
-  public ChangePasswordRequest(UUID applicationId, EventInfo eventInfo, String password) {
-    super(eventInfo);
-    this.applicationId = applicationId;
     this.password = password;
   }
 
