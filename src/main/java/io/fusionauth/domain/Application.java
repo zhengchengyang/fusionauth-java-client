@@ -289,11 +289,18 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
   }
 
   public static class ApplicationEmailConfiguration implements Buildable<ApplicationEmailConfiguration> {
+    // TODO : Events/Emails : Can override tenant?
+//    public UUID emailUpdateEmailTemplateId;
+
     public UUID emailVerificationEmailTemplateId;
 
     public UUID emailVerifiedEmailTemplateId;
 
     public UUID forgotPasswordEmailTemplateId;
+
+    // TODO : Events/Emails : Can override tenant?
+//    public UUID loginIdInUseOnCreateEmailTemplateId;
+//    public UUID loginIdInUseOnUpdateEmailTemplateId;
 
     public UUID loginNewDeviceEmailTemplateId;
 
@@ -301,9 +308,16 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
 
     public UUID passwordResetSuccessEmailTemplateId;
 
+    // TODO : Events/Emails : Can override tenant?
+//    public UUID passwordUpdateEmailTemplateId;
+
     public UUID passwordlessEmailTemplateId;
 
     public UUID setPasswordEmailTemplateId;
+
+    // TODO : Events/Emails : Can override tenant?
+//    public UUID twoFactorMethodAddEmailTemplateId;
+//    public UUID twoFactorMethodRemoveEmailTemplateId;
 
     @JacksonConstructor
     public ApplicationEmailConfiguration() {

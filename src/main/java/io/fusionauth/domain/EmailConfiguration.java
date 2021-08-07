@@ -66,6 +66,7 @@ public class EmailConfiguration implements Buildable<EmailConfiguration> {
   @ExcludeFromDatabaseDataColumn
   public UUID loginIdInUseOnCreateEmailTemplateId;
 
+  @ExcludeFromDatabaseDataColumn
   public UUID loginIdInUseOnUpdateEmailTemplateId;
 
   @ExcludeFromDatabaseDataColumn
