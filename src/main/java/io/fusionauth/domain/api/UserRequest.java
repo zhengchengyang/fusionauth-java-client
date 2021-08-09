@@ -15,6 +15,8 @@
  */
 package io.fusionauth.domain.api;
 
+import java.util.UUID;
+
 import com.inversoft.json.JacksonConstructor;
 import io.fusionauth.domain.Buildable;
 import io.fusionauth.domain.EventInfo;
@@ -26,6 +28,8 @@ import io.fusionauth.domain.User;
  * @author Brian Pontarelli
  */
 public class UserRequest extends BaseEventRequest implements Buildable<UserRequest> {
+  public UUID applicationId;
+
   public boolean disableDomainBlock;
 
   public boolean sendSetPasswordEmail;
@@ -57,8 +61,9 @@ public class UserRequest extends BaseEventRequest implements Buildable<UserReque
     this.user = user;
   }
 
-  public UserRequest(EventInfo eventInfo, boolean sendSetPasswordEmail, boolean skipVerification, User user) {
+  public UserRequest(EventInfo eventInfo, UUID applicationId, boolean sendSetPasswordEmail, boolean skipVerification, User user) {
     super(eventInfo);
+    this.applicationId = applicationId;
     this.sendSetPasswordEmail = sendSetPasswordEmail;
     this.skipVerification = skipVerification;
     this.user = user;

@@ -289,8 +289,7 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
   }
 
   public static class ApplicationEmailConfiguration implements Buildable<ApplicationEmailConfiguration> {
-    // TODO : Events/Emails : Can override tenant?
-//    public UUID emailUpdateEmailTemplateId;
+    public UUID emailUpdateEmailTemplateId;
 
     public UUID emailVerificationEmailTemplateId;
 
@@ -324,6 +323,7 @@ public class Application implements Buildable<Application>, _InternalJSONColumn,
     }
 
     public ApplicationEmailConfiguration(ApplicationEmailConfiguration other) {
+      this.emailUpdateEmailTemplateId = other.emailUpdateEmailTemplateId;
       this.emailVerificationEmailTemplateId = other.emailVerificationEmailTemplateId;
       this.emailVerifiedEmailTemplateId = other.emailVerifiedEmailTemplateId;
       this.forgotPasswordEmailTemplateId = other.forgotPasswordEmailTemplateId;
