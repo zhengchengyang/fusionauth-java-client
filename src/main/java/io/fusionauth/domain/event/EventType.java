@@ -56,13 +56,10 @@ public enum EventType {
 
   UserDeleteComplete("user.delete.complete"),
 
-  // LICENSE
   UserLoginIdDuplicateOnCreate("user.loginId.duplicate.create"),
 
-  // LICENSE
   UserLoginIdDuplicateOnUpdate("user.loginId.duplicate.update"),
 
-  // LICENSE
   UserEmailUpdate("user.email.update"),
 
   UserEmailVerified("user.email.verified"),
@@ -71,7 +68,6 @@ public enum EventType {
 
   // TODO : Lots of Emails : Daniel : Need to hook this event up.
   //        Tests: Event + Email
-  // LICENSE
   UserLoginNewDevice("user.login.new-device"),
 
   UserLoginSuccess("user.login.success"),
@@ -79,20 +75,16 @@ public enum EventType {
   // TODO : Lots of Emails : Daniel : Need to hook this event up.
   //        Tests: Event + Email
   // TODO : Is there a better name for this?
-  // LICENSE
   UserLoginSuspicious("user.login.suspicious"),
 
-  // LICENSE
   UserPasswordBreach("user.password.breach"),
 
   UserPasswordResetSend("user.password.reset.send"),
 
   UserPasswordResetStart("user.password.reset.start"),
 
-  // LICENSE
   UserPasswordResetSuccess("user.password.reset.success"),
 
-  // LICENSE
   UserPasswordUpdate("user.password.update"),
 
   UserReactivate("user.reactivate"),
@@ -111,10 +103,8 @@ public enum EventType {
 
   UserRegistrationVerified("user.registration.verified"),
 
-  // LICENSE
   UserTwoFactorMethodAdd("user.two-factor.method.add"),
 
-  // LICENSE
   UserTwoFactorMethodRemove("user.two-factor.method.remove"),
 
   UserUpdate("user.update"),
