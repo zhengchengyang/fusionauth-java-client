@@ -4,9 +4,7 @@
 package io.fusionauth.domain.event;
 
 import java.time.ZonedDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -17,19 +15,18 @@ import com.inversoft.json.JacksonConstructor;
  *
  * @author Brett Pontarelli
  */
-public abstract class BaseScimEventRequest {
+public abstract class BaseScimEvent {
 
   public String externalId;
 
   public UUID id;
 
-  public Map<String, Object> meta = new HashMap<>();
-//  public ScimMeta meta;
+  public ScimMeta meta = new ScimMeta();
 
   public List<String> schemas;
 
   @JacksonConstructor
-  public BaseScimEventRequest() {
+  public BaseScimEvent() {
   }
 
   @Override
@@ -40,7 +37,7 @@ public abstract class BaseScimEventRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    BaseScimEventRequest that = (BaseScimEventRequest) o;
+    BaseScimEvent that = (BaseScimEvent) o;
     return Objects.equals(externalId, that.externalId) && Objects.equals(id, that.id) && Objects.equals(meta, that.meta) && Objects.equals(schemas, that.schemas);
   }
 
@@ -49,23 +46,22 @@ public abstract class BaseScimEventRequest {
     return Objects.hash(externalId, id, meta, schemas);
   }
 
-  protected void createMeta(UUID id, String resource, ZonedDateTime created, ZonedDateTime lastModified) {
-    meta.put("resourceType", resource);
-    meta.put("created", created);
-    meta.put("lastModified", lastModified);
+  protected void createMeta(UUID id, String resourceType, ZonedDateTime created, ZonedDateTime lastModified) {
+    meta.resourceType = resourceType;
+    meta.created = created;
+    meta.lastModified = lastModified;
     // [brettp]TODO: How do we build the URL with all the parts?
-    //    meta.put("location", QueryStringBuilder
-    meta.put("location", "http://thebaseurl.com/scim/v2/" + resource + "/" + id);
-    // meta.put("version", "W\/\"f250dd84f0671c3\"");  // I don't think we are going to use this.
+    //    meta.location = QueryStringBuilder
+    meta.location = "http://thebaseurl.com/scim/v2/" + resourceType + "/" + id;
   }
 
-  public class ScimMeta {
-    ZonedDateTime created;
+  public static class ScimMeta {
+    public ZonedDateTime created;
 
-    ZonedDateTime lastModified;
+    public ZonedDateTime lastModified;
 
-    String location;
+    public String location;
 
-    String resourceType;
+    public String resourceType;
   }
 }

@@ -33,7 +33,7 @@ public class ScimServer extends Enableable implements Buildable<ScimServer>, _In
                     EventType.UserRegistrationUpdateComplete,
                     EventType.UserUpdateComplete
                     // [brettp]TODO: Group, and what else?
-                    ));
+      ));
 
   public Integer connectTimeout;
 

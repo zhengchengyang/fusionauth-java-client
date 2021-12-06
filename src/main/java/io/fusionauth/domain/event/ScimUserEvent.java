@@ -4,12 +4,15 @@
 package io.fusionauth.domain.event;
 
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JacksonAnnotation;
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 import io.fusionauth.domain.GroupMember;
@@ -20,21 +23,21 @@ import io.fusionauth.domain.User;
  *
  * @author Brett Pontarelli
  */
-public class ScimUserEventRequest extends BaseScimEventRequest {
+public class ScimUserEvent extends BaseScimEvent {
 
   public boolean active;
 
   public String displayName;
 
-  public List<Object> emails;
+  public List<Map<String, String>> emails = new ArrayList<>();
 
-  public List<GroupMember> groups;
+  public List<GroupMember> groups = new ArrayList<>();
 
-  public Map<String, String> name;
+  public Map<String, String> name = new HashMap<>();
 
-  public List<Map<String, String>> phoneNumbers;
+  public List<Map<String, String>> phoneNumbers = new ArrayList<>();
 
-  public List<Map<String, String>> photos;
+  public List<Map<String, String>> photos = new ArrayList<>();
 
   public List<Locale> preferredLanguage;
 
@@ -43,15 +46,14 @@ public class ScimUserEventRequest extends BaseScimEventRequest {
   public String userName;
 
   @JacksonConstructor
-  public ScimUserEventRequest() {
+  public ScimUserEvent() {
   }
 
-  public ScimUserEventRequest(BaseEvent event) {
-    User user = ((UserCreateCompleteEvent) event).user;
+  public ScimUserEvent(BaseEvent event) {
     schemas = Collections.singletonList("urn:ietf:params:scim:schemas:core:2.0:User");
-    id = user.id;
-    createMeta(id, "User", user.insertInstant, user.lastUpdateInstant);
-    extractData(user);
+    User user = ((UserCreateCompleteEvent) event).user;
+    createMeta(user.id, "User", user.insertInstant, user.lastUpdateInstant);
+    extractUserData(user);
   }
 
   @Override
@@ -65,7 +67,7 @@ public class ScimUserEventRequest extends BaseScimEventRequest {
     if (!super.equals(o)) {
       return false;
     }
-    ScimUserEventRequest that = (ScimUserEventRequest) o;
+    ScimUserEvent that = (ScimUserEvent) o;
     return active == that.active && Objects.equals(displayName, that.displayName) && Objects.equals(emails, that.emails) && Objects.equals(groups, that.groups) && Objects.equals(name, that.name) && Objects.equals(phoneNumbers, that.phoneNumbers) && Objects.equals(photos, that.photos) && Objects.equals(preferredLanguage, that.preferredLanguage) && Objects.equals(timezone, that.timezone) && Objects.equals(userName, that.userName);
   }
 
@@ -78,21 +80,34 @@ public class ScimUserEventRequest extends BaseScimEventRequest {
     return ToString.toString(this);
   }
 
-  private void extractData(User user) {
+  private void addEntry(List<Map<String, String>> list, String value, String type) {
+    HashMap<String, String> map = new HashMap();
+    map.put("value", value);
+    map.put("type", type);
+    list.add(map);
+  }
+
+  private void extractUserData(User user) {
     userName = user.uniqueUsername != null ? user.uniqueUsername : user.id.toString();
-//    name = Map.of(
-//        "formatted", user.fullName,
-//        "familyName", user.lastName,
-//        "givenName", user.firstName,
-//        "middleName", user.middleName);
+    name.put("formatted", user.fullName);
+    name.put("familyName", user.lastName);
+    name.put("givenName", user.firstName);
+    name.put("middleName", user.middleName);
     displayName = user.getName();
     preferredLanguage = user.preferredLanguages;
     timezone = user.timezone;
     active = user.active;
     // password = It's in the spec, but I'm not sure if it's secure to pass to a ScimServer?
-//    emails = Collections.singletonList(Map.of("value", user.email, "type", "other"));
-//    phoneNumbers = Collections.singletonList(Map.of("value", user.mobilePhone, "type", "mobile"));
-//    photos = Collections.singletonList(Map.of("value", user.imageUrl, "type", "photo"));
+    // [brettp] Can't user Collections.singletonList(Map.of("value", user.email, "type", "other")) is there a better way?
+    if (user.email != null) {
+      addEntry(emails, user.email, "other");
+    }
+    if (user.mobilePhone != null) {
+      addEntry(phoneNumbers, user.mobilePhone, "mobile");
+    }
+    if (user.imageUrl != null) {
+      addEntry(photos, user.imageUrl.toString(), "photo");
+    }
     groups = user.getMemberships();
     // roles = It's in the spec, but not sure how to get it passed to the SS
 

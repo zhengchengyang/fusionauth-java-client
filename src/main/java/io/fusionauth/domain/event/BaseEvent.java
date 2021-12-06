@@ -27,6 +27,7 @@ import io.fusionauth.domain.EventInfo;
  *
  * @author Brian Pontarelli
  */
+// [brettp]TODO: Rename this and all Events to *WebhookEvent?
 public abstract class BaseEvent {
   public ZonedDateTime createInstant;
 
