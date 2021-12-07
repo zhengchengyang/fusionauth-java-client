@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 import com.inversoft.json.JacksonConstructor;
+import io.fusionauth.domain.EventInfo;
 
 /**
  * Base class for all SCIM events
@@ -46,13 +47,13 @@ public abstract class BaseScimEvent {
     return Objects.hash(externalId, id, meta, schemas);
   }
 
-  protected void createMeta(UUID id, String resourceType, ZonedDateTime created, ZonedDateTime lastModified) {
+  protected void createMeta(UUID id, String resourceType, ZonedDateTime created, ZonedDateTime lastModified, EventInfo info) {
     meta.resourceType = resourceType;
     meta.created = created;
     meta.lastModified = lastModified;
     // [brettp]TODO: How do we build the URL with all the parts?
     //    meta.location = QueryStringBuilder
-    meta.location = "http://thebaseurl.com/scim/v2/" + resourceType + "/" + id;
+    meta.location = info.baseUri + "/scim/v2/" + resourceType + "/" + id;
   }
 
   public static class ScimMeta {

@@ -52,7 +52,7 @@ public class ScimUserEvent extends BaseScimEvent {
   public ScimUserEvent(BaseEvent event) {
     schemas = Collections.singletonList("urn:ietf:params:scim:schemas:core:2.0:User");
     User user = ((UserCreateCompleteEvent) event).user;
-    createMeta(user.id, "User", user.insertInstant, user.lastUpdateInstant);
+    createMeta(user.id, "User", user.insertInstant, user.lastUpdateInstant, event.info);
     extractUserData(user);
   }
 
