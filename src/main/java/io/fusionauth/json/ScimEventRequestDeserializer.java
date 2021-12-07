@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import io.fusionauth.domain.event.BaseEvent;
-import io.fusionauth.domain.event.BaseScimEvent;
+import io.fusionauth.domain.event.BaseScimResource;
 import io.fusionauth.domain.event.EventType;
 import io.fusionauth.domain.event.ScimEventRequest;
 
@@ -37,10 +37,10 @@ public class ScimEventRequestDeserializer extends StdDeserializer<ScimEventReque
     JsonNode eventNode = p.getCodec().readTree(p);
     String type = eventNode.at("/meta/resourceType").asText();
     // Assume all our events have a name like Scim{type}EventRequest
-    String className = BaseScimEvent.class.getPackage().getName() + ".Scim" + type + "Event";
+    String className = BaseScimResource.class.getPackage().getName() + ".Scim" + type + "Resource";
 
     try {
-      req.event = (BaseScimEvent) Class.forName(className).getConstructor().newInstance();
+      req.event = (BaseScimResource) Class.forName(className).getConstructor().newInstance();
     } catch (Exception e) {
       throw new IllegalStateException("Unexpected type [" + type + "]. This is a FusionAuth bug, could not instantiate class [" + className + "].");
     }

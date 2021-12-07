@@ -12,7 +12,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JacksonAnnotation;
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 import io.fusionauth.domain.GroupMember;
@@ -23,7 +22,7 @@ import io.fusionauth.domain.User;
  *
  * @author Brett Pontarelli
  */
-public class ScimUserEvent extends BaseScimEvent {
+public class ScimUserResource extends BaseScimResource {
 
   public boolean active;
 
@@ -46,13 +45,13 @@ public class ScimUserEvent extends BaseScimEvent {
   public String userName;
 
   @JacksonConstructor
-  public ScimUserEvent() {
+  public ScimUserResource() {
   }
 
-  public ScimUserEvent(BaseEvent event) {
+  public ScimUserResource(BaseEvent event) {
     schemas = Collections.singletonList("urn:ietf:params:scim:schemas:core:2.0:User");
     User user = ((UserCreateCompleteEvent) event).user;
-    createMeta(user.id, "User", user.insertInstant, user.lastUpdateInstant, event.info);
+    createMeta(user.id, "User", user.insertInstant, user.lastUpdateInstant);
     extractUserData(user);
   }
 
@@ -67,7 +66,7 @@ public class ScimUserEvent extends BaseScimEvent {
     if (!super.equals(o)) {
       return false;
     }
-    ScimUserEvent that = (ScimUserEvent) o;
+    ScimUserResource that = (ScimUserResource) o;
     return active == that.active && Objects.equals(displayName, that.displayName) && Objects.equals(emails, that.emails) && Objects.equals(groups, that.groups) && Objects.equals(name, that.name) && Objects.equals(phoneNumbers, that.phoneNumbers) && Objects.equals(photos, that.photos) && Objects.equals(preferredLanguage, that.preferredLanguage) && Objects.equals(timezone, that.timezone) && Objects.equals(userName, that.userName);
   }
 

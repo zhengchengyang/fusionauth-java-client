@@ -37,6 +37,7 @@ public class ScimServer extends Enableable implements Buildable<ScimServer>, _In
 
   public Integer connectTimeout;
 
+  // [brettp]TODO: Do we need data here?
   public Map<String, Object> data = new LinkedHashMap<>();
 
   public String description;

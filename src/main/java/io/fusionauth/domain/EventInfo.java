@@ -15,7 +15,6 @@
  */
 package io.fusionauth.domain;
 
-import java.net.URI;
 import java.util.Map;
 import java.util.Objects;
 
@@ -30,8 +29,6 @@ import io.fusionauth.domain.jwt.RefreshToken.MetaData;
  * @author Brian Pontarelli
  */
 public class EventInfo implements Buildable<EventInfo> {
-  public URI baseUri;
-
   public Map<String, Object> data;
 
   public String deviceDescription;
@@ -66,8 +63,7 @@ public class EventInfo implements Buildable<EventInfo> {
       return false;
     }
     EventInfo eventInfo = (EventInfo) o;
-    return Objects.equals(baseUri, eventInfo.baseUri) &&
-           Objects.equals(data, eventInfo.data) &&
+    return Objects.equals(data, eventInfo.data) &&
            Objects.equals(deviceDescription, eventInfo.deviceDescription) &&
            Objects.equals(deviceName, eventInfo.deviceName) &&
            Objects.equals(deviceType, eventInfo.deviceType) &&
@@ -79,7 +75,7 @@ public class EventInfo implements Buildable<EventInfo> {
 
   @Override
   public int hashCode() {
-    return Objects.hash(baseUri, data, deviceDescription, deviceName, deviceType, ipAddress, location, os, userAgent);
+    return Objects.hash(data, deviceDescription, deviceName, deviceType, ipAddress, location, os, userAgent);
   }
 
   public MetaData toMetaData() {

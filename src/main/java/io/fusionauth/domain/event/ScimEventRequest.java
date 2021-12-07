@@ -17,13 +17,13 @@ import io.fusionauth.json.ScimEventRequestDeserializer;
  */
 @JsonDeserialize(using = ScimEventRequestDeserializer.class)
 public class ScimEventRequest {
-  public BaseScimEvent event;
+  public BaseScimResource event;
 
   @JacksonConstructor
   public ScimEventRequest() {
   }
 
-  public ScimEventRequest(BaseScimEvent event) {
+  public ScimEventRequest(BaseScimResource event) {
     this.event = event;
   }
 

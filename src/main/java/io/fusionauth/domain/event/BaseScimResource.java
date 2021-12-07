@@ -9,14 +9,13 @@ import java.util.Objects;
 import java.util.UUID;
 
 import com.inversoft.json.JacksonConstructor;
-import io.fusionauth.domain.EventInfo;
 
 /**
- * Base class for all SCIM events
+ * Base class for all SCIM resources
  *
  * @author Brett Pontarelli
  */
-public abstract class BaseScimEvent {
+public abstract class BaseScimResource {
 
   public String externalId;
 
@@ -27,7 +26,7 @@ public abstract class BaseScimEvent {
   public List<String> schemas;
 
   @JacksonConstructor
-  public BaseScimEvent() {
+  public BaseScimResource() {
   }
 
   @Override
@@ -38,7 +37,7 @@ public abstract class BaseScimEvent {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    BaseScimEvent that = (BaseScimEvent) o;
+    BaseScimResource that = (BaseScimResource) o;
     return Objects.equals(externalId, that.externalId) && Objects.equals(id, that.id) && Objects.equals(meta, that.meta) && Objects.equals(schemas, that.schemas);
   }
 
@@ -47,13 +46,12 @@ public abstract class BaseScimEvent {
     return Objects.hash(externalId, id, meta, schemas);
   }
 
-  protected void createMeta(UUID id, String resourceType, ZonedDateTime created, ZonedDateTime lastModified, EventInfo info) {
+  protected void createMeta(UUID id, String resourceType, ZonedDateTime created, ZonedDateTime lastModified) {
     meta.resourceType = resourceType;
     meta.created = created;
     meta.lastModified = lastModified;
     // [brettp]TODO: How do we build the URL with all the parts?
-    //    meta.location = QueryStringBuilder
-    meta.location = info.baseUri + "/scim/v2/" + resourceType + "/" + id;
+    meta.location = "/scim/v2/" + resourceType + "/" + id;
   }
 
   public static class ScimMeta {
