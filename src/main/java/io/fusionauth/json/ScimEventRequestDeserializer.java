@@ -40,12 +40,12 @@ public class ScimEventRequestDeserializer extends StdDeserializer<ScimEventReque
     String className = BaseScimResource.class.getPackage().getName() + ".Scim" + type + "Resource";
 
     try {
-      req.event = (BaseScimResource) Class.forName(className).getConstructor().newInstance();
+      req.resource = (BaseScimResource) Class.forName(className).getConstructor().newInstance();
     } catch (Exception e) {
       throw new IllegalStateException("Unexpected type [" + type + "]. This is a FusionAuth bug, could not instantiate class [" + className + "].");
     }
 
-    ((ObjectMapper) p.getCodec()).readerForUpdating(req.event).readValue(eventNode);
+    ((ObjectMapper) p.getCodec()).readerForUpdating(req.resource).readValue(eventNode);
     return req;
   }
 

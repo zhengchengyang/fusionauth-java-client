@@ -48,9 +48,9 @@ public class ScimUserResource extends BaseScimResource {
   public ScimUserResource() {
   }
 
-  public ScimUserResource(BaseEvent event) {
+  public ScimUserResource(User user) {
+    id = user.id;
     schemas = Collections.singletonList("urn:ietf:params:scim:schemas:core:2.0:User");
-    User user = ((UserCreateCompleteEvent) event).user;
     createMeta(user.id, "User", user.insertInstant, user.lastUpdateInstant);
     extractUserData(user);
   }
@@ -107,7 +107,7 @@ public class ScimUserResource extends BaseScimResource {
     if (user.imageUrl != null) {
       addEntry(photos, user.imageUrl.toString(), "photo");
     }
-    groups = user.getMemberships();
+//    groups = user.getMemberships();
     // roles = It's in the spec, but not sure how to get it passed to the SS
 
 //  private final List<GroupMember> memberships = new ArrayList<>();

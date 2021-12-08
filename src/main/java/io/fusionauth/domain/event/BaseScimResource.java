@@ -50,8 +50,8 @@ public abstract class BaseScimResource {
     meta.resourceType = resourceType;
     meta.created = created;
     meta.lastModified = lastModified;
-    // [brettp]TODO: How do we build the URL with all the parts?
-    meta.location = "/scim/v2/" + resourceType + "/" + id;
+    // [brettp]TODO: How do we build the URL with all the proper parts?
+    meta.location = "https://basescim.url/scim/v2/" + resourceType + "/" + id;
   }
 
   public static class ScimMeta {

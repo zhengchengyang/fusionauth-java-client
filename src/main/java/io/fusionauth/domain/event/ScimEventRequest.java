@@ -17,14 +17,10 @@ import io.fusionauth.json.ScimEventRequestDeserializer;
  */
 @JsonDeserialize(using = ScimEventRequestDeserializer.class)
 public class ScimEventRequest {
-  public BaseScimResource event;
+  public BaseScimResource resource;
 
   @JacksonConstructor
   public ScimEventRequest() {
-  }
-
-  public ScimEventRequest(BaseScimResource event) {
-    this.event = event;
   }
 
   @Override
@@ -36,12 +32,12 @@ public class ScimEventRequest {
       return false;
     }
     ScimEventRequest that = (ScimEventRequest) o;
-    return Objects.equals(event, that.event);
+    return Objects.equals(resource, that.resource);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(event);
+    return Objects.hash(resource);
   }
 
   public String toString() {
