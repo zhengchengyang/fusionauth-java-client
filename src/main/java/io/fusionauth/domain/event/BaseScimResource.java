@@ -1,19 +1,17 @@
 /*
  * Copyright (c) 2021, FusionAuth, All Rights Reserved
  */
-package io.fusionauth.domain.api.scim;
+package io.fusionauth.domain.event;
 
 import java.time.ZonedDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
 import com.inversoft.json.JacksonConstructor;
 
 /**
- * Base class for all SCIM events
+ * Base class for all SCIM resources
  *
  * @author Brett Pontarelli
  */
@@ -23,8 +21,7 @@ public abstract class BaseScimResource {
 
   public UUID id;
 
-  public Map<String, Object> meta = new HashMap<>();
-//  public ScimMeta meta;
+  public ScimMeta meta = new ScimMeta();
 
   public List<String> schemas;
 
@@ -49,23 +46,21 @@ public abstract class BaseScimResource {
     return Objects.hash(externalId, id, meta, schemas);
   }
 
-  protected void createMeta(UUID id, String resource, ZonedDateTime created, ZonedDateTime lastModified) {
-    meta.put("resourceType", resource);
-    meta.put("created", created);
-    meta.put("lastModified", lastModified);
-    // [brettp]TODO: How do we build the URL with all the parts?
-    //    meta.put("location", QueryStringBuilder
-    meta.put("location", "http://thebaseurl.com/scim/v2/" + resource + "/" + id);
-    // meta.put("version", "W\/\"f250dd84f0671c3\"");  // I don't think we are going to use this.
+  protected void createMeta(UUID id, String resourceType, ZonedDateTime created, ZonedDateTime lastModified) {
+    meta.resourceType = resourceType;
+    meta.created = created;
+    meta.lastModified = lastModified;
+    // [brettp]TODO: How do we build the URL with all the proper parts?
+    meta.location = "https://basescim.url/scim/v2/" + resourceType + "/" + id;
   }
 
-  public class ScimMeta {
-    ZonedDateTime created;
+  public static class ScimMeta {
+    public ZonedDateTime created;
 
-    ZonedDateTime lastModified;
+    public ZonedDateTime lastModified;
 
-    String location;
+    public String location;
 
-    String resourceType;
+    public String resourceType;
   }
 }
