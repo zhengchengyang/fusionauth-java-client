@@ -1,5 +1,17 @@
 /*
  * Copyright (c) 2021, FusionAuth, All Rights Reserved
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
  */
 package io.fusionauth.domain.api.scim;
 
@@ -12,13 +24,12 @@ import java.util.Objects;
 
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
-import io.fusionauth.domain.GroupMember;
 import io.fusionauth.domain.User;
 import io.fusionauth.domain.event.BaseEvent;
 import io.fusionauth.domain.event.UserCreateCompleteEvent;
 
 /**
- * Container for SCIM event information. This is the JSON that is sent from FusionAuth to a SCIM server.
+ * Container for SCIM User information.
  *
  * @author Brett Pontarelli
  */
@@ -30,18 +41,17 @@ public class SCIMUser extends BaseSCIMResource {
 
   public String displayName;
 
-  public List<Object> emails;
+  public List<SCIMUserEmail> emails;
 
   public List<String> entitlements;
 
-  // [brettp]TODO: This is actually a List<SCIMGroup>, right?
-  public List<GroupMember> groups;
+  public List<SCIMGroup> groups;
 
   public List<SCIMUserIMS> ims;
 
   public String locale;
 
-  public SCIMUserName name = new SCIMUserName();
+  public SCIMUserName name;
 
   public String nickName;
 
@@ -103,72 +113,12 @@ public class SCIMUser extends BaseSCIMResource {
     return ToString.toString(this);
   }
 
-  // [brettp]Note: -- Rob:
-  //   I started adding these, but they break your SCIMService which I didn't want to make changes to
-  //   since I know you'll likely be moving them to resource specific converters.  So, I'll leave them
-  //   for now feel free to add/change/delete them as necessary.
-  public static class SCIMUserAddress {
-    public String country;
-
-    public String formatted;
-
-    public String locality;
-
-    public String postalCode;
-
-    public boolean primary;  // Not exactly in spec?, but in the example?
-
-    public String region;
-
-    public String streetAddress;
-  }
-
-  // [brettp]Note: These are all the same, should they instead be SCIMEntry or something like that?
+  // [brettp]Note: These were are all the same (moved out to separate files), should they instead be SCIMEntry or something like that?
   //   When they get baked into a fusionauth-lang-client library we want the user to have flexiblity
   //   around extending SCIMUser and all of it's parts, implementations, etc.
-  public static class SCIMUserEmail {
-    public boolean primary;
-
-    public String type;
-
-    public String value;
-  }
-
-  public static class SCIMUserIMS {
-    public boolean primary;
-
-    public String type;
-
-    public String value;
-  }
-
-  public static class SCIMUserName {
-    public String familyName;
-
-    public String formatted;
-
-    public String givenName;
-
-    public String honorificPrefix;
-
-    public String honorificSuffix;
-
-    public String middleName;
-  }
-
-  public static class SCIMUserPhoneNumber {
-    public boolean primary;
-
-    public String type;
-
-    public String value;
-  }
-
-  public static class SCIMUserPhoto {
-    public boolean primary;
-
-    public String type;
-
-    public String value;
-  }
+  //   !!! DELETE SUBCLASSES WHEN RESOLVED !!!
+  // public static class SCIMUserEmail {}
+  // public static class SCIMUserIMS {}
+  // public static class SCIMUserPhoneNumber {}
+  // public static class SCIMUserPhoto {}
 }
