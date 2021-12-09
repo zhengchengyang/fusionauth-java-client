@@ -15,7 +15,6 @@ import com.inversoft.json.ToString;
 import io.fusionauth.domain.GroupMember;
 import io.fusionauth.domain.User;
 import io.fusionauth.domain.event.BaseEvent;
-import io.fusionauth.domain.event.BaseScimEventRequest;
 import io.fusionauth.domain.event.UserCreateCompleteEvent;
 
 /**
@@ -34,6 +33,8 @@ public class ScimUser extends BaseScimResource {
   public List<GroupMember> groups;
 
   public Map<String, String> name;
+
+  public String password;
 
   public List<Map<String, String>> phoneNumbers;
 
@@ -122,5 +123,39 @@ public class ScimUser extends BaseScimResource {
 //  public ZonedDateTime passwordLastUpdateInstant;
 //  public boolean passwordChangeRequired;
 //  public boolean verified;
+  }
+
+  // [brettp]Note: -- Rob:
+  //   I started adding these, but they break your ScimService which I didn't want to make changes to
+  //   since I know you'll likely be moving them to resource specific converters.  So, I'll leave them
+  //   for now feel free to add/change/delete them as necessary.
+  public static class ScimUserEmail {
+    public boolean primary = true;
+
+    public String type;
+
+    public String value;
+  }
+
+  public static class ScimUserName {
+    public String familyName;
+
+    public String formatted;
+
+    public String givenName;
+
+    public String middleName;
+  }
+
+  public static class ScimUserPhoneNumber {
+    public String type;
+
+    public String value;
+  }
+
+  public static class ScimUserPhoto {
+    public String type;
+
+    public String value;
   }
 }

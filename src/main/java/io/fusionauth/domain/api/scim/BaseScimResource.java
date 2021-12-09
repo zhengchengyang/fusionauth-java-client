@@ -24,7 +24,6 @@ public abstract class BaseScimResource {
   public UUID id;
 
   public Map<String, Object> meta = new HashMap<>();
-//  public ScimMeta meta;
 
   public List<String> schemas;
 
@@ -50,16 +49,14 @@ public abstract class BaseScimResource {
   }
 
   protected void createMeta(UUID id, String resource, ZonedDateTime created, ZonedDateTime lastModified) {
-    meta.put("resourceType", resource);
-    meta.put("created", created);
-    meta.put("lastModified", lastModified);
-    // [brettp]TODO: How do we build the URL with all the parts?
-    //    meta.put("location", QueryStringBuilder
-    meta.put("location", "http://thebaseurl.com/scim/v2/" + resource + "/" + id);
-    // meta.put("version", "W\/\"f250dd84f0671c3\"");  // I don't think we are going to use this.
+//    meta.resourceType = resourceType;
+//    meta.created = created;
+//    meta.lastModified = lastModified;
+//    // [brettp]TODO: How do we build the URL with all the proper parts?
+//    meta.location = "https://basescim.url/scim/v2/" + resourceType + "/" + id;
   }
 
-  public class ScimMeta {
+  public static class ScimMeta {
     ZonedDateTime created;
 
     ZonedDateTime lastModified;
