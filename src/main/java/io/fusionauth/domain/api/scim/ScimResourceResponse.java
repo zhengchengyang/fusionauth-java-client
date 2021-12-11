@@ -32,7 +32,7 @@ public class ScimResourceResponse {
   public List<HashMap<String, String>> phoneNumbers;
   public List<HashMap<String, Object>> emails;
 
-  @JsonProperty("urn:ietf:params:scim:schemas:extension:enterprise:2.0:User")
+//  @JsonProperty("urn:ietf:params:scim:schemas:extension:enterprise:2.0:User")
   public HashMap<String, Object> enterpriseUserExtension;
 
   @JacksonConstructor

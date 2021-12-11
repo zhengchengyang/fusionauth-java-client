@@ -75,7 +75,7 @@ public class SCIMUser extends BaseSCIMResource {
 
   public URI userType;
 
-  public List<X509Certificate> x509Certificates;
+//  public List<X509Certificate> x509Certificates;
 
   @JacksonConstructor
   public SCIMUser() {

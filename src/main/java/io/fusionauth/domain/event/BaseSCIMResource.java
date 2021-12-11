@@ -21,7 +21,7 @@ public abstract class BaseSCIMResource {
 
   public UUID id;
 
-  public ScimMeta meta = new ScimMeta();
+  public SCIMMeta meta = new SCIMMeta();
 
   public List<String> schemas;
 
@@ -47,17 +47,17 @@ public abstract class BaseSCIMResource {
   }
 
   protected void createMeta(UUID id, String resourceType, ZonedDateTime created, ZonedDateTime lastModified) {
-    meta.resourceType = resourceType;
-    meta.created = created;
-    meta.lastModified = lastModified;
+//    meta.resourceType = resourceType;
+//    meta.created = created;
+//    meta.lastModified = lastModified;
     // [brettp]TODO: How do we build the URL with all the proper parts?
-    meta.location = "https://basescim.url/scim/v2/" + resourceType + "/" + id;
+//    meta.location = "https://basescim.url/scim/v2/" + resourceType + "/" + id;
   }
 
-  public static class ScimMeta {
-    public ZonedDateTime created;
+  public static class SCIMMeta {
+    public String created;
 
-    public ZonedDateTime lastModified;
+    public String lastModified;
 
     public String location;
 
