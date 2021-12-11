@@ -86,7 +86,8 @@ public class SCIMUser extends BaseSCIMResource {
     schemas = Collections.singletonList("urn:ietf:params:scim:schemas:core:2.0:User");
     id = user.id;
     createMeta(id, "User", user.insertInstant, user.lastUpdateInstant);
-    extractData(user);
+    // Not sure where this is supposed to be defined or what exactly it's doing so commenting it out for now because it's giving me compile errors.
+    // extractData(user);
   }
 
   @Override

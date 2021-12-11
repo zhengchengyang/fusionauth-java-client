@@ -23,13 +23,13 @@ import java.time.ZonedDateTime;
  * @author Brett Pontarelli
  */
 public class SCIMMeta {
-  ZonedDateTime created;
+  public String created;
 
-  ZonedDateTime lastModified;
+  public String lastModified;
 
-  String location;
+  public String location;
 
-  String resourceType;
+  public String resourceType;
 
-  String version;
+  public String version;
 }
