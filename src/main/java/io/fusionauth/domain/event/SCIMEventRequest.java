@@ -8,19 +8,19 @@ import java.util.Objects;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
-import io.fusionauth.json.ScimEventRequestDeserializer;
+import io.fusionauth.json.SCIMEventRequestDeserializer;
 
 /**
  * Container for the SCIM event information. This is the JSON that is sent from FusionAuth to SCIM Servers.
  *
  * @author Brett Pontarelli
  */
-@JsonDeserialize(using = ScimEventRequestDeserializer.class)
-public class ScimEventRequest {
-  public BaseScimResource resource;
+@JsonDeserialize(using = SCIMEventRequestDeserializer.class)
+public class SCIMEventRequest {
+  public BaseSCIMResource resource;
 
   @JacksonConstructor
-  public ScimEventRequest() {
+  public SCIMEventRequest() {
   }
 
   @Override
@@ -31,7 +31,7 @@ public class ScimEventRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ScimEventRequest that = (ScimEventRequest) o;
+    SCIMEventRequest that = (SCIMEventRequest) o;
     return Objects.equals(resource, that.resource);
   }
 

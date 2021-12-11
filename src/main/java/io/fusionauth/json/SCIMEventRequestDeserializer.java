@@ -13,34 +13,34 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import io.fusionauth.domain.event.BaseEvent;
-import io.fusionauth.domain.event.BaseScimResource;
+import io.fusionauth.domain.event.BaseSCIMResource;
 import io.fusionauth.domain.event.EventType;
-import io.fusionauth.domain.event.ScimEventRequest;
+import io.fusionauth.domain.event.SCIMEventRequest;
 
 /**
  * Custom JSON deserializer for BaseScimEventRequest.
  *
  * @author Brett Pontarelli
  */
-public class ScimEventRequestDeserializer extends StdDeserializer<ScimEventRequest> {
-  public ScimEventRequestDeserializer() {
-    super(ScimEventRequest.class);
+public class SCIMEventRequestDeserializer extends StdDeserializer<SCIMEventRequest> {
+  public SCIMEventRequestDeserializer() {
+    super(SCIMEventRequest.class);
   }
 
   @Override
-  public ScimEventRequest deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-    return deserialize(p, ctxt, new ScimEventRequest());
+  public SCIMEventRequest deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    return deserialize(p, ctxt, new SCIMEventRequest());
   }
 
   @Override
-  public ScimEventRequest deserialize(JsonParser p, DeserializationContext ctxt, ScimEventRequest req) throws IOException {
+  public SCIMEventRequest deserialize(JsonParser p, DeserializationContext ctxt, SCIMEventRequest req) throws IOException {
     JsonNode eventNode = p.getCodec().readTree(p);
     String type = eventNode.at("/meta/resourceType").asText();
     // Assume all our events have a name like Scim{type}EventRequest
-    String className = BaseScimResource.class.getPackage().getName() + ".Scim" + type + "Resource";
+    String className = BaseSCIMResource.class.getPackage().getName() + ".Scim" + type + "Resource";
 
     try {
-      req.resource = (BaseScimResource) Class.forName(className).getConstructor().newInstance();
+      req.resource = (BaseSCIMResource) Class.forName(className).getConstructor().newInstance();
     } catch (Exception e) {
       throw new IllegalStateException("Unexpected type [" + type + "]. This is a FusionAuth bug, could not instantiate class [" + className + "].");
     }

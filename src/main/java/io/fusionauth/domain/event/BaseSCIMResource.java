@@ -15,7 +15,7 @@ import com.inversoft.json.JacksonConstructor;
  *
  * @author Brett Pontarelli
  */
-public abstract class BaseScimResource {
+public abstract class BaseSCIMResource {
 
   public String externalId;
 
@@ -26,7 +26,7 @@ public abstract class BaseScimResource {
   public List<String> schemas;
 
   @JacksonConstructor
-  public BaseScimResource() {
+  public BaseSCIMResource() {
   }
 
   @Override
@@ -37,7 +37,7 @@ public abstract class BaseScimResource {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    BaseScimResource that = (BaseScimResource) o;
+    BaseSCIMResource that = (BaseSCIMResource) o;
     return Objects.equals(externalId, that.externalId) && Objects.equals(id, that.id) && Objects.equals(meta, that.meta) && Objects.equals(schemas, that.schemas);
   }
 

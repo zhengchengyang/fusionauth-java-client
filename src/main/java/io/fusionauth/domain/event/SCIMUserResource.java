@@ -22,7 +22,7 @@ import io.fusionauth.domain.User;
  *
  * @author Brett Pontarelli
  */
-public class ScimUserResource extends BaseScimResource {
+public class SCIMUserResource extends BaseSCIMResource {
 
   public boolean active;
 
@@ -45,10 +45,10 @@ public class ScimUserResource extends BaseScimResource {
   public String userName;
 
   @JacksonConstructor
-  public ScimUserResource() {
+  public SCIMUserResource() {
   }
 
-  public ScimUserResource(User user) {
+  public SCIMUserResource(User user) {
     id = user.id;
     schemas = Collections.singletonList("urn:ietf:params:scim:schemas:core:2.0:User");
     createMeta(user.id, "User", user.insertInstant, user.lastUpdateInstant);
@@ -66,7 +66,7 @@ public class ScimUserResource extends BaseScimResource {
     if (!super.equals(o)) {
       return false;
     }
-    ScimUserResource that = (ScimUserResource) o;
+    SCIMUserResource that = (SCIMUserResource) o;
     return active == that.active && Objects.equals(displayName, that.displayName) && Objects.equals(emails, that.emails) && Objects.equals(groups, that.groups) && Objects.equals(name, that.name) && Objects.equals(phoneNumbers, that.phoneNumbers) && Objects.equals(photos, that.photos) && Objects.equals(preferredLanguage, that.preferredLanguage) && Objects.equals(timezone, that.timezone) && Objects.equals(userName, that.userName);
   }
 
