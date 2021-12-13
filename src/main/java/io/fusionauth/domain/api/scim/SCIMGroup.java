@@ -25,7 +25,7 @@ import com.inversoft.json.JacksonConstructor;
  *
  * @author Brett Pontarelli
  */
-public abstract class SCIMGroup {
+public class SCIMGroup extends BaseSCIMResource {
 
   public String displayName;
 
