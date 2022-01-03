@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, FusionAuth, All Rights Reserved
+ * Copyright (c) 2018, FusionAuth, All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,27 @@
  * either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package io.fusionauth.domain.api.scim;
+package io.fusionauth.domain.api;
+
+import java.util.List;
+
+import com.inversoft.json.JacksonConstructor;
+import io.fusionauth.domain.GroupMemberData;
+import io.fusionauth.domain.User;
 
 /**
- * @author Brett Pontarelli
+ * Group Member Response
+ *
+ * @author Daniel DeGroff
  */
-public class SCIMUserName {
-  public String familyName;
+public class GroupMemberListResponse {
+  public List<GroupMemberData> members;
 
-  public String formatted;
+  @JacksonConstructor
+  public GroupMemberListResponse() {
+  }
 
-  public String givenName;
-
-  public String honorificPrefix;
-
-  public String honorificSuffix;
-
-  public String middleName;
+  public GroupMemberListResponse(List<GroupMemberData> members) {
+    this.members = members;
+  }
 }

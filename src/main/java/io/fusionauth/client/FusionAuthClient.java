@@ -32,7 +32,7 @@ import com.inversoft.rest.FormDataBodyHandler;
 import com.inversoft.rest.JSONBodyHandler;
 import com.inversoft.rest.JSONResponseHandler;
 import com.inversoft.rest.RESTClient;
-import io.fusionauth.domain.GroupMemberListItem;import io.fusionauth.domain.LambdaType;
+import io.fusionauth.domain.LambdaType;
 import io.fusionauth.domain.OpenIdConfiguration;
 import io.fusionauth.domain.api.ApplicationRequest;
 import io.fusionauth.domain.api.ApplicationResponse;
@@ -70,7 +70,7 @@ import io.fusionauth.domain.api.EventLogSearchResponse;
 import io.fusionauth.domain.api.FamilyEmailRequest;
 import io.fusionauth.domain.api.FamilyRequest;
 import io.fusionauth.domain.api.FamilyResponse;
-import io.fusionauth.domain.api.GroupRequest;
+import io.fusionauth.domain.api.GroupMemberListResponse;import io.fusionauth.domain.api.GroupRequest;
 import io.fusionauth.domain.api.GroupResponse;
 import io.fusionauth.domain.api.IdentityProviderRequest;
 import io.fusionauth.domain.api.IdentityProviderResponse;
@@ -90,7 +90,7 @@ import io.fusionauth.domain.api.LoginRequest;
 import io.fusionauth.domain.api.LoginResponse;
 import io.fusionauth.domain.api.LogoutRequest;
 import io.fusionauth.domain.api.MemberDeleteRequest;
-import io.fusionauth.domain.api.MemberListItemsResponse;import io.fusionauth.domain.api.MemberRequest;
+import io.fusionauth.domain.api.MemberRequest;
 import io.fusionauth.domain.api.MemberResponse;
 import io.fusionauth.domain.api.MessageTemplateRequest;
 import io.fusionauth.domain.api.MessageTemplateResponse;
@@ -2886,6 +2886,20 @@ public class FusionAuthClient {
   }
 
   /**
+   * Retrieves all of the members of a group.
+   *
+   * @param groupId The Id of the group.
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<GroupMemberListResponse, Void> retrieveGroupMemberList(UUID groupId) {
+    return start(GroupMemberListResponse.class, Void.TYPE)
+        .uri("/api/group/member")
+        .urlSegment(groupId)
+        .get()
+        .go();
+  }
+
+  /**
    * Retrieves all of the groups.
    *
    * @return The ClientResponse object.
@@ -2893,14 +2907,6 @@ public class FusionAuthClient {
   public ClientResponse<GroupResponse, Void> retrieveGroups() {
     return start(GroupResponse.class, Void.TYPE)
         .uri("/api/group")
-        .get()
-        .go();
-  }
-
-  public ClientResponse<MemberListItemsResponse, Errors> retrieveGroupMemberListItems(UUID groupId) {
-    return start(MemberListItemsResponse.class, Errors.class)
-        .uri("/api/group/member")
-        .urlParameter("groupId", groupId)
         .get()
         .go();
   }
