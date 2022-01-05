@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, FusionAuth, All Rights Reserved
+ * Copyright (c) 2022, FusionAuth, All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +19,11 @@ import java.util.List;
 
 import com.inversoft.json.JacksonConstructor;
 import io.fusionauth.domain.GroupMemberData;
-import io.fusionauth.domain.User;
 
 /**
- * Group Member Response
+ * Group Member List Response
  *
- * @author Daniel DeGroff
+ * @author Rob Davis
  */
 public class GroupMemberListResponse {
   public List<GroupMemberData> members;
