@@ -2895,7 +2895,7 @@ public class FusionAuthClient {
   public ClientResponse<GroupMemberListResponse, Void> retrieveGroupMemberList(UUID groupId) {
     return start(GroupMemberListResponse.class, Void.TYPE)
         .uri("/api/group/member")
-        .urlSegment(groupId)
+        .urlParameter("groupId", groupId)
         .get()
         .go();
   }
