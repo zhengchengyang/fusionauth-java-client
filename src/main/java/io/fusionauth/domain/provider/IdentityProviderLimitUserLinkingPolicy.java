@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020, FusionAuth, All Rights Reserved
+ * Copyright (c) 2018, FusionAuth, All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,51 +13,38 @@
  * either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package io.fusionauth.domain.form;
+package io.fusionauth.domain.provider;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
-import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 import io.fusionauth.domain.Buildable;
+import io.fusionauth.domain.Enableable;
 
 /**
  * @author Daniel DeGroff
  */
-public class FormStep implements Buildable<FormStep> {
-  public List<UUID> fields = new ArrayList<>();
-
-  @JacksonConstructor
-  public FormStep() {
-  }
-
-  public FormStep(FormStep other) {
-    fields.addAll(other.fields);
-  }
-
-  public FormStep(UUID... fieldIds) {
-    fields.addAll(Arrays.asList(fieldIds));
-  }
+public class IdentityProviderLimitUserLinkingPolicy extends Enableable implements Buildable<IdentityProviderLimitUserLinkingPolicy> {
+  public int maximumLinks = 42;
 
   @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof FormStep)) {
+    if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    FormStep formStep = (FormStep) o;
-    return Objects.equals(fields, formStep.fields);
+    if (!super.equals(o)) {
+      return false;
+    }
+    IdentityProviderLimitUserLinkingPolicy that = (IdentityProviderLimitUserLinkingPolicy) o;
+    return maximumLinks == that.maximumLinks;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(fields);
+    return Objects.hash(super.hashCode(), maximumLinks);
   }
 
   @Override

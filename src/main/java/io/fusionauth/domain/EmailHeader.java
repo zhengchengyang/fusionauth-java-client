@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020, FusionAuth, All Rights Reserved
+ * Copyright (c) 2021, FusionAuth, All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,34 +13,28 @@
  * either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package io.fusionauth.domain.form;
+package io.fusionauth.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
-import io.fusionauth.domain.Buildable;
 
 /**
  * @author Daniel DeGroff
  */
-public class FormStep implements Buildable<FormStep> {
-  public List<UUID> fields = new ArrayList<>();
+public class EmailHeader implements Buildable<EmailHeader> {
+  public String name;
+
+  public String value;
 
   @JacksonConstructor
-  public FormStep() {
+  public EmailHeader() {
   }
 
-  public FormStep(FormStep other) {
-    fields.addAll(other.fields);
-  }
-
-  public FormStep(UUID... fieldIds) {
-    fields.addAll(Arrays.asList(fieldIds));
+  public EmailHeader(String name, String value) {
+    this.name = name;
+    this.value = value;
   }
 
   @Override
@@ -48,16 +42,16 @@ public class FormStep implements Buildable<FormStep> {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof FormStep)) {
+    if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    FormStep formStep = (FormStep) o;
-    return Objects.equals(fields, formStep.fields);
+    EmailHeader that = (EmailHeader) o;
+    return Objects.equals(name, that.name) && Objects.equals(value, that.value);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(fields);
+    return Objects.hash(name, value);
   }
 
   @Override
