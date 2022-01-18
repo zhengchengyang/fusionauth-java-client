@@ -4550,6 +4550,20 @@ public class FusionAuthClient {
   }
 
   /**
+   * Creates a member in a group.
+   *
+   * @param request The request object that contains all the information used to create the group member(s).
+   * @return The ClientResponse object.
+   */
+  public ClientResponse<MemberResponse, Errors> updateGroupMembers(MemberRequest request) {
+    return start(MemberResponse.class, Errors.class)
+        .uri("/api/group/member")
+        .bodyHandler(new JSONBodyHandler(request, objectMapper))
+        .post()
+        .go();
+  }
+
+  /**
    * Updates the IP Access Control List with the given Id.
    *
    * @param accessControlListId The Id of the IP Access Control List to update.
