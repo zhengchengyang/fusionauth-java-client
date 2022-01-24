@@ -143,6 +143,9 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
   @InternalJSONColumn
   public TenantUsernameConfiguration usernameConfiguration = new TenantUsernameConfiguration();
 
+  @InternalJSONColumn
+  public TenantLambdaConfiguration tenantLambdaConfiguration = new TenantLambdaConfiguration();
+
   @JacksonConstructor
   public Tenant() {
   }
@@ -181,6 +184,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
     this.themeId = other.themeId;
     this.userDeletePolicy = new TenantUserDeletePolicy(other.userDeletePolicy);
     this.usernameConfiguration = new TenantUsernameConfiguration(other.usernameConfiguration);
+    this.tenantLambdaConfiguration = new TenantLambdaConfiguration(other.tenantLambdaConfiguration);
   }
 
   @Override
@@ -223,7 +227,8 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
            Objects.equals(state, tenant.state) &&
            Objects.equals(themeId, tenant.themeId) &&
            Objects.equals(userDeletePolicy, tenant.userDeletePolicy) &&
-           Objects.equals(usernameConfiguration, tenant.usernameConfiguration);
+           Objects.equals(usernameConfiguration, tenant.usernameConfiguration) &&
+           Objects.equals(tenantLambdaConfiguration, tenant.tenantLambdaConfiguration);
   }
 
   @JsonIgnore
@@ -233,7 +238,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
 
   @Override
   public int hashCode() {
-    return Objects.hash(captchaConfiguration, configured, connectorPolicies, data, emailConfiguration, eventConfiguration, externalIdentifierConfiguration, failedAuthenticationConfiguration, familyConfiguration, formConfiguration, httpSessionMaxInactiveInterval, id, insertInstant, accessControlConfiguration, issuer, jwtConfiguration, lastUpdateInstant, loginConfiguration, logoutURL, maximumPasswordAge, minimumPasswordAge, name, passwordEncryptionConfiguration, passwordValidationRules, state, rateLimitConfiguration, registrationConfiguration, themeId, userDeletePolicy, usernameConfiguration);
+    return Objects.hash(captchaConfiguration, configured, connectorPolicies, data, emailConfiguration, eventConfiguration, externalIdentifierConfiguration, failedAuthenticationConfiguration, familyConfiguration, formConfiguration, httpSessionMaxInactiveInterval, id, insertInstant, accessControlConfiguration, issuer, jwtConfiguration, lastUpdateInstant, loginConfiguration, logoutURL, maximumPasswordAge, minimumPasswordAge, name, passwordEncryptionConfiguration, passwordValidationRules, state, rateLimitConfiguration, registrationConfiguration, themeId, userDeletePolicy, usernameConfiguration, tenantLambdaConfiguration);
   }
 
   @JsonIgnore
@@ -314,4 +319,43 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
       return ToString.toString(this);
     }
   }
+
+  public static class TenantLambdaConfiguration {
+    public UUID SCIMUserRequestId;
+
+    public UUID SCIMUserResponseId;
+
+    @JacksonConstructor
+    public TenantLambdaConfiguration() {
+    }
+
+    public TenantLambdaConfiguration(Tenant.TenantLambdaConfiguration other) {
+      this.SCIMUserRequestId = other.SCIMUserRequestId;
+      this.SCIMUserResponseId = other.SCIMUserResponseId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) {
+        return true;
+      }
+      if (!(o instanceof Tenant.TenantLambdaConfiguration)) {
+        return false;
+      }
+      Tenant.TenantLambdaConfiguration that = (Tenant.TenantLambdaConfiguration) o;
+      return Objects.equals(SCIMUserRequestId, that.SCIMUserRequestId) &&
+             Objects.equals(SCIMUserResponseId, that.SCIMUserResponseId);
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(SCIMUserRequestId, SCIMUserResponseId);
+    }
+
+    @Override
+    public String toString() {
+      return ToString.toString(this);
+    }
+  }
 }
+
