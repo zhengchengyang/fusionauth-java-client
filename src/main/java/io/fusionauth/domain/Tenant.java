@@ -321,6 +321,14 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
   }
 
   public static class TenantLambdaConfiguration {
+    public UUID SCIMEnterpriseUserRequestId;
+
+    public UUID SCIMEnterpriseUserResponseId;
+
+    public UUID SCIMGroupRequestId;
+
+    public UUID SCIMGroupResponseId;
+
     public UUID SCIMUserRequestId;
 
     public UUID SCIMUserResponseId;
@@ -330,6 +338,10 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
     }
 
     public TenantLambdaConfiguration(Tenant.TenantLambdaConfiguration other) {
+      this.SCIMEnterpriseUserRequestId = other.SCIMEnterpriseUserRequestId;
+      this.SCIMEnterpriseUserResponseId = other.SCIMEnterpriseUserResponseId;
+      this.SCIMGroupRequestId = other.SCIMGroupRequestId;
+      this.SCIMGroupResponseId = other.SCIMGroupResponseId;
       this.SCIMUserRequestId = other.SCIMUserRequestId;
       this.SCIMUserResponseId = other.SCIMUserResponseId;
     }
@@ -343,13 +355,22 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
         return false;
       }
       Tenant.TenantLambdaConfiguration that = (Tenant.TenantLambdaConfiguration) o;
-      return Objects.equals(SCIMUserRequestId, that.SCIMUserRequestId) &&
+      return Objects.equals(SCIMEnterpriseUserRequestId, that.SCIMEnterpriseUserRequestId) &&
+             Objects.equals(SCIMEnterpriseUserResponseId, that.SCIMEnterpriseUserResponseId) &&
+             Objects.equals(SCIMGroupRequestId, that.SCIMGroupRequestId) &&
+             Objects.equals(SCIMGroupResponseId, that.SCIMGroupResponseId) &&
+             Objects.equals(SCIMUserRequestId, that.SCIMUserRequestId) &&
              Objects.equals(SCIMUserResponseId, that.SCIMUserResponseId);
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(SCIMUserRequestId, SCIMUserResponseId);
+      return Objects.hash(SCIMEnterpriseUserRequestId,
+                          SCIMEnterpriseUserResponseId,
+                          SCIMGroupRequestId,
+                          SCIMGroupResponseId,
+                          SCIMUserRequestId,
+                          SCIMUserResponseId);
     }
 
     @Override

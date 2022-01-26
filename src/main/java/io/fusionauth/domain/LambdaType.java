@@ -346,6 +346,74 @@ public enum LambdaType {
       "\n" +
       "}\n"),
 
+  SCIMServerEnterpriseUserRequest("convert", "" +
+                                   "// Using the generated SCIMUser and FA User, you can map incoming field data to the correct FusionAuth User data.\n" +
+                                   "function convert(SCIMUser, user) {\n" +
+                                   "  //  When writing a lambda we've added a few helpers to make life easier.\n" +
+                                   "  //  console.info('Hello World');         # This will create an EventLog of type Information\n" +
+                                   "  //  console.error('Not good.');          # This will create an EventLog of type Error\n" +
+                                   "  //  console.debug('Step 42 completed.'); # This will create an EventLog of type Debug\n" +
+                                   "  //  \n" +
+                                   "  //  To dump an entire object to the EventLog you can use JSON.stringify, for example: \n" +
+                                   "  //  console.info(JSON.stringify(user)); \n" +
+                                   "\n" +
+                                   "  // Happy coding! Reconcile the User here.\n" +
+                                   "\n" +
+                                   "  console.info('Hello World!');" +
+                                   "\n" +
+                                   "}\n"),
+
+  SCIMServerEnterpriseUserResponse("convert", "" +
+                                    "// Using the FusionAuth User and generated SCIMUser, you can map outgoing field data to the correct SCIMUser data.\n" +
+                                    "function convert(user, SCIMUser) {\n" +
+                                    "  //  When writing a lambda we've added a few helpers to make life easier.\n" +
+                                    "  //  console.info('Hello World');         # This will create an EventLog of type Information\n" +
+                                    "  //  console.error('Not good.');          # This will create an EventLog of type Error\n" +
+                                    "  //  console.debug('Step 42 completed.'); # This will create an EventLog of type Debug\n" +
+                                    "  //  \n" +
+                                    "  //  To dump an entire object to the EventLog you can use JSON.stringify, for example: \n" +
+                                    "  //  console.info(JSON.stringify(user)); \n" +
+                                    "\n" +
+                                    "  // Happy coding! Reconcile the User here.\n" +
+                                    "\n" +
+                                    "  console.info('Hello World!');" +
+                                    "\n" +
+                                    "}\n"),
+
+  SCIMServerGroupRequest("convert", "" +
+                            "// Using the generated SCIMUser and FA User, you can map incoming field data to the correct FusionAuth User data.\n" +
+                            "function convert(SCIMUser, user) {\n" +
+                            "  //  When writing a lambda we've added a few helpers to make life easier.\n" +
+                            "  //  console.info('Hello World');         # This will create an EventLog of type Information\n" +
+                            "  //  console.error('Not good.');          # This will create an EventLog of type Error\n" +
+                            "  //  console.debug('Step 42 completed.'); # This will create an EventLog of type Debug\n" +
+                            "  //  \n" +
+                            "  //  To dump an entire object to the EventLog you can use JSON.stringify, for example: \n" +
+                            "  //  console.info(JSON.stringify(user)); \n" +
+                            "\n" +
+                            "  // Happy coding! Reconcile the User here.\n" +
+                            "\n" +
+                            "  console.info('Hello World!');" +
+                            "\n" +
+                            "}\n"),
+
+  SCIMServerGroupResponse("convert", "" +
+                             "// Using the FusionAuth User and generated SCIMUser, you can map outgoing field data to the correct SCIMUser data.\n" +
+                             "function convert(user, SCIMUser) {\n" +
+                             "  //  When writing a lambda we've added a few helpers to make life easier.\n" +
+                             "  //  console.info('Hello World');         # This will create an EventLog of type Information\n" +
+                             "  //  console.error('Not good.');          # This will create an EventLog of type Error\n" +
+                             "  //  console.debug('Step 42 completed.'); # This will create an EventLog of type Debug\n" +
+                             "  //  \n" +
+                             "  //  To dump an entire object to the EventLog you can use JSON.stringify, for example: \n" +
+                             "  //  console.info(JSON.stringify(user)); \n" +
+                             "\n" +
+                             "  // Happy coding! Reconcile the User here.\n" +
+                             "\n" +
+                             "  console.info('Hello World!');" +
+                             "\n" +
+                             "}\n"),
+
   SCIMServerUserRequest("convert", "" +
                                  "// Using the generated SCIMUser and FA User, you can map incoming field data to the correct FusionAuth User data.\n" +
                                  "function convert(SCIMUser, user) {\n" +
