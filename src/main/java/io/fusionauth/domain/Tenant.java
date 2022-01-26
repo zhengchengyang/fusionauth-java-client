@@ -140,7 +140,6 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
   @InternalJSONColumn
   public TenantUserDeletePolicy userDeletePolicy = new TenantUserDeletePolicy();
 
-  @InternalJSONColumn
   public TenantUsernameConfiguration usernameConfiguration = new TenantUsernameConfiguration();
 
   @InternalJSONColumn
