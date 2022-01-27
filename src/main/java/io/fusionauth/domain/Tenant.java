@@ -275,6 +275,8 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
                                         .with(cpInner -> cpInner.domains.add("*"))
                                         .with(cpInner -> cpInner.migrate = false));
     }
+
+    familyConfiguration.normalize();
   }
 
   public Tenant secure() {
