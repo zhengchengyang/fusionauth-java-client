@@ -4559,7 +4559,7 @@ public class FusionAuthClient {
     return start(MemberResponse.class, Errors.class)
         .uri("/api/group/member")
         .bodyHandler(new JSONBodyHandler(request, objectMapper))
-        .post()
+        .put()
         .go();
   }
 

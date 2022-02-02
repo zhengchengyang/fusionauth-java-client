@@ -347,106 +347,129 @@ public enum LambdaType {
       "}\n"),
 
   SCIMServerEnterpriseUserRequest("convert", "" +
-                                   "// Using the generated SCIMUser and FA User, you can map incoming field data to the correct FusionAuth User data.\n" +
-                                   "function convert(SCIMUser, user) {\n" +
-                                   "  //  When writing a lambda we've added a few helpers to make life easier.\n" +
-                                   "  //  console.info('Hello World');         # This will create an EventLog of type Information\n" +
-                                   "  //  console.error('Not good.');          # This will create an EventLog of type Error\n" +
-                                   "  //  console.debug('Step 42 completed.'); # This will create an EventLog of type Debug\n" +
-                                   "  //  \n" +
-                                   "  //  To dump an entire object to the EventLog you can use JSON.stringify, for example: \n" +
-                                   "  //  console.info(JSON.stringify(user)); \n" +
-                                   "\n" +
-                                   "  // Happy coding! Reconcile the User here.\n" +
-                                   "\n" +
-                                   "  console.info('Hello World!');" +
-                                   "\n" +
-                                   "}\n"),
+                                    "function convert(SCIMUser, user) {\n" +
+                                    "  user.username = SCIMUser.userName;\n" +
+                                    "  user.fullName = SCIMUser.name.formatted;\n" +
+                                    "  user.lastName = SCIMUser.name.familyName;\n" +
+                                    "  user.firstName = SCIMUser.name.givenName;\n" +
+                                    "  user.middleName = SCIMUser.name.middleName;\n" +
+                                    "  user.data.honorificPrefix = SCIMUser.name.honorificPrefix;\n" +
+                                    "  user.data.honorificSuffix = SCIMUser.name.honorificSuffix;\n" +
+                                    "  for (var i = 0; i < SCIMUser.phoneNumbers.length; i++) {\n" +
+                                    "    if (SCIMUser.phoneNumbers[i].primary) {\n" +
+                                    "      user.mobilePhone = SCIMUser.phoneNumbers[i].value;\n" +
+                                    "    }\n" +
+                                    "  }\n" +
+                                    "  for (var i = 0; i < SCIMUser.emails.length; i++) {\n" +
+                                    "    if (SCIMUser.emails[i].primary) {\n" +
+                                    "      user.email = SCIMUser.emails[i].value;\n" +
+                                    "    }\n" +
+                                    "  }\n" +
+                                    "}\n"),
 
   SCIMServerEnterpriseUserResponse("convert", "" +
-                                    "// Using the FusionAuth User and generated SCIMUser, you can map outgoing field data to the correct SCIMUser data.\n" +
-                                    "function convert(user, SCIMUser) {\n" +
-                                    "  //  When writing a lambda we've added a few helpers to make life easier.\n" +
-                                    "  //  console.info('Hello World');         # This will create an EventLog of type Information\n" +
-                                    "  //  console.error('Not good.');          # This will create an EventLog of type Error\n" +
-                                    "  //  console.debug('Step 42 completed.'); # This will create an EventLog of type Debug\n" +
-                                    "  //  \n" +
-                                    "  //  To dump an entire object to the EventLog you can use JSON.stringify, for example: \n" +
-                                    "  //  console.info(JSON.stringify(user)); \n" +
-                                    "\n" +
-                                    "  // Happy coding! Reconcile the User here.\n" +
-                                    "\n" +
-                                    "  console.info('Hello World!');" +
-                                    "\n" +
+                                    "function convert(user, newSCIMUser) {\n" +
+                                    "          newSCIMUser.userName = user.username;\n" +
+                                    "          newSCIMUser.externalId = user.username;\n" +
+                                    "          newSCIMUser.meta = {\n" +
+                                    "            created: new Date(user.insertInstant),\n" +
+                                    "            lastModified: new Date(user.lastUpdateInstant),\n" +
+                                    "            resourceType: \"EnterpriseUser\",\n" +
+                                    "            location: \"https://fusionauth.io/api/scim/resource/v2/EnterpriseUsers/\" + user.id,\n" +
+                                    "            version: \"\"\n" +
+                                    "          }\n" +
+                                    "          newSCIMUser.name = {\n" +
+                                    "            formatted: user.fullName,\n" +
+                                    "            familyName: user.lastName,\n" +
+                                    "            givenName: user.firstName,\n" +
+                                    "            middleName: user.middleName,\n" +
+                                    "            honorificPrefix: user.data.honorificPrefix,\n" +
+                                    "            honorificSuffix: user.data.honorificSuffix\n" +
+                                    "          }\n" +
+                                    "          newSCIMUser.phoneNumbers = [\n" +
+                                    "            {\n" +
+                                    "              primary: true,\n" +
+                                    "              value: user.mobilePhone,\n" +
+                                    "              type: \"mobile\"\n" +
+                                    "            }\n" +
+                                    "          ]\n" +
+                                    "          newSCIMUser.emails = [\n" +
+                                    "            {\n" +
+                                    "              primary: true,\n" +
+                                    "              value: user.email,\n" +
+                                    "              type: \"work\"\n" +
+                                    "            }\n" +
+                                    "          ]\n" +
                                     "}\n"),
 
   SCIMServerGroupRequest("convert", "" +
                             "// Using the generated SCIMUser and FA User, you can map incoming field data to the correct FusionAuth User data.\n" +
-                            "function convert(SCIMUser, user) {\n" +
-                            "  //  When writing a lambda we've added a few helpers to make life easier.\n" +
-                            "  //  console.info('Hello World');         # This will create an EventLog of type Information\n" +
-                            "  //  console.error('Not good.');          # This will create an EventLog of type Error\n" +
-                            "  //  console.debug('Step 42 completed.'); # This will create an EventLog of type Debug\n" +
-                            "  //  \n" +
-                            "  //  To dump an entire object to the EventLog you can use JSON.stringify, for example: \n" +
-                            "  //  console.info(JSON.stringify(user)); \n" +
-                            "\n" +
-                            "  // Happy coding! Reconcile the User here.\n" +
-                            "\n" +
-                            "  console.info('Hello World!');" +
-                            "\n" +
+                            "function convert(SCIMGroup, group, members) {\n" +
+                            "  members[0].id = SCIMGroup.members[0].id;" +
                             "}\n"),
 
   SCIMServerGroupResponse("convert", "" +
-                             "// Using the FusionAuth User and generated SCIMUser, you can map outgoing field data to the correct SCIMUser data.\n" +
-                             "function convert(user, SCIMUser) {\n" +
-                             "  //  When writing a lambda we've added a few helpers to make life easier.\n" +
-                             "  //  console.info('Hello World');         # This will create an EventLog of type Information\n" +
-                             "  //  console.error('Not good.');          # This will create an EventLog of type Error\n" +
-                             "  //  console.debug('Step 42 completed.'); # This will create an EventLog of type Debug\n" +
-                             "  //  \n" +
-                             "  //  To dump an entire object to the EventLog you can use JSON.stringify, for example: \n" +
-                             "  //  console.info(JSON.stringify(user)); \n" +
-                             "\n" +
-                             "  // Happy coding! Reconcile the User here.\n" +
-                             "\n" +
-                             "  console.info('Hello World!');" +
-                             "\n" +
+                             "// Using the FusionAuth User and generated SCIMGroup, you can map outgoing field data to the correct SCIMUser data.\n" +
+                             "function convert(group, members, SCIMGroup) {\n" +
+                             "  SCIMGroup.members[0].displayName = members[0].user.fullName;" +
                              "}\n"),
 
   SCIMServerUserRequest("convert", "" +
-                                 "// Using the generated SCIMUser and FA User, you can map incoming field data to the correct FusionAuth User data.\n" +
-                                 "function convert(SCIMUser, user) {\n" +
-                                 "  //  When writing a lambda we've added a few helpers to make life easier.\n" +
-                                 "  //  console.info('Hello World');         # This will create an EventLog of type Information\n" +
-                                 "  //  console.error('Not good.');          # This will create an EventLog of type Error\n" +
-                                 "  //  console.debug('Step 42 completed.'); # This will create an EventLog of type Debug\n" +
-                                 "  //  \n" +
-                                 "  //  To dump an entire object to the EventLog you can use JSON.stringify, for example: \n" +
-                                 "  //  console.info(JSON.stringify(user)); \n" +
-                                 "\n" +
-                                 "  // Happy coding! Reconcile the User here.\n" +
-                                 "\n" +
-                                 "  console.info('Hello World!');" +
-                                 "\n" +
-                                 "}\n"),
+                                   "function convert(SCIMUser, user) {\n" +
+                                   "  user.username = SCIMUser.userName;\n" +
+                                   "  user.fullName = SCIMUser.name.formatted;\n" +
+                                   "  user.lastName = SCIMUser.name.familyName;\n" +
+                                   "  user.firstName = SCIMUser.name.givenName;\n" +
+                                   "  user.middleName = SCIMUser.name.middleName;\n" +
+                                   "  user.data.honorificPrefix = SCIMUser.name.honorificPrefix;\n" +
+                                   "  user.data.honorificSuffix = SCIMUser.name.honorificSuffix;\n" +
+                                   // TODO: rob: The less than operator is getting encoded for some reason
+                                   "  for (var i = 0; i < SCIMUser.phoneNumbers.length; i++) {\n" +
+                                   "    if (SCIMUser.phoneNumbers[i].primary) {\n" +
+                                   "      user.mobilePhone = SCIMUser.phoneNumbers[i].value;\n" +
+                                   "    }\n" +
+                                   "  }\n" +
+                                   "  for (var i = 0; i < SCIMUser.emails.length; i++) {\n" +
+                                   "    if (SCIMUser.emails[i].primary) {\n" +
+                                   "      user.email = SCIMUser.emails[i].value;\n" +
+                                   "    }\n" +
+                                   "  }\n" +
+                                   "}\n"),
 
   SCIMServerUserResponse("convert", "" +
-                            "// Using the FusionAuth User and generated SCIMUser, you can map outgoing field data to the correct SCIMUser data.\n" +
-                            "function convert(user, SCIMUser) {\n" +
-                            "  //  When writing a lambda we've added a few helpers to make life easier.\n" +
-                            "  //  console.info('Hello World');         # This will create an EventLog of type Information\n" +
-                            "  //  console.error('Not good.');          # This will create an EventLog of type Error\n" +
-                            "  //  console.debug('Step 42 completed.'); # This will create an EventLog of type Debug\n" +
-                            "  //  \n" +
-                            "  //  To dump an entire object to the EventLog you can use JSON.stringify, for example: \n" +
-                            "  //  console.info(JSON.stringify(user)); \n" +
-                            "\n" +
-                            "  // Happy coding! Reconcile the User here.\n" +
-                            "\n" +
-                            "  console.info('Hello World!');" +
-                            "\n" +
-                            "}\n");
+                                    "function convert(user, newSCIMUser) {\n" +
+                                    "          newSCIMUser.userName = user.username;\n" +
+                                    "          newSCIMUser.externalId = user.username;\n" +
+                                    "          newSCIMUser.meta = {\n" +
+                                    "            created: new Date(user.insertInstant),\n" +
+                                    "            lastModified: new Date(user.lastUpdateInstant),\n" +
+                                    "            resourceType: \"User\",\n" +
+                                    "            location: \"https://fusionauth.io/api/scim/resource/v2/Users/\" + user.id,\n" +
+                                    "            version: \"\"\n" +
+                                    "          }\n" +
+                                    "          newSCIMUser.name = {\n" +
+                                    "            formatted: user.fullName,\n" +
+                                    "            familyName: user.lastName,\n" +
+                                    "            givenName: user.firstName,\n" +
+                                    "            middleName: user.middleName,\n" +
+                                    "            honorificPrefix: user.data.honorificPrefix,\n" +
+                                    "            honorificSuffix: user.data.honorificSuffix\n" +
+                                    "          }\n" +
+                                    "          newSCIMUser.phoneNumbers = [\n" +
+                                    "            {\n" +
+                                    "              primary: true,\n" +
+                                    "              value: user.mobilePhone,\n" +
+                                    "              type: \"mobile\"\n" +
+                                    "            }\n" +
+                                    "          ]\n" +
+                                    "          newSCIMUser.emails = [\n" +
+                                    "            {\n" +
+                                    "              primary: true,\n" +
+                                    "              value: user.email,\n" +
+                                    "              type: \"work\"\n" +
+                                    "            }\n" +
+                                    "          ]\n" +
+                                    "}\n");
   // @formatter:on
 
   private final String example;
