@@ -370,7 +370,6 @@ public enum LambdaType {
   SCIMServerEnterpriseUserResponse("convert", "" +
                                     "function convert(user, newSCIMUser) {\n" +
                                     "          newSCIMUser.userName = user.username;\n" +
-                                    "          newSCIMUser.externalId = user.username;\n" +
                                     "          newSCIMUser.meta = {\n" +
                                     "            created: new Date(user.insertInstant),\n" +
                                     "            lastModified: new Date(user.lastUpdateInstant),\n" +
@@ -439,7 +438,6 @@ public enum LambdaType {
   SCIMServerUserResponse("convert", "" +
                                     "function convert(user, newSCIMUser) {\n" +
                                     "          newSCIMUser.userName = user.username;\n" +
-                                    "          newSCIMUser.externalId = user.username;\n" +
                                     "          newSCIMUser.meta = {\n" +
                                     "            created: new Date(user.insertInstant),\n" +
                                     "            lastModified: new Date(user.lastUpdateInstant),\n" +
