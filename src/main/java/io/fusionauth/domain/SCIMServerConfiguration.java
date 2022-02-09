@@ -27,12 +27,15 @@ public class SCIMServerConfiguration implements Buildable<SCIMServerConfiguratio
 
   public String baseUrl = "https://fusionauth.io";
 
+  public String schemasResponse;
+
   @JacksonConstructor
   public SCIMServerConfiguration() {
   }
 
   public SCIMServerConfiguration(SCIMServerConfiguration other) {
     this.baseUrl = other.baseUrl;
+    this.schemasResponse = other.schemasResponse;
   }
 
   @Override
@@ -44,12 +47,12 @@ public class SCIMServerConfiguration implements Buildable<SCIMServerConfiguratio
       return false;
     }
     SCIMServerConfiguration that = (SCIMServerConfiguration) o;
-    return Objects.equals(baseUrl, that.baseUrl);
+    return Objects.equals(baseUrl, that.baseUrl) && Objects.equals(schemasResponse, that.schemasResponse);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(baseUrl);
+    return Objects.hash(baseUrl, schemasResponse);
   }
 
   @Override
