@@ -145,6 +145,9 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
   @InternalJSONColumn
   public TenantLambdaConfiguration tenantLambdaConfiguration = new TenantLambdaConfiguration();
 
+  @InternalJSONColumn
+  public SCIMServerConfiguration scimServerConfiguration = new SCIMServerConfiguration();
+
   @JacksonConstructor
   public Tenant() {
   }
@@ -184,6 +187,7 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
     this.userDeletePolicy = new TenantUserDeletePolicy(other.userDeletePolicy);
     this.usernameConfiguration = new TenantUsernameConfiguration(other.usernameConfiguration);
     this.tenantLambdaConfiguration = new TenantLambdaConfiguration(other.tenantLambdaConfiguration);
+    this.scimServerConfiguration = new SCIMServerConfiguration(other.scimServerConfiguration);
   }
 
   @Override

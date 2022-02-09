@@ -24,7 +24,7 @@ import io.fusionauth.domain.util.Normalizer;
  *
  * @author Brett Pontarelli
  */
-public class ScimServer extends Enableable implements Buildable<ScimServer>, _InternalJSONColumn {
+public class ScimExternalServerConfiguration extends Enableable implements Buildable<ScimExternalServerConfiguration>, _InternalJSONColumn {
   public static final List<EventType> eventsEnabled = new ArrayList<>(
       Arrays.asList(EventType.UserCreateComplete,
                     EventType.UserDeleteComplete,
@@ -74,7 +74,7 @@ public class ScimServer extends Enableable implements Buildable<ScimServer>, _In
     if (!super.equals(o)) {
       return false;
     }
-    ScimServer that = (ScimServer) o;
+    ScimExternalServerConfiguration that = (ScimExternalServerConfiguration) o;
     return global == that.global && connectTimeout.equals(that.connectTimeout) && data.equals(that.data) && description.equals(that.description) && eventsEnabled.equals(that.eventsEnabled) && headers.equals(that.headers) && httpAuthenticationPassword.equals(that.httpAuthenticationPassword) && httpAuthenticationUsername.equals(that.httpAuthenticationUsername) && id.equals(that.id) && insertInstant.equals(that.insertInstant) && lastUpdateInstant.equals(that.lastUpdateInstant) && readTimeout.equals(that.readTimeout) && sslCertificate.equals(that.sslCertificate) && tenantIds.equals(that.tenantIds) && url.equals(that.url);
   }
 

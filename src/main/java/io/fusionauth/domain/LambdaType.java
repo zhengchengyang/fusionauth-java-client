@@ -370,13 +370,6 @@ public enum LambdaType {
   SCIMServerEnterpriseUserResponse("convert", "" +
                                     "function convert(user, newSCIMUser) {\n" +
                                     "          newSCIMUser.userName = user.username;\n" +
-                                    "          newSCIMUser.meta = {\n" +
-                                    "            created: new Date(user.insertInstant),\n" +
-                                    "            lastModified: new Date(user.lastUpdateInstant),\n" +
-                                    "            resourceType: \"EnterpriseUser\",\n" +
-                                    "            location: \"https://fusionauth.io/api/scim/resource/v2/EnterpriseUsers/\" + user.id,\n" +
-                                    "            version: \"\"\n" +
-                                    "          }\n" +
                                     "          newSCIMUser.name = {\n" +
                                     "            formatted: user.fullName,\n" +
                                     "            familyName: user.lastName,\n" +
@@ -438,13 +431,6 @@ public enum LambdaType {
   SCIMServerUserResponse("convert", "" +
                                     "function convert(user, newSCIMUser) {\n" +
                                     "          newSCIMUser.userName = user.username;\n" +
-                                    "          newSCIMUser.meta = {\n" +
-                                    "            created: new Date(user.insertInstant),\n" +
-                                    "            lastModified: new Date(user.lastUpdateInstant),\n" +
-                                    "            resourceType: \"User\",\n" +
-                                    "            location: \"https://fusionauth.io/api/scim/resource/v2/Users/\" + user.id,\n" +
-                                    "            version: \"\"\n" +
-                                    "          }\n" +
                                     "          newSCIMUser.name = {\n" +
                                     "            formatted: user.fullName,\n" +
                                     "            familyName: user.lastName,\n" +
