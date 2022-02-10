@@ -27,7 +27,115 @@ public class SCIMServerConfiguration implements Buildable<SCIMServerConfiguratio
 
   public String baseUrl = "https://fusionauth.io";
 
-  public String schemasResponse;
+  public String schemasResponse = "{\n" +
+                                  "  \"itemsPerPage\" : 3,\n" +
+                                  "  \"schemas\" : [ \"urn:ietf:params:scim:api:messages:2.0:ListResponse\" ],\n" +
+                                  "  \"startIndex\" : 0,\n" +
+                                  "  \"totalResults\" : 3,\n" +
+                                  "  \"Resources\" : [\n" +
+                                  "    {\n" +
+                                  "      \"id\" : \"urn:ietf:params:scim:schemas:core:2.0:User\",\n" +
+                                  "      \"name\" : \"User\",\n" +
+                                  "      \"description\" : \"User Account\",\n" +
+                                  "      \"attributes\" : [\n" +
+                                  "        {\n" +
+                                  "          \"name\" : \"userName\",\n" +
+                                  "          \"type\" : \"string\",\n" +
+                                  "          \"multiValued\" : false,\n" +
+                                  "          \"description\" : \"Unique identifier for the User, typically used by the user to directly authenticate to the service provider. Each User MUST include a non-empty userName value. REQUIRED.\",\n" +
+                                  "          \"required\" : true,\n" +
+                                  "          \"caseExact\" : false,\n" +
+                                  "          \"mutability\" : \"readWrite\",\n" +
+                                  "          \"returned\" : \"default\",\n" +
+                                  "          \"uniqueness\" : \"server\"\n" +
+                                  "        },\n" +
+                                  "        {\n" +
+                                  "          \"name\" : \"active\",\n" +
+                                  "          \"type\" : \"boolean\",\n" +
+                                  "          \"multiValued\" : false,\n" +
+                                  "          \"description\" : \"A Boolean value indicating the User's administrative status.\",\n" +
+                                  "          \"required\" : false,\n" +
+                                  "          \"mutability\" : \"readWrite\",\n" +
+                                  "          \"returned\" : \"default\"\n" +
+                                  "        }\n" +
+                                  "      ],\n" +
+                                  "      \"meta\" : {\n" +
+                                  "        \"resourceType\" : \"Schema\",\n" +
+                                  "        \"location\" : \"https://fusionauth.io/api/scim/resource/v2/Schemas/urn:ietf:params:scim:schemas:core:2.0:User\"\n" +
+                                  "      }\n" +
+                                  "    },\n" +
+                                  "    {\n" +
+                                  "      \"id\" : \"urn:ietf:params:scim:schemas:core:2.0:Group\",\n" +
+                                  "      \"name\" : \"Group\",\n" +
+                                  "      \"description\" : \"Group\",\n" +
+                                  "      \"attributes\" : [\n" +
+                                  "        {\n" +
+                                  "          \"name\" : \"displayName\",\n" +
+                                  "          \"type\" : \"string\",\n" +
+                                  "          \"multiValued\" : false,\n" +
+                                  "          \"description\" : \"A human-readable name for the Group. REQUIRED.\",\n" +
+                                  "          \"required\" : false,\n" +
+                                  "          \"caseExact\" : false,\n" +
+                                  "          \"mutability\" : \"readWrite\",\n" +
+                                  "          \"returned\" : \"default\",\n" +
+                                  "          \"uniqueness\" : \"none\"\n" +
+                                  "        },\n" +
+                                  "        {\n" +
+                                  "          \"name\" : \"members\",\n" +
+                                  "          \"type\" : \"complex\",\n" +
+                                  "          \"multiValued\" : true,\n" +
+                                  "          \"description\" : \"A list of members of the Group.\",\n" +
+                                  "          \"required\" : false,\n" +
+                                  "          \"subAttributes\" : [\n" +
+                                  "            {\n" +
+                                  "              \"name\" : \"value\",\n" +
+                                  "              \"type\" : \"string\",\n" +
+                                  "              \"multiValued\" : false,\n" +
+                                  "              \"description\" : \"Identifier of the member of this Group.\",\n" +
+                                  "              \"required\" : false,\n" +
+                                  "              \"caseExact\" : false,\n" +
+                                  "              \"mutability\" : \"immutable\",\n" +
+                                  "              \"returned\" : \"default\",\n" +
+                                  "              \"uniqueness\" : \"none\"\n" +
+                                  "            },\n" +
+                                  "            {\n" +
+                                  "              \"name\" : \"$ref\",\n" +
+                                  "              \"type\" : \"reference\",\n" +
+                                  "              \"referenceTypes\" : [\n" +
+                                  "                \"User\",\n" +
+                                  "                \"Group\"\n" +
+                                  "              ],\n" +
+                                  "              \"multiValued\" : false,\n" +
+                                  "              \"description\" : \"The URI corresponding to a SCIM resource that is a member of this Group.\",\n" +
+                                  "              \"required\" : false,\n" +
+                                  "              \"caseExact\" : false,\n" +
+                                  "              \"mutability\" : \"immutable\",\n" +
+                                  "              \"returned\" : \"default\",\n" +
+                                  "              \"uniqueness\" : \"none\"\n" +
+                                  "            }\n" +
+                                  "          ],\n" +
+                                  "          \"mutability\" : \"readWrite\",\n" +
+                                  "          \"returned\" : \"default\"\n" +
+                                  "        }\n" +
+                                  "      ],\n" +
+                                  "      \"meta\" : {\n" +
+                                  "        \"resourceType\" : \"Schema\",\n" +
+                                  "        \"location\" :\n" +
+                                  "        \"https://fusionauth.io/api/scim/resource/v2/Schemas/urn:ietf:params:scim:schemas:core:2.0:Group\"\n" +
+                                  "      }\n" +
+                                  "    },\n" +
+                                  "    {\n" +
+                                  "      \"id\" : \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\",\n" +
+                                  "      \"name\" : \"EnterpriseUser\",\n" +
+                                  "      \"description\" : \"Enterprise User\",\n" +
+                                  "      \"attributes\" : [],\n" +
+                                  "      \"meta\" : {\n" +
+                                  "        \"resourceType\" : \"Schema\",\n" +
+                                  "        \"location\" :\"https://fusionauth.io/api/scim/resource/v2/Schemas/v2/Schemas/urn:ietf:params:scim:schemas:extension:enterprise:2.0:User\"\n" +
+                                  "      }\n" +
+                                  "    }\n" +
+                                  "  ]\n" +
+                                  "}\n";
 
   @JacksonConstructor
   public SCIMServerConfiguration() {
