@@ -453,6 +453,8 @@ public enum LambdaType {
                                     "              type: \"work\"\n" +
                                     "            }\n" +
                                     "          ]\n" +
+                                    "          // example of accessing values from a custom schema extension." +
+                                    "          // newSCIMUser['urn:ietf:params:scim:schemas:extension:fubar:2.0:User'].whibble = user.data.extensions['urn:ietf:params:scim:schemas:extension:fubar:2.0:User'].whibble + \"42\";\n" +
                                     "}\n");
   // @formatter:on
 
