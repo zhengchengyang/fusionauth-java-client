@@ -415,7 +415,6 @@ public enum LambdaType {
                                    "  user.middleName = SCIMUser.name.middleName;\n" +
                                    "  user.data.honorificPrefix = SCIMUser.name.honorificPrefix;\n" +
                                    "  user.data.honorificSuffix = SCIMUser.name.honorificSuffix;\n" +
-                                   // TODO: rob: The less than operator is getting encoded for some reason
                                    "  for (var i = 0; i < SCIMUser.phoneNumbers.length; i++) {\n" +
                                    "    if (SCIMUser.phoneNumbers[i].primary) {\n" +
                                    "      user.mobilePhone = SCIMUser.phoneNumbers[i].value;\n" +
