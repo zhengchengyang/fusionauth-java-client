@@ -52,6 +52,9 @@ public class SystemConfiguration implements Buildable<SystemConfiguration>, _Int
 
   public ZonedDateTime insertInstant;
 
+  @InternalJSONColumn
+  public LambdaEngineConfiguration lambdaEngineConfiguration = new LambdaEngineConfiguration();
+
   public ZonedDateTime lastUpdateInstant;
 
   @InternalJSONColumn
