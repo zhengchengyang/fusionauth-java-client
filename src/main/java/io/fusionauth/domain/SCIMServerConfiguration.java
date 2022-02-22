@@ -25,8 +25,12 @@ import com.inversoft.json.ToString;
  */
 public class SCIMServerConfiguration implements Buildable<SCIMServerConfiguration> {
 
+  // TODO : SCIM : Probably will not default this?
+  // TODO : SCIM : Should this be in the SystemConfiguration, with an optional override at the tenant?
   public String baseUrl = "https://fusionauth.io";
 
+  // TODO : SCIM : We should initialize this somewhere else if we want to ship it this way?
+  //               Can this be a Map<String, Object> or something that we could directly return on an API response?
   public String schemasResponse = "{\n" +
                                   "  \"itemsPerPage\" : 3,\n" +
                                   "  \"schemas\" : [ \"urn:ietf:params:scim:api:messages:2.0:ListResponse\" ],\n" +
