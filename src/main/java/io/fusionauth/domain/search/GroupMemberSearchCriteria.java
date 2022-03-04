@@ -17,6 +17,7 @@ package io.fusionauth.domain.search;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import static io.fusionauth.domain.util.SQLTools.normalizeOrderBy;
@@ -41,6 +42,11 @@ public class GroupMemberSearchCriteria extends BaseSearchCriteria {
 
     orderBy = normalizeOrderBy(orderBy, SortableFields);
     return this;
+  }
+
+  @Override
+  public Set<String> supportedOrderByColumns() {
+    return SortableFields.keySet();
   }
 
   @Override

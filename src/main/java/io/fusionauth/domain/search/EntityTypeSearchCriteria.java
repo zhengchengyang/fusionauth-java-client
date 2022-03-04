@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, FusionAuth, All Rights Reserved
+ * Copyright (c) 2021-2022, FusionAuth, All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package io.fusionauth.domain.search;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import static io.fusionauth.domain.util.SQLTools.normalizeOrderBy;
 import static io.fusionauth.domain.util.SQLTools.toSearchString;
@@ -43,11 +44,17 @@ public class EntityTypeSearchCriteria extends BaseSearchCriteria {
   }
 
   @Override
+  public Set<String> supportedOrderByColumns() {
+    return SortableFields.keySet();
+  }
+
+  @Override
   protected String defaultOrderBy() {
     return "name ASC";
   }
 
   static {
+    SortableFields.put("entityTypePermissionsCount", "entityTypePermissionsCount");
     SortableFields.put("id", "id");
     SortableFields.put("insertInstant", "insert_instant");
     SortableFields.put("lastUpdateInstant", "last_update_instant");
