@@ -29,6 +29,8 @@ import io.fusionauth.domain.api.BaseEventRequest;
 public class ChangePasswordRequest extends BaseEventRequest implements Buildable<ChangePasswordRequest> {
   public UUID applicationId;
 
+  public String changePasswordId;
+
   public String currentPassword;
 
   public String loginId;
@@ -36,6 +38,10 @@ public class ChangePasswordRequest extends BaseEventRequest implements Buildable
   public String password;
 
   public String refreshToken;
+
+  public String trustChallenge;
+
+  public String trustToken;
 
   @JacksonConstructor
   public ChangePasswordRequest() {
