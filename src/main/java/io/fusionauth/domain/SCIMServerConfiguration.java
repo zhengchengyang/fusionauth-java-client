@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019, FusionAuth, All Rights Reserved
+ * Copyright (c) 2021-2022, FusionAuth, All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ public class SCIMServerConfiguration implements Buildable<SCIMServerConfiguratio
 
   // TODO : SCIM : Probably will not default this?
   // TODO : SCIM : Should this be in the SystemConfiguration, with an optional override at the tenant?
+  // TODO : SCIM : Should this be of type URI? and named baseURL?
   public String baseUrl = "https://fusionauth.io";
 
   // TODO : SCIM : We should initialize this somewhere else if we want to ship it this way?

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019, FusionAuth, All Rights Reserved
+ * Copyright (c) 2019-2022, FusionAuth, All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -130,23 +130,24 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
   public TenantRegistrationConfiguration registrationConfiguration = new TenantRegistrationConfiguration();
 
   @InternalJSONColumn
+  public SCIMServerConfiguration scimServerConfiguration = new SCIMServerConfiguration();
+
+  @InternalJSONColumn
   public TenantSSOConfiguration ssoConfiguration = new TenantSSOConfiguration();
 
   @InternalJSONColumn
   public ObjectState state;
+
+  @InternalJSONColumn
+  public TenantLambdaConfiguration tenantLambdaConfiguration = new TenantLambdaConfiguration();
 
   public UUID themeId;
 
   @InternalJSONColumn
   public TenantUserDeletePolicy userDeletePolicy = new TenantUserDeletePolicy();
 
+  @InternalJSONColumn
   public TenantUsernameConfiguration usernameConfiguration = new TenantUsernameConfiguration();
-
-  @InternalJSONColumn
-  public TenantLambdaConfiguration tenantLambdaConfiguration = new TenantLambdaConfiguration();
-
-  @InternalJSONColumn
-  public SCIMServerConfiguration scimServerConfiguration = new SCIMServerConfiguration();
 
   @JacksonConstructor
   public Tenant() {
@@ -181,13 +182,13 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
     this.passwordValidationRules = new PasswordValidationRules(other.passwordValidationRules);
     this.rateLimitConfiguration = new TenantRateLimitConfiguration(other.rateLimitConfiguration);
     this.registrationConfiguration = new TenantRegistrationConfiguration(other.registrationConfiguration);
+    this.scimServerConfiguration = new SCIMServerConfiguration(other.scimServerConfiguration);
     this.ssoConfiguration = new TenantSSOConfiguration(other.ssoConfiguration);
     this.state = other.state;
+    this.tenantLambdaConfiguration = new TenantLambdaConfiguration(other.tenantLambdaConfiguration);
     this.themeId = other.themeId;
     this.userDeletePolicy = new TenantUserDeletePolicy(other.userDeletePolicy);
     this.usernameConfiguration = new TenantUsernameConfiguration(other.usernameConfiguration);
-    this.tenantLambdaConfiguration = new TenantLambdaConfiguration(other.tenantLambdaConfiguration);
-    this.scimServerConfiguration = new SCIMServerConfiguration(other.scimServerConfiguration);
   }
 
   @Override
@@ -226,12 +227,13 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
            Objects.equals(passwordValidationRules, tenant.passwordValidationRules) &&
            Objects.equals(rateLimitConfiguration, tenant.rateLimitConfiguration) &&
            Objects.equals(registrationConfiguration, tenant.registrationConfiguration) &&
+           Objects.equals(scimServerConfiguration, tenant.scimServerConfiguration) &&
            Objects.equals(ssoConfiguration, tenant.ssoConfiguration) &&
            Objects.equals(state, tenant.state) &&
+           Objects.equals(tenantLambdaConfiguration, tenant.tenantLambdaConfiguration) &&
            Objects.equals(themeId, tenant.themeId) &&
            Objects.equals(userDeletePolicy, tenant.userDeletePolicy) &&
-           Objects.equals(usernameConfiguration, tenant.usernameConfiguration) &&
-           Objects.equals(tenantLambdaConfiguration, tenant.tenantLambdaConfiguration);
+           Objects.equals(usernameConfiguration, tenant.usernameConfiguration);
   }
 
   @JsonIgnore
@@ -241,7 +243,38 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
 
   @Override
   public int hashCode() {
-    return Objects.hash(captchaConfiguration, configured, connectorPolicies, data, emailConfiguration, eventConfiguration, externalIdentifierConfiguration, failedAuthenticationConfiguration, familyConfiguration, formConfiguration, httpSessionMaxInactiveInterval, id, insertInstant, accessControlConfiguration, issuer, jwtConfiguration, lastUpdateInstant, loginConfiguration, logoutURL, maximumPasswordAge, minimumPasswordAge, name, passwordEncryptionConfiguration, passwordValidationRules, state, rateLimitConfiguration, registrationConfiguration, themeId, userDeletePolicy, usernameConfiguration, tenantLambdaConfiguration);
+    return Objects.hash(captchaConfiguration,
+                        configured,
+                        connectorPolicies,
+                        data,
+                        emailConfiguration,
+                        eventConfiguration,
+                        externalIdentifierConfiguration,
+                        failedAuthenticationConfiguration,
+                        familyConfiguration,
+                        formConfiguration,
+                        httpSessionMaxInactiveInterval,
+                        id,
+                        insertInstant,
+                        accessControlConfiguration,
+                        issuer,
+                        jwtConfiguration,
+                        lastUpdateInstant,
+                        loginConfiguration,
+                        logoutURL,
+                        maximumPasswordAge,
+                        minimumPasswordAge,
+                        name,
+                        passwordEncryptionConfiguration,
+                        passwordValidationRules,
+                        rateLimitConfiguration,
+                        registrationConfiguration,
+                        scimServerConfiguration,
+                        state,
+                        tenantLambdaConfiguration,
+                        themeId,
+                        userDeletePolicy,
+                        usernameConfiguration);
   }
 
   @JsonIgnore
@@ -291,38 +324,6 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
   @Override
   public String toString() {
     return ToString.toString(this);
-  }
-
-  public static class TenantOAuth2Configuration {
-    public UUID clientCredentialsAccessTokenPopulateLambdaId;
-
-    public TenantOAuth2Configuration() {
-    }
-
-    public TenantOAuth2Configuration(TenantOAuth2Configuration other) {
-      this.clientCredentialsAccessTokenPopulateLambdaId = other.clientCredentialsAccessTokenPopulateLambdaId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-      if (this == o) {
-        return true;
-      }
-      if (!(o instanceof TenantOAuth2Configuration)) {
-        return false;
-      }
-      TenantOAuth2Configuration that = (TenantOAuth2Configuration) o;
-      return Objects.equals(clientCredentialsAccessTokenPopulateLambdaId, that.clientCredentialsAccessTokenPopulateLambdaId);
-    }
-
-    @Override
-    public int hashCode() {
-      return Objects.hash(clientCredentialsAccessTokenPopulateLambdaId);
-    }
-
-    public String toString() {
-      return ToString.toString(this);
-    }
   }
 
   public static class TenantLambdaConfiguration {
@@ -379,6 +380,38 @@ public class Tenant implements Buildable<Tenant>, _InternalJSONColumn {
     }
 
     @Override
+    public String toString() {
+      return ToString.toString(this);
+    }
+  }
+
+  public static class TenantOAuth2Configuration {
+    public UUID clientCredentialsAccessTokenPopulateLambdaId;
+
+    public TenantOAuth2Configuration() {
+    }
+
+    public TenantOAuth2Configuration(TenantOAuth2Configuration other) {
+      this.clientCredentialsAccessTokenPopulateLambdaId = other.clientCredentialsAccessTokenPopulateLambdaId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) {
+        return true;
+      }
+      if (!(o instanceof TenantOAuth2Configuration)) {
+        return false;
+      }
+      TenantOAuth2Configuration that = (TenantOAuth2Configuration) o;
+      return Objects.equals(clientCredentialsAccessTokenPopulateLambdaId, that.clientCredentialsAccessTokenPopulateLambdaId);
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(clientCredentialsAccessTokenPopulateLambdaId);
+    }
+
     public String toString() {
       return ToString.toString(this);
     }
