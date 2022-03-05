@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019, FusionAuth, All Rights Reserved
+ * Copyright (c) 2019-2022, FusionAuth, All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 
 /**
@@ -26,11 +27,20 @@ import com.inversoft.json.ToString;
  *
  * @author Brian Pontarelli
  */
-// TODO : Future : This shouldn't be enableable
-public class Lambda extends Enableable implements Buildable<Lambda> {
+public class Lambda implements Buildable<Lambda> {
   public String body;
 
   public boolean debug;
+
+  /**
+   * Was never used, only left here for backwards compatibility.
+   *
+   * @deprecated Do not use this property, if you are binding to it, be advised this will be removed in a future version.
+   */
+  @Deprecated
+  public boolean enabled = true;
+
+  public LambdaEngineType engineType;
 
   public UUID id;
 
@@ -42,15 +52,16 @@ public class Lambda extends Enableable implements Buildable<Lambda> {
 
   public LambdaType type;
 
+  @JacksonConstructor
   public Lambda() {
-    enabled = true;
   }
 
   public Lambda(Lambda lambda) {
     this.body = lambda.body;
     this.name = lambda.name;
     this.debug = lambda.debug;
-    this.enabled = lambda.enabled;
+    this.enabled = true;
+    this.engineType = lambda.engineType;
     this.id = lambda.id;
     this.insertInstant = lambda.insertInstant;
     this.lastUpdateInstant = lambda.lastUpdateInstant;
@@ -62,10 +73,7 @@ public class Lambda extends Enableable implements Buildable<Lambda> {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof Lambda)) {
-      return false;
-    }
-    if (!super.equals(o)) {
+    if (o == null || getClass() != o.getClass()) {
       return false;
     }
     Lambda lambda = (Lambda) o;
@@ -80,7 +88,7 @@ public class Lambda extends Enableable implements Buildable<Lambda> {
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), body, debug, id, insertInstant, lastUpdateInstant, name, type);
+    return Objects.hash(body, debug, id, insertInstant, lastUpdateInstant, name, type);
   }
 
   public String toString() {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2019, FusionAuth, All Rights Reserved
+ * Copyright (c) 2018-2022, FusionAuth, All Rights Reserved
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,9 +51,6 @@ public class SystemConfiguration implements Buildable<SystemConfiguration>, _Int
   public EventLogConfiguration eventLogConfiguration = new EventLogConfiguration();
 
   public ZonedDateTime insertInstant;
-
-  @InternalJSONColumn
-  public LambdaEngineConfiguration lambdaEngineConfiguration = new LambdaEngineConfiguration();
 
   public ZonedDateTime lastUpdateInstant;
 
