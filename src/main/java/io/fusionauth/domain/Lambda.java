@@ -19,6 +19,7 @@ import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.inversoft.json.JacksonConstructor;
 import com.inversoft.json.ToString;
 
@@ -38,9 +39,10 @@ public class Lambda implements Buildable<Lambda> {
    * @deprecated Do not use this property, if you are binding to it, be advised this will be removed in a future version.
    */
   @Deprecated
-  public boolean enabled = true;
+  @JsonIgnore
+  public boolean enabled;
 
-  public LambdaEngineType engineType;
+  public LambdaEngineType engineType = LambdaEngineType.GraalJS;
 
   public UUID id;
 
@@ -60,7 +62,7 @@ public class Lambda implements Buildable<Lambda> {
     this.body = lambda.body;
     this.name = lambda.name;
     this.debug = lambda.debug;
-    this.enabled = true;
+    this.enabled = lambda.enabled;
     this.engineType = lambda.engineType;
     this.id = lambda.id;
     this.insertInstant = lambda.insertInstant;
@@ -78,7 +80,9 @@ public class Lambda implements Buildable<Lambda> {
     }
     Lambda lambda = (Lambda) o;
     return debug == lambda.debug &&
+           enabled == lambda.enabled &&
            Objects.equals(body, lambda.body) &&
+           engineType == lambda.engineType &&
            Objects.equals(id, lambda.id) &&
            Objects.equals(insertInstant, lambda.insertInstant) &&
            Objects.equals(lastUpdateInstant, lambda.lastUpdateInstant) &&
@@ -88,7 +92,7 @@ public class Lambda implements Buildable<Lambda> {
 
   @Override
   public int hashCode() {
-    return Objects.hash(body, debug, id, insertInstant, lastUpdateInstant, name, type);
+    return Objects.hash(body, debug, enabled, engineType, id, insertInstant, lastUpdateInstant, name, type);
   }
 
   public String toString() {
