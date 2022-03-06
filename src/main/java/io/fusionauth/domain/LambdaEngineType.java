@@ -19,6 +19,6 @@ package io.fusionauth.domain;
  * @author Daniel DeGroff
  */
 public enum LambdaEngineType {
-  NashornJS,
-  GraalJS
+  GraalJS,
+  Nashorn
 }
